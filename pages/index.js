@@ -1,25 +1,41 @@
-import Head from 'next/head'
+// pages/index.js
+import Head from 'next/head';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import Projects from '../components/Projects';
+import Footer from '../components/Footer';
 
-export default function Home() {
+// Receive theme and toggleTheme from _app.js props
+export default function Home({ theme, toggleTheme }) {
   return (
     <>
       <Head>
-        <title>Shubham Gajjar | Resume</title>
+        <title>Shubham Gajjar | Portfolio</title>
+        <meta name="description" content="Portfolio of Shubham Gajjar, showcasing projects in AI, ML, and Deep Learning." />
+        <link rel="icon" href="/favicon.ico" /> {/* Make sure you have a favicon in /public */}
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center px-4 py-10">
-        <h1 className="text-4xl font-bold mb-4">Hi, I'm Shubham Gajjar 👋</h1>
-        <p className="text-lg text-gray-700 mb-6 text-center max-w-xl">
-          I’m passionate about AI, ML, and Deep Learning. Here’s my creative resume site – feel free to download my full resume below!
-        </p>
-        <a
-          href="/Shubham_Gajjar_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition-all"
-        >
-          📄 Download Resume
-        </a>
-      </main>
+
+      {/* Main layout container */}
+      <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900"> {/* Ensure bg is set here too */}
+        <Navbar theme={theme} toggleTheme={toggleTheme} />
+
+        {/* Main content grows to push footer down */}
+        <main className="flex-grow">
+          <Hero
+            title="Hi, I'm Shubham Gajjar 👋"
+            subtitle="I’m passionate about AI, ML, and Deep Learning. Explore my work and feel free to reach out!"
+            resumeLink="/Shubham_Gajjar_Resume.pdf" // Ensure this PDF is in your /public folder
+          />
+
+          <Projects />
+
+          {/* You can add more sections here later */}
+          {/* e.g., <AboutMe /> <Skills /> <ContactForm /> */}
+
+        </main>
+
+        <Footer />
+      </div>
     </>
-  )
+  );
 }
