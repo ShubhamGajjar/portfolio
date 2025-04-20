@@ -1,9 +1,29 @@
+/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
+  padding: 0;
+  margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  color: #111827;
+  /* Add smooth transition for background and text color */
+  transition-property: background-color, color, background;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+body {
+  @apply bg-white text-black dark:bg-gray-900 dark:text-white;
+}
+
+/* Add other base styles if needed */
+* {
+  box-sizing: border-box;
+}
+
+/* Optional: Improve focus visibility */
+*:focus-visible {
+  @apply outline-none ring-2 ring-offset-2 ring-blue-500 dark:ring-offset-black;
 }
