@@ -151,51 +151,8 @@ const ResearchPapers = () => {
             variants={itemVariants}
           >
             Published research in medical AI and computer vision, contributing
-            to the advancement of healthcare through innovative deep learning
-            solutions
+            to healthcare advancement
           </motion.p>
-        </motion.div>
-
-        {/* Research Impact Stats */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-w-4xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div className="text-center" variants={itemVariants}>
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              2
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Research Papers
-            </div>
-          </motion.div>
-          <motion.div className="text-center" variants={itemVariants}>
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              IEEE
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Conference
-            </div>
-          </motion.div>
-          <motion.div className="text-center" variants={itemVariants}>
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              96.3%
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Model Accuracy
-            </div>
-          </motion.div>
-          <motion.div className="text-center" variants={itemVariants}>
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              Medical
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              AI Focus
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* Research Papers Grid */}
@@ -252,36 +209,6 @@ const ResearchPapers = () => {
               <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                 {paper.description}
               </p>
-
-              {/* Research Impact */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <StarIcon className="h-4 w-4 text-yellow-500" />
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
-                    Research Impact
-                  </h4>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 glass-card rounded-lg">
-                    <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                      Medical AI Contribution
-                    </h5>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">
-                      Advanced deep learning models for medical image analysis
-                      and diagnosis
-                    </p>
-                  </div>
-                  <div className="p-4 glass-card rounded-lg">
-                    <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                      Technical Innovation
-                    </h5>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">
-                      Novel hybrid architectures combining state-of-the-art
-                      neural networks
-                    </p>
-                  </div>
-                </div>
-              </div>
 
               {/* Keywords */}
               <div className="mb-6">

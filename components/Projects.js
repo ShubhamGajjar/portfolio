@@ -68,13 +68,19 @@ const Projects = () => {
       return <EyeIcon className="h-4 w-4 text-blue-500 dark:text-blue-400" />;
     }
 
-    // Game AI projects
+    // Game development projects (simple games, not AI)
     if (
-      title.includes("game") ||
-      title.includes("trackmania") ||
       title.includes("snake") ||
-      title.includes("flappy")
+      title.includes("flappy") ||
+      title.includes("game clone")
     ) {
+      return (
+        <CodeBracketIcon className="h-4 w-4 text-orange-500 dark:text-orange-400" />
+      );
+    }
+
+    // Game AI projects (actual AI)
+    if (title.includes("trackmania") && description.includes("reinforcement")) {
       return (
         <RocketLaunchIcon className="h-4 w-4 text-pink-500 dark:text-pink-400" />
       );
@@ -191,7 +197,7 @@ const Projects = () => {
             variants={itemVariants}
           >
             Cutting-edge research in medical AI and innovative AI/ML projects
-            showcasing expertise in deep learning and computer vision
+            showcasing deep learning expertise
           </motion.p>
         </motion.div>
 

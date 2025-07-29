@@ -52,63 +52,112 @@ const Skills = () => {
   };
 
   const getSkillIcon = (skill, category) => {
-    // Return specific icons for certain skills
-    if (skill.toLowerCase().includes("python")) {
+    const skillLower = skill.toLowerCase();
+
+    // Programming languages
+    if (skillLower.includes("python")) {
       return <CommandLineIcon className="h-4 w-4 text-blue-500" />;
     }
+
+    // Deep learning frameworks
     if (
-      skill.toLowerCase().includes("pytorch") ||
-      skill.toLowerCase().includes("tensorflow")
+      skillLower.includes("pytorch") ||
+      skillLower.includes("tensorflow") ||
+      skillLower.includes("keras")
     ) {
       return <CubeIcon className="h-4 w-4 text-purple-500" />;
     }
+
+    // Computer vision
     if (
-      skill.toLowerCase().includes("opencv") ||
-      skill.toLowerCase().includes("vision")
+      skillLower.includes("opencv") ||
+      skillLower.includes("vision") ||
+      skillLower.includes("image")
     ) {
       return <EyeIcon className="h-4 w-4 text-blue-500" />;
     }
+
+    // Research and academic
     if (
-      skill.toLowerCase().includes("research") ||
-      skill.toLowerCase().includes("ieee")
+      skillLower.includes("research") ||
+      skillLower.includes("ieee") ||
+      skillLower.includes("academic")
     ) {
       return <AcademicCapIcon className="h-4 w-4 text-blue-500" />;
     }
+
+    // Game AI and reinforcement learning
     if (
-      skill.toLowerCase().includes("reinforcement") ||
-      skill.toLowerCase().includes("game")
+      skillLower.includes("reinforcement") ||
+      skillLower.includes("game") ||
+      skillLower.includes("evolutionary")
     ) {
       return <RocketLaunchIcon className="h-4 w-4 text-pink-500" />;
     }
+
+    // Neural networks and deep learning
     if (
-      skill.toLowerCase().includes("neural") ||
-      skill.toLowerCase().includes("deep")
+      skillLower.includes("neural") ||
+      skillLower.includes("deep") ||
+      skillLower.includes("cnn") ||
+      skillLower.includes("rnn")
     ) {
       return <CpuChipIcon className="h-4 w-4 text-blue-500" />;
     }
+
+    // Data science and analytics
     if (
-      skill.toLowerCase().includes("data") ||
-      skill.toLowerCase().includes("analytics")
+      skillLower.includes("data") ||
+      skillLower.includes("analytics") ||
+      skillLower.includes("pandas") ||
+      skillLower.includes("numpy")
     ) {
       return <ChartBarIcon className="h-4 w-4 text-green-500" />;
     }
+
+    // Medical and healthcare
     if (
-      skill.toLowerCase().includes("medical") ||
-      skill.toLowerCase().includes("health")
+      skillLower.includes("medical") ||
+      skillLower.includes("health") ||
+      skillLower.includes("diagnosis")
     ) {
       return <LightBulbIcon className="h-4 w-4 text-green-500" />;
     }
+
+    // Algorithms and optimization
     if (
-      skill.toLowerCase().includes("algorithm") ||
-      skill.toLowerCase().includes("optimization")
+      skillLower.includes("algorithm") ||
+      skillLower.includes("optimization") ||
+      skillLower.includes("genetic")
     ) {
       return <PuzzlePieceIcon className="h-4 w-4 text-purple-500" />;
     }
+
+    // Frameworks and libraries
     if (
-      skill.toLowerCase().includes("framework") ||
-      skill.toLowerCase().includes("library")
+      skillLower.includes("framework") ||
+      skillLower.includes("library") ||
+      skillLower.includes("transformers")
     ) {
       return <CogIcon className="h-4 w-4 text-gray-500" />;
+    }
+
+    // Natural language processing
+    if (
+      skillLower.includes("nlp") ||
+      skillLower.includes("language") ||
+      skillLower.includes("text")
+    ) {
+      return <CommandLineIcon className="h-4 w-4 text-indigo-500" />;
+    }
+
+    // Statistical analysis
+    if (
+      skillLower.includes("statistical") ||
+      skillLower.includes("scikit") ||
+      skillLower.includes("matplotlib")
+    ) {
+      return <ChartBarIcon className="h-4 w-4 text-green-500" />;
     }
 
     // Default icon based on category
@@ -151,14 +200,14 @@ const Skills = () => {
             className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
             variants={itemVariants}
           >
-            AI Engineering Expertise
+            Technical Skills
           </motion.h2>
           <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Comprehensive skills in deep learning, computer vision, and research
-            methodologies for cutting-edge AI development
+            Specialized expertise in AI/ML, computer vision, and research
+            methodologies
           </motion.p>
         </motion.div>
 
@@ -182,7 +231,7 @@ const Skills = () => {
 
         {/* Skills Grid */}
         <motion.div
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16"
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -206,94 +255,6 @@ const Skills = () => {
               </h3>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Expertise Highlights */}
-        <motion.div
-          className="grid gap-8 md:grid-cols-3 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="ai-card p-8 text-center"
-            variants={itemVariants}
-          >
-            <AcademicCapIcon className="h-12 w-12 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-              Research Excellence
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Published research in IEEE conferences with focus on medical AI
-              and computer vision applications
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="ai-card p-8 text-center"
-            variants={itemVariants}
-          >
-            <EyeIcon className="h-12 w-12 text-purple-500 dark:text-purple-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-              Medical AI Specialist
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Expertise in brain tumor segmentation and skin cancer
-              classification with state-of-the-art deep learning models
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="ai-card p-8 text-center"
-            variants={itemVariants}
-          >
-            <BeakerIcon className="h-12 w-12 text-pink-500 dark:text-pink-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-              Game AI & RL
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Advanced reinforcement learning implementations for game AI,
-              including TrackMania and classic games
-            </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Technical Proficiency */}
-        <motion.div
-          className="ai-card p-8 max-w-4xl mx-auto"
-          variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-            Technical Proficiency
-          </h3>
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                Deep Learning & Frameworks
-              </h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                <li>• PyTorch & TensorFlow expertise</li>
-                <li>• CNN, ResNet, Vision Transformers</li>
-                <li>• UNet architectures for medical imaging</li>
-                <li>• Neural network optimization</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                Research & Development
-              </h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                <li>• IEEE conference publications</li>
-                <li>• Experimental design & methodology</li>
-                <li>• Statistical analysis & validation</li>
-                <li>• Medical AI research focus</li>
-              </ul>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
