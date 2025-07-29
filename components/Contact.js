@@ -1,186 +1,212 @@
 // components/Contact.js
 import React from "react";
-import { socialLinks } from "../utils/data";
 import {
-  EnvelopeIcon,
-  GlobeAltIcon,
   CpuChipIcon,
+  EnvelopeIcon,
+  MapPinIcon,
+  PhoneIcon,
 } from "@heroicons/react/24/outline";
+import { socialLinks } from "../utils/data";
+import { motion } from "framer-motion";
 
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: EnvelopeIcon,
-      label: "Email",
-      value: "shubhamkgajjar2002@gmail.com",
-      href: "mailto:shubhamkgajjar2002@gmail.com",
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.2,
+      },
     },
-    {
-      icon: GlobeAltIcon,
-      label: "Website",
-      value: "shubhamgajjar.vercel.app",
-      href: "https://shubhamgajjar.vercel.app",
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
     },
-  ];
+  };
 
   return (
-    <section
-      id="contact"
-      className="py-16 relative overflow-hidden bg-white dark:bg-gray-900"
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 ai-pattern opacity-5"></div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contact" className="py-20 static-glass">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold ai-gradient-text mb-4">
-            Let's Build Together
-          </h2>
-          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Ready to collaborate on cutting-edge projects? Let's discuss how we
-            can bring innovative solutions to life.
-          </p>
-        </div>
+        <motion.div
+          className="text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
+            variants={itemVariants}
+          >
+            Get In Touch
+          </motion.h2>
+          <motion.p
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            variants={itemVariants}
+          >
+            Let's collaborate on innovative AI and machine learning projects
+          </motion.p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="ai-card p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <CpuChipIcon className="h-8 w-8 text-blue-400" />
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Get In Touch
-                </h3>
-              </div>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Whether you're looking to collaborate on projects, discuss
-                opportunities, or explore innovative solutions, I'm here to help
-                bring your vision to reality.
-              </p>
-            </div>
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+              Get In Touch
+            </h3>
 
-            {/* Contact Details */}
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <a
-                  key={index}
-                  href={info.href}
-                  className="flex items-center gap-4 p-4 ai-card transition-all duration-200"
-                >
-                  <div className="p-3 ai-glass rounded-lg">
-                    <info.icon className="h-6 w-6 text-blue-400" />
+            <div className="space-y-6">
+              <div className="ai-card p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 ai-glass rounded-xl">
+                    <EnvelopeIcon className="h-6 w-6 text-blue-500" />
                   </div>
                   <div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {info.label}
-                    </div>
-                    <div className="text-gray-900 dark:text-white font-medium">
-                      {info.value}
-                    </div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                      Email
+                    </h4>
+                    <a
+                      href="mailto:your.email@example.com"
+                      className="text-blue-600 dark:text-blue-400 hover:underline transition-all duration-200"
+                    >
+                      your.email@example.com
+                    </a>
                   </div>
-                </a>
-              ))}
+                </div>
+              </div>
+
+              <div className="ai-card p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 ai-glass rounded-xl">
+                    <MapPinIcon className="h-6 w-6 text-blue-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                      Location
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Available for remote collaboration worldwide
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ai-card p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 ai-glass rounded-xl">
+                    <CpuChipIcon className="h-6 w-6 text-blue-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                      Research Focus
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Computer Vision, NLP, Deep Learning
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Social Links */}
-          <div className="space-y-8">
-            <div className="ai-card p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <CpuChipIcon className="h-8 w-8 text-purple-400" />
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Connect & Collaborate
-                </h3>
-              </div>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Follow my journey and connect with me on social platforms to
-                stay updated with the latest developments and insights.
-              </p>
-            </div>
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+              Connect & Collaborate
+            </h3>
 
-            {/* Social Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {socialLinks.map((social, index) => (
+            <div className="grid gap-4">
+              {socialLinks.map((link) => (
                 <a
-                  key={index}
-                  href={social.url}
+                  key={link.name}
+                  href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 p-6 ai-card transition-all duration-200"
+                  className="ai-card p-6 hover:scale-105 transition-all duration-200"
                 >
-                  <div className="p-3 ai-gradient rounded-lg group-hover:scale-110 transition-transform">
-                    <div className="text-white font-bold text-lg">
-                      {social.icon === "github" && "G"}
-                      {social.icon === "linkedin" && "L"}
-                      {social.icon === "twitter" && "T"}
-                      {social.icon === "email" && "E"}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 ai-glass rounded-xl">
+                        <CpuChipIcon className="h-6 w-6 text-blue-500" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                          {link.name}
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm">
+                          Connect on {link.name}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="text-gray-900 dark:text-white font-semibold">
-                      {social.name}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      Connect
-                    </div>
+                    <CpuChipIcon className="h-5 w-5 text-blue-500" />
                   </div>
                 </a>
               ))}
             </div>
-
-            {/* Call to Action */}
-            <div className="ai-card p-8">
-              <h4 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                Ready to Innovate Together?
-              </h4>
-              <p className="mb-6 text-gray-600 dark:text-gray-300">
-                Let's discuss how we can leverage AI and machine learning to
-                solve complex problems and create impactful solutions.
-              </p>
-              <a
-                href="mailto:shubhamkgajjar2002@gmail.com"
-                className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
-              >
-                Start a Conversation
-                <EnvelopeIcon className="h-5 w-5" />
-              </a>
-            </div>
           </div>
         </div>
 
-        {/* Collaboration Areas */}
+        {/* Call to Action */}
+        <div className="text-center mt-12">
+          <div className="ai-card p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Research Collaboration
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Interested in collaborating on cutting-edge AI research? Let's
+              explore opportunities to advance the field together.
+            </p>
+            <a
+              href="mailto:your.email@example.com"
+              className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
+            >
+              <CpuChipIcon className="h-5 w-5" />
+              Start Discussion
+            </a>
+          </div>
+        </div>
+
+        {/* Research Collaboration Areas */}
         <div className="mt-12">
-          <div className="ai-card p-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <CpuChipIcon className="h-8 w-8 text-blue-400" />
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Collaboration Areas
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-lg font-bold ai-gradient-text mb-2">
-                  Research & Development
-                </div>
+          <div className="ai-card p-8">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+              Collaboration Areas
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="text-center p-6 glass-card rounded-xl">
+                <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  Computer Vision
+                </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Novel algorithms and cutting-edge research
+                  Object detection, image segmentation, autonomous systems
                 </p>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-bold ai-gradient-text mb-2">
-                  Product Development
-                </div>
+              <div className="text-center p-6 glass-card rounded-xl">
+                <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  Natural Language Processing
+                </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  AI-powered applications and solutions
+                  Transformers, multilingual models, text generation
                 </p>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-bold ai-gradient-text mb-2">
-                  Consulting
-                </div>
+              <div className="text-center p-6 glass-card rounded-xl">
+                <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  Deep Learning
+                </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Strategy and implementation guidance
+                  Neural networks, reinforcement learning, model optimization
                 </p>
               </div>
             </div>

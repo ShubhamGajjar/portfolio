@@ -1,9 +1,12 @@
 // components/Hero.js
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowDownIcon,
   DocumentArrowDownIcon,
   CpuChipIcon,
+  AcademicCapIcon,
+  ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 
 const Hero = ({ title, subtitle, resumeLink }) => {
@@ -13,154 +16,222 @@ const Hero = ({ title, subtitle, resumeLink }) => {
     setIsLoaded(true);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const floatingVariants = {
+    animate: {
+      y: [-10, 10, -10],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
-    >
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 ai-pattern opacity-30"></div>
+    <section className="relative min-h-screen flex items-center justify-center liquid-glass">
+      {/* Background patterns */}
+      <div className="absolute inset-0 ai-pattern opacity-40"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/3 to-pink-500/3"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-pink-400/10 animate-pulse-glow"></div>
 
-      {/* Floating Elements - Simplified */}
-      <div className="absolute top-20 left-10 floating-element">
-        <CpuChipIcon className="h-8 w-8 text-blue-500" />
-      </div>
-      <div className="absolute top-40 right-20 floating-element">
-        <CpuChipIcon className="h-6 w-6 text-purple-500" />
-      </div>
-      <div className="absolute bottom-40 left-20 floating-element">
-        <CpuChipIcon className="h-7 w-7 text-pink-500" />
+      {/* Floating elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-20 left-10 text-blue-400/20"
+          variants={floatingVariants}
+          animate="float"
+        >
+          <CpuChipIcon className="w-8 h-8 drop-shadow-lg" />
+        </motion.div>
+        <motion.div
+          className="absolute top-40 right-20 text-purple-400/20"
+          variants={floatingVariants}
+          animate="float"
+          style={{ animationDelay: "1s" }}
+        >
+          <CpuChipIcon className="w-6 h-6 drop-shadow-lg" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-40 left-20 text-pink-400/20"
+          variants={floatingVariants}
+          animate="float"
+          style={{ animationDelay: "2s" }}
+        >
+          <CpuChipIcon className="w-10 h-10 drop-shadow-lg" />
+        </motion.div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Main content */}
+      <motion.div
+        className="relative z-10 text-center px-4 pt-32"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* AI Badge */}
-        <div
-          className={`mb-8 transition-all duration-500 ease-out ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        <motion.div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 mb-12"
+          variants={itemVariants}
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 ai-glass rounded-full">
-            <CpuChipIcon className="h-5 w-5 text-blue-400" />
-            <span className="text-blue-400 font-medium">
-              AI Engineer & ML Specialist
-            </span>
-          </div>
-        </div>
-
-        {/* Main Title */}
-        <h1
-          className={`text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-8 transition-all duration-500 delay-200 ease-out ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          <span className="ai-gradient-text">
-            {title || "Hi, I'm Shubham Gajjar"}
+          <CpuChipIcon className="w-5 h-5 text-blue-400" />
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            AI Engineer & ML Specialist
           </span>
-        </h1>
+        </motion.div>
+
+        {/* Title */}
+        <motion.h1
+          className="text-5xl md:text-7xl font-bold mb-6 ai-gradient-text"
+          variants={itemVariants}
+        >
+          Hi, I'm Shubham Gajjar
+        </motion.h1>
 
         {/* Subtitle */}
-        <p
-          className={`text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed transition-all duration-500 delay-400 ease-out ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        <motion.p
+          className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
+          variants={itemVariants}
         >
-          {subtitle ||
-            "Pioneering the future with AI, Machine Learning, and Deep Learning solutions"}
-        </p>
+          AI Engineer & ML Specialist pioneering the future with intelligent
+          solutions and cutting-edge artificial intelligence.
+        </motion.p>
 
         {/* Action Buttons */}
-        <div
-          className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 transition-all duration-500 delay-600 ease-out ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          variants={itemVariants}
         >
-          {resumeLink && (
-            <a
-              href={resumeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 py-4 btn-ai"
-            >
-              <DocumentArrowDownIcon className="h-6 w-6 transition-transform duration-200 group-hover:translate-y-1" />
-              Download Resume
-            </a>
-          )}
-
+          <a
+            href="/Shubham_Gajjar_Resume.pdf"
+            download
+            className="action-button inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+          >
+            <ArrowDownTrayIcon className="w-5 h-5" />
+            Download Resume
+          </a>
           <a
             href="#projects"
-            className="group inline-flex items-center gap-3 px-8 py-4 glass-card text-gray-900 dark:text-white text-lg font-semibold hover:scale-105 transition-all duration-200"
+            className="action-button inline-flex items-center gap-2 px-8 py-3 bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-white/20 dark:hover:bg-gray-800/30 transition-all duration-300"
           >
             Explore My Work
-            <ArrowDownIcon className="h-6 w-6 transition-transform duration-200 group-hover:translate-y-1" />
+            <ArrowDownIcon className="w-5 h-5" />
           </a>
-        </div>
+        </motion.div>
 
         {/* AI Stats */}
-        <div
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto transition-all duration-500 delay-800 ease-out ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mb-12"
+          variants={itemVariants}
         >
-          <div className="text-center p-6 ai-card">
-            <div className="text-3xl font-bold ai-gradient-text mb-2">15+</div>
-            <div className="text-gray-600 dark:text-gray-400">
-              AI/ML Projects
+          <div className="text-center">
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              7+ months
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              AI/ML Experience
             </div>
           </div>
+          <div className="text-center">
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              2
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Research Papers
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              6+
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              AI Projects
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              15+
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Technologies
+            </div>
+          </div>
+        </motion.div>
 
-          <div className="text-center p-6 ai-card">
-            <div className="text-3xl font-bold ai-gradient-text mb-2">5+</div>
-            <div className="text-gray-600 dark:text-gray-400">
-              Years in AI/ML
-            </div>
+        {/* Research Highlight */}
+        <motion.div
+          className="mt-12 p-6 ai-card max-w-2xl mx-auto"
+          variants={itemVariants}
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <AcademicCapIcon className="h-6 w-6 text-blue-500" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Research Focus
+            </h3>
           </div>
-
-          <div className="text-center p-6 ai-card">
-            <div className="text-3xl font-bold ai-gradient-text mb-2">25+</div>
-            <div className="text-gray-600 dark:text-gray-400">
-              Technologies Mastered
-            </div>
-          </div>
-        </div>
+          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            Specializing in Computer Vision and Natural Language Processing with
+            publications in IEEE conferences. Contributing to the advancement of
+            AI through innovative research and practical applications.
+          </p>
+        </motion.div>
 
         {/* AI Capabilities */}
-        <div
-          className={`mt-12 transition-all duration-500 delay-1000 ease-out ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        <motion.div
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          variants={itemVariants}
         >
-          <div className="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto">
-            {[
-              "Deep Learning",
-              "Computer Vision",
-              "NLP",
-              "MLOps",
-              "Data Science",
-              "AI Ethics",
-            ].map((skill, index) => (
-              <span
-                key={skill}
-                className="px-4 py-2 glass-card text-sm font-medium text-gray-700 dark:text-gray-300"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {skill}
-              </span>
-            ))}
+          <div className="text-center p-6 glass-card rounded-xl">
+            <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Deep Learning
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              Neural Networks, CNN, RNN, Transformers
+            </p>
           </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div
-        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 delay-1200 ease-out ${
-          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
-      >
-        <div className="animate-bounce">
-          <ArrowDownIcon className="h-8 w-8 text-blue-400" />
-        </div>
-      </div>
+          <div className="text-center p-6 glass-card rounded-xl">
+            <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Computer Vision
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              Object Detection, Image Segmentation, OCR
+            </p>
+          </div>
+          <div className="text-center p-6 glass-card rounded-xl">
+            <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              NLP & LLMs
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              BERT, GPT, Text Generation, Sentiment Analysis
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
