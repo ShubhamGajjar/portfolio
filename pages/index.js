@@ -26,15 +26,35 @@ export default function Home({ theme, toggleTheme }) {
   }, []);
 
   const pageVariants = {
-    initial: { opacity: 0 },
-    in: { opacity: 1 },
-    out: { opacity: 0 },
+    initial: {
+      opacity: 0,
+      scale: 0.98,
+      filter: "blur(5px)",
+    },
+    in: {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 1.5,
+        ease: "easeOut",
+      },
+    },
+    out: {
+      opacity: 0,
+      scale: 1.02,
+      filter: "blur(3px)",
+      transition: {
+        duration: 0.6,
+        ease: "easeIn",
+      },
+    },
   };
 
   const pageTransition = {
     type: "tween",
     ease: "anticipate",
-    duration: 0.5,
+    duration: 1.0,
   };
 
   return (
