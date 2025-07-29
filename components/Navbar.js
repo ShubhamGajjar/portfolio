@@ -71,7 +71,11 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   return (
     <motion.nav
-      className={`fixed top-4 left-4 right-4 z-50 bg-transparent mx-4 rounded-2xl shadow-lg`}
+      className={`sticky top-4 z-50 bg-transparent mx-4 rounded-2xl shadow-lg transition-all duration-300 ${
+        scrolled
+          ? "bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10"
+          : ""
+      }`}
       variants={navbarVariants}
       initial="hidden"
       animate="visible"
@@ -141,7 +145,7 @@ const Navbar = ({ theme, toggleTheme }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden absolute top-full left-0 right-0 ai-glassmorphism backdrop-blur-md border-t border-white/10"
+            className="md:hidden absolute top-full left-0 right-0 bg-white/10 dark:bg-black/10 backdrop-blur-md border-t border-white/20 dark:border-white/10 rounded-b-2xl"
             variants={menuVariants}
             initial="closed"
             animate="open"
