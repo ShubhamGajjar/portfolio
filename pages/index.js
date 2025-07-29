@@ -4,6 +4,7 @@ import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import About from "../components/About";
 import Skills from "../components/Skills";
 import ResearchPapers from "../components/ResearchPapers";
 import Projects from "../components/Projects";
@@ -39,28 +40,28 @@ export default function Home({ theme, toggleTheme }) {
   return (
     <>
       <Head>
-        <title>Shubham Gajjar | AI Engineer & ML Specialist</title>
+        <title>Shubham Gajjar | AI Engineer & Research Specialist</title>
         <meta
           name="description"
-          content="AI Engineer and Machine Learning Specialist. Expert in Deep Learning, Computer Vision, NLP, and cutting-edge AI solutions."
+          content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
         />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#3B82F6" />
         <meta
           name="keywords"
-          content="AI Engineer, Machine Learning, Deep Learning, Computer Vision, NLP, Research, IEEE Conference"
+          content="AI Engineer, Machine Learning, Deep Learning, Computer Vision, Medical AI, Research, IEEE Conference, Brain Tumor, Skin Cancer, Reinforcement Learning"
         />
         <meta name="author" content="Shubham Gajjar" />
 
         {/* Open Graph Meta Tags */}
         <meta
           property="og:title"
-          content="Shubham Gajjar | AI Engineer & ML Specialist"
+          content="Shubham Gajjar | AI Engineer & Research Specialist"
         />
         <meta
           property="og:description"
-          content="AI Engineer and Machine Learning Specialist with research publications in IEEE conferences."
+          content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://your-portfolio-url.com" />
@@ -69,11 +70,11 @@ export default function Home({ theme, toggleTheme }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Shubham Gajjar | AI Engineer & ML Specialist"
+          content="Shubham Gajjar | AI Engineer & Research Specialist"
         />
         <meta
           name="twitter:description"
-          content="AI Engineer and Machine Learning Specialist with research publications in IEEE conferences."
+          content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
         />
       </Head>
 
@@ -96,9 +97,11 @@ export default function Home({ theme, toggleTheme }) {
             <main className="flex-grow">
               <Hero
                 title="Hi, I'm Shubham Gajjar 👋"
-                subtitle="AI Engineer & ML Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
+                subtitle="AI Engineer & Research Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
                 resumeLink="/Shubham_Gajjar_Resume.pdf"
               />
+
+              <About />
 
               <Skills />
 

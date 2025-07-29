@@ -5,6 +5,10 @@ import {
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
+  AcademicCapIcon,
+  BeakerIcon,
+  EyeIcon,
+  ChartBarIcon,
 } from "@heroicons/react/24/outline";
 import { socialLinks } from "../utils/data";
 import { motion } from "framer-motion";
@@ -47,13 +51,14 @@ const Contact = () => {
             className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
             variants={itemVariants}
           >
-            Get In Touch
+            Let's Collaborate
           </motion.h2>
           <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Let's collaborate on innovative AI and machine learning projects
+            Ready to work on cutting-edge AI research and innovative machine
+            learning projects
           </motion.p>
         </motion.div>
 
@@ -77,13 +82,25 @@ const Contact = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <CpuChipIcon className="w-6 h-6 text-blue-500" />
+                <AcademicCapIcon className="w-6 h-6 text-blue-500" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">
                     Research Focus
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    AI/ML, Computer Vision, Medical AI
+                    Medical AI, Computer Vision, Deep Learning
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <BeakerIcon className="w-6 h-6 text-blue-500" />
+                <div>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    Expertise
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    IEEE Publications, Neural Networks, Reinforcement Learning
                   </p>
                 </div>
               </div>
@@ -111,7 +128,7 @@ const Contact = () => {
                           GitHub
                         </h4>
                         <p className="text-gray-600 dark:text-gray-300 text-sm">
-                          View my projects and contributions
+                          View AI/ML projects and research code
                         </p>
                       </div>
                     </div>
@@ -127,18 +144,18 @@ const Contact = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 ai-glass rounded-lg">
-                        <CpuChipIcon className="h-5 w-5 text-blue-500" />
+                        <AcademicCapIcon className="h-5 w-5 text-blue-500" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900 dark:text-white">
                           LinkedIn
                         </h4>
                         <p className="text-gray-600 dark:text-gray-300 text-sm">
-                          Connect professionally
+                          Professional network and research updates
                         </p>
                       </div>
                     </div>
-                    <CpuChipIcon className="h-4 w-4 text-blue-500" />
+                    <AcademicCapIcon className="h-4 w-4 text-blue-500" />
                   </div>
                 </a>
                 <a
@@ -150,18 +167,18 @@ const Contact = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 ai-glass rounded-lg">
-                        <CpuChipIcon className="h-5 w-5 text-blue-500" />
+                        <BeakerIcon className="h-5 w-5 text-blue-500" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900 dark:text-white">
                           X (Twitter)
                         </h4>
                         <p className="text-gray-600 dark:text-gray-300 text-sm">
-                          Follow for AI/ML updates
+                          AI research insights and updates
                         </p>
                       </div>
                     </div>
-                    <CpuChipIcon className="h-4 w-4 text-blue-500" />
+                    <BeakerIcon className="h-4 w-4 text-blue-500" />
                   </div>
                 </a>
               </div>
@@ -171,20 +188,21 @@ const Contact = () => {
           {/* Collaboration Areas */}
           <motion.div className="space-y-6" variants={itemVariants}>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-              Collaboration Areas
+              Research & Collaboration Areas
             </h3>
             <div className="grid gap-4">
               <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
                 <div className="flex items-center gap-4">
                   <div className="p-3 ai-glass rounded-xl">
-                    <CpuChipIcon className="h-6 w-6 text-blue-500" />
+                    <EyeIcon className="h-6 w-6 text-blue-500" />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Computer Vision
+                      Medical AI Research
                     </h4>
                     <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Object detection, image segmentation, medical imaging
+                      Brain tumor segmentation, skin cancer classification,
+                      medical imaging
                     </p>
                   </div>
                 </div>
@@ -192,14 +210,14 @@ const Contact = () => {
               <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
                 <div className="flex items-center gap-4">
                   <div className="p-3 ai-glass rounded-xl">
-                    <CpuChipIcon className="h-6 w-6 text-blue-500" />
+                    <CpuChipIcon className="h-6 w-6 text-purple-500" />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Deep Learning
+                      Deep Learning & Neural Networks
                     </h4>
                     <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Neural networks, model optimization, research papers
+                      CNN, ResNet, Vision Transformers, hybrid architectures
                     </p>
                   </div>
                 </div>
@@ -207,14 +225,30 @@ const Contact = () => {
               <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
                 <div className="flex items-center gap-4">
                   <div className="p-3 ai-glass rounded-xl">
-                    <CpuChipIcon className="h-6 w-6 text-blue-500" />
+                    <BeakerIcon className="h-6 w-6 text-pink-500" />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Medical AI
+                      Reinforcement Learning
                     </h4>
                     <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Brain tumor segmentation, skin cancer classification
+                      Game AI, autonomous agents, evolutionary algorithms
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 ai-glass rounded-xl">
+                    <ChartBarIcon className="h-6 w-6 text-green-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      Data Science & Analytics
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">
+                      Sentiment analysis, predictive modeling, statistical
+                      analysis
                     </p>
                   </div>
                 </div>
@@ -227,18 +261,19 @@ const Contact = () => {
         <div className="text-center mt-12">
           <div className="ai-card p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Research Collaboration
+              Research & Project Collaboration
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Interested in collaborating on cutting-edge AI research? Let's
-              explore opportunities to advance the field together.
+              Interested in collaborating on cutting-edge AI research or
+              innovative machine learning projects? Let's explore opportunities
+              to advance medical AI and computer vision together.
             </p>
             <a
               href={`mailto:${socialLinks.email}`}
               className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
             >
-              <CpuChipIcon className="h-5 w-5" />
-              Start Discussion
+              <AcademicCapIcon className="h-5 w-5" />
+              Start Research Discussion
             </a>
           </div>
         </div>
