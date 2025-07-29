@@ -12,10 +12,10 @@ export default function Home({ theme, toggleTheme }) {
   return (
     <>
       <Head>
-        <title>Shubham Gajjar | Portfolio</title>
+        <title>Shubham Gajjar | AI Engineer & ML Specialist</title>
         <meta
           name="description"
-          content="Portfolio of Shubham Gajjar, showcasing projects in AI, ML, and Deep Learning."
+          content="AI Engineer and Machine Learning Specialist. Expert in Deep Learning, Computer Vision, NLP, and cutting-edge AI solutions."
         />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,7 +30,7 @@ export default function Home({ theme, toggleTheme }) {
         <main className="flex-grow">
           <Hero
             title="Hi, I'm Shubham Gajjar 👋"
-            subtitle="I'm passionate about AI, ML, and Deep Learning. Explore my work and feel free to reach out!"
+            subtitle="AI Engineer & ML Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
             resumeLink="/Shubham_Gajjar_Resume.pdf"
           />
 

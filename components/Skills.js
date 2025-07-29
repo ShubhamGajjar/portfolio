@@ -8,33 +8,43 @@ import {
   CircleStackIcon,
   PaintBrushIcon,
   WrenchScrewdriverIcon,
+  ChartBarIcon,
 } from "@heroicons/react/24/outline";
 
 const Skills = () => {
   const categoryIcons = {
+    "AI/ML Core": CpuChipIcon,
     "Programming Languages": CodeBracketIcon,
-    Frontend: PaintBrushIcon,
-    Backend: ServerIcon,
-    "AI/ML": CpuChipIcon,
-    Databases: CircleStackIcon,
-    "Tools & Others": WrenchScrewdriverIcon,
+    "Deep Learning": CpuChipIcon,
+    "Data Science": ChartBarIcon,
+    "Backend & APIs": ServerIcon,
+    "Frontend & UI": PaintBrushIcon,
+    "Databases & Cloud": CircleStackIcon,
+    "Tools & DevOps": WrenchScrewdriverIcon,
   };
 
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="skills"
+      className="py-16 relative overflow-hidden bg-white dark:bg-gray-900"
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 neural-pattern opacity-5"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            Skills & Technologies
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold ai-gradient-text mb-4">
+            Skills & Expertise
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            My technical toolkit for building innovative solutions
+          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            My comprehensive toolkit for building intelligent solutions and
+            cutting-edge applications
           </p>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {skills.map((skillCategory, index) => {
             const IconComponent =
               categoryIcons[skillCategory.category] || CodeBracketIcon;
@@ -42,15 +52,15 @@ const Skills = () => {
             return (
               <div
                 key={skillCategory.category}
-                className="group bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-600"
+                className="group ai-card p-6"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Category Header */}
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                    <IconComponent className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <div className="p-3 ai-glass rounded-xl">
+                    <IconComponent className="h-6 w-6 text-blue-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                     {skillCategory.category}
                   </h3>
                 </div>
@@ -60,14 +70,14 @@ const Skills = () => {
                   {skillCategory.items.map((skill, skillIndex) => (
                     <div
                       key={skill}
-                      className="flex items-center justify-between p-3 bg-white dark:bg-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                      className="flex items-center justify-between p-3 glass-card rounded-lg hover:scale-105 transition-all duration-200"
                     >
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">
+                      <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
                         {skill}
                       </span>
-                      <div className="w-16 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                      <div className="w-12 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-1000"
+                          className="h-full ai-gradient rounded-full transition-all duration-1000"
                           style={{
                             width: `${85 + Math.random() * 15}%`,
                             animationDelay: `${skillIndex * 200}ms`,
@@ -82,16 +92,52 @@ const Skills = () => {
           })}
         </div>
 
-        {/* Additional Info */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Always Learning
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              I'm constantly expanding my skill set and staying up-to-date with
-              the latest technologies and best practices in the industry.
-            </p>
+        {/* AI Expertise Highlight */}
+        <div className="mt-12">
+          <div className="ai-card p-8 text-center">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <CpuChipIcon className="h-8 w-8 text-blue-400" />
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Core Expertise
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="text-center">
+                <div className="text-xl font-bold ai-gradient-text mb-2">
+                  Deep Learning
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Neural Networks, CNN, RNN, Transformers
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="text-xl font-bold ai-gradient-text mb-2">
+                  Computer Vision
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Object Detection, Image Segmentation, OCR
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="text-xl font-bold ai-gradient-text mb-2">
+                  NLP & LLMs
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  BERT, GPT, Text Generation, Sentiment Analysis
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Continuous Learning */}
+        <div className="mt-8 text-center">
+          <div className="inline-flex items-center gap-2 px-6 py-3 ai-glass rounded-full">
+            <CpuChipIcon className="h-5 w-5 text-blue-400" />
+            <span className="text-blue-400 font-medium">
+              Continuously expanding knowledge and staying ahead of emerging
+              technologies
+            </span>
           </div>
         </div>
       </div>
