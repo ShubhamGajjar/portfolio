@@ -59,29 +59,31 @@ const Footer = () => {
           </div>
 
           {/* Social Links */}
-          <div className="text-center md:text-right">
-            <h4 className="text-gray-900 dark:text-white font-semibold mb-4">
-              Connect
-            </h4>
-            <div className="flex justify-center md:justify-end space-x-4">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 ai-glass hover:scale-105 hover:shadow-lg hover:shadow-blue-500/40 rounded-lg transition-all duration-300 group"
-                  aria-label={social.name}
-                >
-                  <div className="text-gray-600 dark:text-gray-300 group-hover:text-blue-400 transition-colors text-lg font-bold">
-                    {social.icon === "github" && "G"}
-                    {social.icon === "linkedin" && "L"}
-                    {social.icon === "twitter" && "T"}
-                    {social.icon === "email" && "E"}
-                  </div>
-                </a>
-              ))}
-            </div>
+          <div className="flex space-x-4">
+            <a
+              href={socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <CpuChipIcon className="w-5 h-5" />
+            </a>
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <CpuChipIcon className="w-5 h-5" />
+            </a>
+            <a
+              href={socialLinks.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <CpuChipIcon className="w-5 h-5" />
+            </a>
           </div>
         </div>
 

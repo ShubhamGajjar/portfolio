@@ -163,27 +163,11 @@ export const researchPapers = [
   },
 ];
 
-export const socialLinks = [
-  {
-    name: "GitHub",
-    url: "https://github.com/yourusername",
-    icon: "github",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://linkedin.com/in/yourusername",
-    icon: "linkedin",
-  },
-  {
-    name: "Twitter",
-    url: "https://twitter.com/yourusername",
-    icon: "twitter",
-  },
-  {
-    name: "Email",
-    url: "mailto:your.email@example.com",
-    icon: "email",
-  },
-];
+export const socialLinks = {
+  email: "shubhamkgajjar2002@gmail.com",
+  github: "https://github.com/ShubhamGajjar",
+  linkedin: "https://www.linkedin.com/in/shubham-gajjar-b55b64143/",
+  x: "https://x.com/Implici7",
+};
 
 export const experience = "7+ months";
