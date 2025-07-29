@@ -10,6 +10,12 @@ import {
   BeakerIcon,
   ChartBarIcon,
   EyeIcon,
+  LightBulbIcon,
+  PuzzlePieceIcon,
+  RocketLaunchIcon,
+  CommandLineIcon,
+  CogIcon,
+  CubeIcon,
 } from "@heroicons/react/24/outline";
 
 const Hero = ({ title, subtitle, resumeLink }) => {
@@ -119,7 +125,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           animate="float"
           style={{ animationDelay: "1s" }}
         >
-          <BeakerIcon className="w-6 h-6 drop-shadow-lg" />
+          <CubeIcon className="w-6 h-6 drop-shadow-lg" />
         </motion.div>
         <motion.div
           className="absolute bottom-40 left-20 text-pink-400/20"
@@ -136,6 +142,22 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           style={{ animationDelay: "0.5s" }}
         >
           <EyeIcon className="w-7 h-7 drop-shadow-lg" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-60 right-1/3 text-yellow-400/20"
+          variants={floatingVariants}
+          animate="float"
+          style={{ animationDelay: "1.5s" }}
+        >
+          <RocketLaunchIcon className="w-6 h-6 drop-shadow-lg" />
+        </motion.div>
+        <motion.div
+          className="absolute top-80 left-1/3 text-indigo-400/20"
+          variants={floatingVariants}
+          animate="float"
+          style={{ animationDelay: "2.5s" }}
+        >
+          <LightBulbIcon className="w-5 h-5 drop-shadow-lg" />
         </motion.div>
       </div>
 
@@ -242,14 +264,14 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           variants={itemVariants}
         >
           <div className="flex items-center gap-3 mb-4">
-            <AcademicCapIcon className="h-6 w-6 text-blue-500" />
+            <AcademicCapIcon className="h-6 w-6 text-blue-500 dark:text-blue-400" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Research Focus Areas
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-4 glass-card rounded-lg">
-              <EyeIcon className="h-8 w-8 text-blue-500 mx-auto mb-3" />
+              <EyeIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-3" />
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Medical AI
               </h4>
@@ -258,7 +280,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
               </p>
             </div>
             <div className="text-center p-4 glass-card rounded-lg">
-              <CpuChipIcon className="h-8 w-8 text-purple-500 mx-auto mb-3" />
+              <CpuChipIcon className="h-8 w-8 text-purple-500 dark:text-purple-400 mx-auto mb-3" />
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Reinforcement Learning
               </h4>
@@ -267,7 +289,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
               </p>
             </div>
             <div className="text-center p-4 glass-card rounded-lg">
-              <ChartBarIcon className="h-8 w-8 text-pink-500 mx-auto mb-3" />
+              <ChartBarIcon className="h-8 w-8 text-pink-500 dark:text-pink-400 mx-auto mb-3" />
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Deep Learning
               </h4>
@@ -284,7 +306,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           variants={itemVariants}
         >
           <div className="text-center p-6 glass-card rounded-xl">
-            <CpuChipIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+            <CpuChipIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               Deep Learning
             </h3>
@@ -293,7 +315,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
             </p>
           </div>
           <div className="text-center p-6 glass-card rounded-xl">
-            <EyeIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+            <EyeIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               Computer Vision
             </h3>
@@ -302,7 +324,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
             </p>
           </div>
           <div className="text-center p-6 glass-card rounded-xl">
-            <BeakerIcon className="h-8 w-8 text-blue-500 mx-auto mb-4" />
+            <BeakerIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               Research & Development
             </h3>

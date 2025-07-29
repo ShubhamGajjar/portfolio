@@ -8,6 +8,11 @@ import {
   BeakerIcon,
   ChartBarIcon,
   EyeIcon,
+  RocketLaunchIcon,
+  LightBulbIcon,
+  PuzzlePieceIcon,
+  CommandLineIcon,
+  CogIcon,
 } from "@heroicons/react/24/outline";
 import { projects } from "../utils/data";
 import { motion } from "framer-motion";
@@ -25,18 +30,115 @@ const Projects = () => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case "Research":
-        return <AcademicCapIcon className="h-4 w-4" />;
+        return (
+          <AcademicCapIcon className="h-4 w-4 text-blue-500 dark:text-blue-400" />
+        );
       case "AI/ML Core":
-        return <CpuChipIcon className="h-4 w-4" />;
+        return (
+          <CpuChipIcon className="h-4 w-4 text-purple-500 dark:text-purple-400" />
+        );
       case "Data Science":
-        return <ChartBarIcon className="h-4 w-4" />;
+        return (
+          <ChartBarIcon className="h-4 w-4 text-green-500 dark:text-green-400" />
+        );
       default:
-        return <CodeBracketIcon className="h-4 w-4" />;
+        return (
+          <CodeBracketIcon className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+        );
     }
   };
 
+  const getProjectIcon = (project) => {
+    const title = project.title.toLowerCase();
+    const description = project.description.toLowerCase();
+
+    // Medical AI projects
+    if (
+      title.includes("brain") ||
+      title.includes("tumor") ||
+      title.includes("medical")
+    ) {
+      return (
+        <LightBulbIcon className="h-4 w-4 text-green-500 dark:text-green-400" />
+      );
+    }
+
+    // Skin cancer projects
+    if (title.includes("skin") || title.includes("cancer")) {
+      return <EyeIcon className="h-4 w-4 text-blue-500 dark:text-blue-400" />;
+    }
+
+    // Game AI projects
+    if (
+      title.includes("game") ||
+      title.includes("trackmania") ||
+      title.includes("snake") ||
+      title.includes("flappy")
+    ) {
+      return (
+        <RocketLaunchIcon className="h-4 w-4 text-pink-500 dark:text-pink-400" />
+      );
+    }
+
+    // Reinforcement learning projects
+    if (
+      description.includes("reinforcement") ||
+      description.includes("rl") ||
+      description.includes("q-learning")
+    ) {
+      return (
+        <RocketLaunchIcon className="h-4 w-4 text-pink-500 dark:text-pink-400" />
+      );
+    }
+
+    // Data science projects
+    if (
+      title.includes("sentiment") ||
+      title.includes("twitter") ||
+      title.includes("analysis")
+    ) {
+      return (
+        <ChartBarIcon className="h-4 w-4 text-green-500 dark:text-green-400" />
+      );
+    }
+
+    // Deep learning projects
+    if (
+      description.includes("deep learning") ||
+      description.includes("neural") ||
+      description.includes("cnn")
+    ) {
+      return (
+        <CpuChipIcon className="h-4 w-4 text-purple-500 dark:text-purple-400" />
+      );
+    }
+
+    // Research projects
+    if (project.category === "Research") {
+      return (
+        <AcademicCapIcon className="h-4 w-4 text-blue-500 dark:text-blue-400" />
+      );
+    }
+
+    // AI/ML projects
+    if (project.category === "AI/ML Core") {
+      return (
+        <CpuChipIcon className="h-4 w-4 text-purple-500 dark:text-purple-400" />
+      );
+    }
+
+    // Default
+    return (
+      <CodeBracketIcon className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+    );
+  };
+
   const getStatusColor = (status) => {
-    if (status?.includes("Published") || status?.includes("Accepted")) {
+    if (
+      status?.includes("Published") ||
+      status?.includes("Accepted") ||
+      status?.includes("Completed")
+    ) {
       return "bg-green-500/10 text-green-600 border-green-500/20";
     } else if (status?.includes("Under Review")) {
       return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
@@ -126,7 +228,7 @@ const Projects = () => {
               {/* Project Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  {getCategoryIcon(project.category)}
+                  {getProjectIcon(project)}
                   <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-500/10 px-2 py-1 rounded-full">
                     {project.category}
                   </span>
@@ -151,7 +253,7 @@ const Projects = () => {
               {project.impact && (
                 <div className="mb-4">
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs rounded-full border border-purple-500/20">
-                    <BeakerIcon className="h-3 w-3" />
+                    <BeakerIcon className="h-3 w-3 text-purple-500 dark:text-purple-400" />
                     {project.impact}
                   </span>
                 </div>
@@ -185,7 +287,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
                   >
-                    <CodeBracketIcon className="h-4 w-4" />
+                    <CodeBracketIcon className="h-4 w-4 text-gray-900 dark:text-white" />
                     View Code
                   </a>
                 )}
@@ -196,7 +298,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 ai-glass text-gray-900 dark:text-white rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
                   >
-                    <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                    <ArrowTopRightOnSquareIcon className="h-4 w-4 text-gray-900 dark:text-white" />
                     Live Demo
                   </a>
                 )}
@@ -220,7 +322,7 @@ const Projects = () => {
               href="#contact"
               className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
             >
-              <AcademicCapIcon className="h-5 w-5" />
+              <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
               Discuss Research
             </a>
           </div>

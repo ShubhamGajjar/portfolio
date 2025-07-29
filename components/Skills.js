@@ -8,6 +8,12 @@ import {
   ChartBarIcon,
   EyeIcon,
   CodeBracketIcon,
+  CommandLineIcon,
+  CogIcon,
+  CubeIcon,
+  LightBulbIcon,
+  PuzzlePieceIcon,
+  RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import { skills } from "../utils/data";
 
@@ -17,20 +23,96 @@ const Skills = () => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case "AI/ML Core":
-        return <CpuChipIcon className="h-5 w-5" />;
+        return (
+          <CpuChipIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
+        );
       case "Deep Learning Frameworks":
-        return <CpuChipIcon className="h-5 w-5" />;
+        return (
+          <CubeIcon className="h-5 w-5 text-purple-500 dark:text-purple-400" />
+        );
       case "Computer Vision":
-        return <EyeIcon className="h-5 w-5" />;
+        return <EyeIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />;
       case "Data Science & Analytics":
-        return <ChartBarIcon className="h-5 w-5" />;
+        return (
+          <ChartBarIcon className="h-5 w-5 text-green-500 dark:text-green-400" />
+        );
       case "Research & Development":
-        return <AcademicCapIcon className="h-5 w-5" />;
+        return (
+          <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
+        );
       case "Game AI & RL":
-        return <BeakerIcon className="h-5 w-5" />;
+        return (
+          <RocketLaunchIcon className="h-5 w-5 text-pink-500 dark:text-pink-400" />
+        );
       default:
-        return <CodeBracketIcon className="h-5 w-5" />;
+        return (
+          <CodeBracketIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+        );
     }
+  };
+
+  const getSkillIcon = (skill, category) => {
+    // Return specific icons for certain skills
+    if (skill.toLowerCase().includes("python")) {
+      return <CommandLineIcon className="h-4 w-4 text-blue-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("pytorch") ||
+      skill.toLowerCase().includes("tensorflow")
+    ) {
+      return <CubeIcon className="h-4 w-4 text-purple-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("opencv") ||
+      skill.toLowerCase().includes("vision")
+    ) {
+      return <EyeIcon className="h-4 w-4 text-blue-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("research") ||
+      skill.toLowerCase().includes("ieee")
+    ) {
+      return <AcademicCapIcon className="h-4 w-4 text-blue-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("reinforcement") ||
+      skill.toLowerCase().includes("game")
+    ) {
+      return <RocketLaunchIcon className="h-4 w-4 text-pink-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("neural") ||
+      skill.toLowerCase().includes("deep")
+    ) {
+      return <CpuChipIcon className="h-4 w-4 text-blue-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("data") ||
+      skill.toLowerCase().includes("analytics")
+    ) {
+      return <ChartBarIcon className="h-4 w-4 text-green-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("medical") ||
+      skill.toLowerCase().includes("health")
+    ) {
+      return <LightBulbIcon className="h-4 w-4 text-green-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("algorithm") ||
+      skill.toLowerCase().includes("optimization")
+    ) {
+      return <PuzzlePieceIcon className="h-4 w-4 text-purple-500" />;
+    }
+    if (
+      skill.toLowerCase().includes("framework") ||
+      skill.toLowerCase().includes("library")
+    ) {
+      return <CogIcon className="h-4 w-4 text-gray-500" />;
+    }
+
+    // Default icon based on category
+    return getCategoryIcon(category);
   };
 
   const containerVariants = {
@@ -100,7 +182,7 @@ const Skills = () => {
 
         {/* Skills Grid */}
         <motion.div
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -117,7 +199,7 @@ const Skills = () => {
               }}
             >
               <div className="flex items-center justify-center mb-4">
-                {getCategoryIcon(activeCategory)}
+                {getSkillIcon(skill, activeCategory)}
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 {skill}
@@ -128,7 +210,7 @@ const Skills = () => {
 
         {/* Expertise Highlights */}
         <motion.div
-          className="mt-16 grid gap-8 md:grid-cols-3"
+          className="grid gap-8 md:grid-cols-3 mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -138,7 +220,7 @@ const Skills = () => {
             className="ai-card p-8 text-center"
             variants={itemVariants}
           >
-            <AcademicCapIcon className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+            <AcademicCapIcon className="h-12 w-12 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
               Research Excellence
             </h3>
@@ -152,7 +234,7 @@ const Skills = () => {
             className="ai-card p-8 text-center"
             variants={itemVariants}
           >
-            <EyeIcon className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+            <EyeIcon className="h-12 w-12 text-purple-500 dark:text-purple-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
               Medical AI Specialist
             </h3>
@@ -166,7 +248,7 @@ const Skills = () => {
             className="ai-card p-8 text-center"
             variants={itemVariants}
           >
-            <BeakerIcon className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+            <BeakerIcon className="h-12 w-12 text-pink-500 dark:text-pink-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
               Game AI & RL
             </h3>
@@ -179,7 +261,7 @@ const Skills = () => {
 
         {/* Technical Proficiency */}
         <motion.div
-          className="mt-16 ai-card p-8 max-w-4xl mx-auto"
+          className="ai-card p-8 max-w-4xl mx-auto"
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
