@@ -5,12 +5,93 @@ import { CpuChipIcon } from "@heroicons/react/24/outline";
 
 const LoadingSpinner = () => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20">
-      <div className="text-center">
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center liquid-glass overflow-hidden"
+      initial={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        scale: 1.1,
+        transition: { duration: 0.8, ease: "easeInOut" },
+      }}
+    >
+      {/* Enhanced Background Patterns - Exact Same as Hero */}
+      <div className="absolute inset-0 ai-pattern opacity-30"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/8 via-purple-400/8 to-pink-400/8 animate-pulse-glow"></div>
+
+      {/* Background morphing elements - Matching Hero exactly */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-20 left-10 w-3 h-3 bg-blue-400 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute top-40 right-20 w-2 h-2 bg-purple-400 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-40 left-20 w-4 h-4 bg-pink-400 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+        <motion.div
+          className="absolute top-60 left-1/4 w-2 h-2 bg-green-400 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-60 right-1/3 w-3 h-3 bg-yellow-400 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+      </div>
+
+      <div className="text-center relative z-10">
         <motion.div
           animate={{
             rotate: 360,
-            scale: [1, 1.2, 1],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 2,
@@ -65,7 +146,7 @@ const LoadingSpinner = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

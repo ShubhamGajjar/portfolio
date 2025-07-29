@@ -1,6 +1,6 @@
 // components/Hero.js
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowDownIcon,
   DocumentArrowDownIcon,
@@ -20,10 +20,25 @@ import {
 
 const Hero = ({ title, subtitle, resumeLink }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  // Scroll-based transforms for icons
+  const cpuIconY = useTransform(scrollY, [0, 500], [0, -100]);
+  const cpuIconX = useTransform(scrollY, [0, 500], [0, 50]);
+  const cubeIconY = useTransform(scrollY, [0, 500], [0, 80]);
+  const cubeIconX = useTransform(scrollY, [0, 500], [0, -30]);
+  const chartIconY = useTransform(scrollY, [0, 500], [0, -60]);
+  const chartIconX = useTransform(scrollY, [0, 500], [0, 40]);
+  const eyeIconY = useTransform(scrollY, [0, 500], [0, 70]);
+  const eyeIconX = useTransform(scrollY, [0, 500], [0, -20]);
+  const rocketIconY = useTransform(scrollY, [0, 500], [0, -90]);
+  const rocketIconX = useTransform(scrollY, [0, 500], [0, 60]);
+  const lightbulbIconY = useTransform(scrollY, [0, 500], [0, 50]);
+  const lightbulbIconX = useTransform(scrollY, [0, 500], [0, -40]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -73,191 +88,296 @@ const Hero = ({ title, subtitle, resumeLink }) => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center liquid-glass overflow-hidden">
-      {/* Enhanced Background Patterns */}
+      {/* Enhanced Background Patterns - Matching Loading Spinner */}
       <div className="absolute inset-0 ai-pattern opacity-30"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-blue-400/8 via-purple-400/8 to-pink-400/8 animate-pulse-glow"></div>
 
-      {/* Animated Neural Network Visualization */}
+      {/* Animated Neural Network Visualization - Enhanced for Morphing */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Neural Network Nodes */}
+        {/* Neural Network Nodes - Matching Loading Spinner */}
         <motion.div
           className="absolute top-20 left-10 w-3 h-3 bg-blue-400 rounded-full"
-          variants={neuralNetworkVariants}
-          animate="animate"
+          initial={{ scale: 1, opacity: 0.3 }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
         <motion.div
           className="absolute top-40 right-20 w-2 h-2 bg-purple-400 rounded-full"
-          variants={neuralNetworkVariants}
-          animate="animate"
-          style={{ animationDelay: "0.5s" }}
+          initial={{ scale: 1, opacity: 0.3 }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
         />
         <motion.div
           className="absolute bottom-40 left-20 w-4 h-4 bg-pink-400 rounded-full"
-          variants={neuralNetworkVariants}
-          animate="animate"
-          style={{ animationDelay: "1s" }}
+          initial={{ scale: 1, opacity: 0.3 }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
         <motion.div
           className="absolute top-60 left-1/4 w-2 h-2 bg-green-400 rounded-full"
-          variants={neuralNetworkVariants}
-          animate="animate"
-          style={{ animationDelay: "1.5s" }}
+          initial={{ scale: 1, opacity: 0.3 }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
         />
         <motion.div
           className="absolute bottom-60 right-1/3 w-3 h-3 bg-yellow-400 rounded-full"
-          variants={neuralNetworkVariants}
-          animate="animate"
-          style={{ animationDelay: "2s" }}
+          initial={{ scale: 1, opacity: 0.3 }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
         />
 
-        {/* Floating AI Icons */}
+        {/* Floating AI Icons with Scroll-Responsive Animations Only */}
         <motion.div
           className="absolute top-20 left-10 text-blue-400/20"
-          variants={floatingVariants}
-          animate="float"
+          style={{ y: cpuIconY, x: cpuIconX }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          whileHover={{
+            scale: 1.2,
+            rotate: 5,
+            transition: { duration: 0.3 },
+          }}
         >
           <CpuChipIcon className="w-8 h-8 drop-shadow-lg" />
         </motion.div>
+
         <motion.div
           className="absolute top-40 right-20 text-purple-400/20"
-          variants={floatingVariants}
-          animate="float"
-          style={{ animationDelay: "1s" }}
+          style={{ y: cubeIconY, x: cubeIconX }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          whileHover={{
+            scale: 1.3,
+            rotate: -5,
+            transition: { duration: 0.3 },
+          }}
         >
           <CubeIcon className="w-6 h-6 drop-shadow-lg" />
         </motion.div>
+
         <motion.div
           className="absolute bottom-40 left-20 text-pink-400/20"
-          variants={floatingVariants}
-          animate="float"
-          style={{ animationDelay: "2s" }}
+          style={{ y: chartIconY, x: chartIconX }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          whileHover={{
+            scale: 1.4,
+            rotate: 10,
+            transition: { duration: 0.3 },
+          }}
         >
           <ChartBarIcon className="w-10 h-10 drop-shadow-lg" />
         </motion.div>
+
         <motion.div
           className="absolute top-60 left-1/4 text-green-400/20"
-          variants={floatingVariants}
-          animate="float"
-          style={{ animationDelay: "0.5s" }}
+          style={{ y: eyeIconY, x: eyeIconX }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 1.1 }}
+          whileHover={{
+            scale: 1.25,
+            rotate: -8,
+            transition: { duration: 0.3 },
+          }}
         >
           <EyeIcon className="w-7 h-7 drop-shadow-lg" />
         </motion.div>
+
         <motion.div
           className="absolute bottom-60 right-1/3 text-yellow-400/20"
-          variants={floatingVariants}
-          animate="float"
-          style={{ animationDelay: "1.5s" }}
+          style={{ y: rocketIconY, x: rocketIconX }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 1.3 }}
+          whileHover={{
+            scale: 1.35,
+            rotate: 12,
+            transition: { duration: 0.3 },
+          }}
         >
           <RocketLaunchIcon className="w-6 h-6 drop-shadow-lg" />
         </motion.div>
+
         <motion.div
           className="absolute top-80 left-1/3 text-indigo-400/20"
-          variants={floatingVariants}
-          animate="float"
-          style={{ animationDelay: "2.5s" }}
+          style={{ y: lightbulbIconY, x: lightbulbIconX }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 1.5 }}
+          whileHover={{
+            scale: 1.3,
+            rotate: -15,
+            transition: { duration: 0.3 },
+          }}
         >
           <LightBulbIcon className="w-5 h-5 drop-shadow-lg" />
         </motion.div>
+
+        {/* Additional Animated Elements with Scroll Response Only */}
+        <motion.div
+          className="absolute top-1/4 right-1/4 text-blue-300/15"
+          style={{
+            y: useTransform(scrollY, [0, 500], [0, -30]),
+            x: useTransform(scrollY, [0, 500], [0, 20]),
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 1.7 }}
+          whileHover={{
+            scale: 1.2,
+            rotate: 180,
+            transition: { duration: 0.3 },
+          }}
+        >
+          <CommandLineIcon className="w-4 h-4 drop-shadow-lg" />
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/3 left-1/3 text-purple-300/15"
+          style={{
+            y: useTransform(scrollY, [0, 500], [0, 40]),
+            x: useTransform(scrollY, [0, 500], [0, -25]),
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 1.9 }}
+          whileHover={{
+            scale: 1.2,
+            rotate: -180,
+            transition: { duration: 0.3 },
+          }}
+        >
+          <CogIcon className="w-5 h-5 drop-shadow-lg" />
+        </motion.div>
+
+        <motion.div
+          className="absolute top-1/2 right-1/3 text-green-300/15"
+          style={{
+            y: useTransform(scrollY, [0, 500], [0, -50]),
+            x: useTransform(scrollY, [0, 500], [0, 35]),
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 2.1 }}
+          whileHover={{
+            scale: 1.2,
+            rotate: 90,
+            transition: { duration: 0.3 },
+          }}
+        >
+          <PuzzlePieceIcon className="w-6 h-6 drop-shadow-lg" />
+        </motion.div>
       </div>
 
-      {/* Main content */}
-      <motion.div
-        className="relative z-10 text-center px-4 pt-32"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* AI Engineer Badge */}
-        <motion.div
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 mb-12"
-          variants={itemVariants}
-        >
-          <CpuChipIcon className="w-5 h-5 text-blue-400" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            AI Engineer & Research Specialist
-          </span>
-        </motion.div>
-
-        {/* Enhanced Title */}
+      {/* Main Content */}
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-6 ai-gradient-text"
-          variants={itemVariants}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.3,
+            ease: "easeOut",
+          }}
+          className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6"
         >
-          Hi, I'm Shubham Gajjar
+          {title}
         </motion.h1>
 
-        {/* Enhanced Subtitle */}
         <motion.p
-          className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
-          variants={itemVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1.0,
+            delay: 0.6,
+            ease: "easeOut",
+          }}
+          className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
         >
-          AI Engineer specializing in medical AI, computer vision, and deep
-          learning. Published researcher with IEEE conference publications and
-          96.3% model accuracy.
+          {subtitle}
         </motion.p>
 
-        {/* Enhanced Action Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-          variants={itemVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1.0,
+            delay: 0.9,
+            ease: "easeOut",
+          }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <a
-            href="/Shubham_Gajjar_Resume.pdf"
-            download
-            className="action-button inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+          <motion.a
+            href={resumeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.95 }}
           >
-            <ArrowDownTrayIcon className="w-5 h-5" />
             Download Resume
-          </a>
-          <a
-            href="#research"
-            className="action-button inline-flex items-center gap-2 px-8 py-4 bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-white/20 dark:hover:bg-gray-800/30 transition-all duration-300"
-          >
-            View Research
-            <AcademicCapIcon className="w-5 h-5" />
-          </a>
-        </motion.div>
+          </motion.a>
 
-        {/* Key Stats */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
-          variants={itemVariants}
-        >
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              2
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Research Papers
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              6+
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              AI Projects
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              96.3%
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Model Accuracy
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
-              IEEE
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Conference
-            </div>
-          </div>
+          <motion.a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-white/20 dark:hover:bg-gray-800/30 transition-all duration-300"
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get In Touch
+          </motion.a>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };
