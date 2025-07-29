@@ -1,27 +1,44 @@
 // components/Skills.js
 import React, { useState } from "react";
-import { CpuChipIcon, ChartBarIcon } from "@heroicons/react/24/outline";
-import { skills } from "../utils/data";
 import { motion } from "framer-motion";
+import {
+  CpuChipIcon,
+  AcademicCapIcon,
+  BeakerIcon,
+  ChartBarIcon,
+  EyeIcon,
+  CodeBracketIcon,
+} from "@heroicons/react/24/outline";
+import { skills } from "../utils/data";
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("AI/ML Core");
 
-  const categoryIcons = {
-    "AI/ML Core": CpuChipIcon,
-    "Deep Learning": CpuChipIcon,
-    "Data Science": ChartBarIcon,
-    "MLOps & Deployment": CpuChipIcon,
-    "Research & Development": CpuChipIcon,
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case "AI/ML Core":
+        return <CpuChipIcon className="h-5 w-5" />;
+      case "Deep Learning Frameworks":
+        return <CpuChipIcon className="h-5 w-5" />;
+      case "Computer Vision":
+        return <EyeIcon className="h-5 w-5" />;
+      case "Data Science & Analytics":
+        return <ChartBarIcon className="h-5 w-5" />;
+      case "Research & Development":
+        return <AcademicCapIcon className="h-5 w-5" />;
+      case "Game AI & RL":
+        return <BeakerIcon className="h-5 w-5" />;
+      default:
+        return <CodeBracketIcon className="h-5 w-5" />;
+    }
   };
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -31,6 +48,9 @@ const Skills = () => {
     visible: {
       opacity: 1,
       y: 0,
+      transition: {
+        duration: 0.5,
+      },
     },
   };
 
@@ -49,85 +69,150 @@ const Skills = () => {
             className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
             variants={itemVariants}
           >
-            Skills & Expertise
+            AI Engineering Expertise
           </motion.h2>
           <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Comprehensive AI/ML skillset with expertise in research and
-            development
+            Comprehensive skills in deep learning, computer vision, and research
+            methodologies for cutting-edge AI development
           </motion.p>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* Skills Categories */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {Object.keys(skills).map((category) => {
-            const Icon = categoryIcons[category];
-            return (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
-                  activeCategory === category
-                    ? "ai-glass text-blue-600 dark:text-blue-400"
-                    : "glass-card text-gray-600 dark:text-gray-400 hover:scale-105"
-                }`}
-              >
-                <Icon className="h-5 w-5" />
-                <span className="font-medium">{category}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Skills Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
-          {skills[activeCategory].map((skill, index) => (
-            <div
-              key={index}
-              className="ai-card p-6 text-center hover:scale-105 transition-all duration-200"
+          {Object.keys(skills).map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+                activeCategory === category
+                  ? "ai-glass text-blue-600 dark:text-blue-400"
+                  : "glass-card text-gray-600 dark:text-gray-400 hover:scale-105"
+              }`}
             >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                {skill}
-              </h3>
-            </div>
+              {getCategoryIcon(category)}
+              <span className="font-medium">{category}</span>
+            </button>
           ))}
         </div>
 
-        {/* Research Expertise Highlight */}
-        <div className="ai-card p-8 max-w-4xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
-            <ChartBarIcon className="h-8 w-8 text-blue-500" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Core Expertise
+        {/* Skills Grid */}
+        <motion.div
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {skills[activeCategory]?.map((skill, index) => (
+            <motion.div
+              key={index}
+              className="ai-card p-6 text-center hover:scale-105 transition-all duration-300"
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 },
+              }}
+            >
+              <div className="flex items-center justify-center mb-4">
+                {getCategoryIcon(activeCategory)}
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                {skill}
+              </h3>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Expertise Highlights */}
+        <motion.div
+          className="mt-16 grid gap-8 md:grid-cols-3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="ai-card p-8 text-center"
+            variants={itemVariants}
+          >
+            <AcademicCapIcon className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Research Excellence
             </h3>
-          </div>
+            <p className="text-gray-600 dark:text-gray-300">
+              Published research in IEEE conferences with focus on medical AI
+              and computer vision applications
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="ai-card p-8 text-center"
+            variants={itemVariants}
+          >
+            <EyeIcon className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Medical AI Specialist
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Expertise in brain tumor segmentation and skin cancer
+              classification with state-of-the-art deep learning models
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="ai-card p-8 text-center"
+            variants={itemVariants}
+          >
+            <BeakerIcon className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Game AI & RL
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Advanced reinforcement learning implementations for game AI,
+              including TrackMania and classic games
+            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Technical Proficiency */}
+        <motion.div
+          className="mt-16 ai-card p-8 max-w-4xl mx-auto"
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+            Technical Proficiency
+          </h3>
           <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                Deep Learning & Frameworks
+              </h4>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                <li>• PyTorch & TensorFlow expertise</li>
+                <li>• CNN, ResNet, Vision Transformers</li>
+                <li>• UNet architectures for medical imaging</li>
+                <li>• Neural network optimization</li>
+              </ul>
+            </div>
             <div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 Research & Development
               </h4>
               <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                <li>• Academic paper writing and publication</li>
-                <li>• Experimental design and statistical analysis</li>
-                <li>• Literature review and research synthesis</li>
-                <li>• Conference presentation and collaboration</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                Continuous Learning
-              </h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                <li>• Staying updated with latest AI research</li>
-                <li>• Implementing cutting-edge algorithms</li>
-                <li>• Contributing to open-source projects</li>
-                <li>• Mentoring and knowledge sharing</li>
+                <li>• IEEE conference publications</li>
+                <li>• Experimental design & methodology</li>
+                <li>• Statistical analysis & validation</li>
+                <li>• Medical AI research focus</li>
               </ul>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

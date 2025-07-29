@@ -4,6 +4,10 @@ import {
   CpuChipIcon,
   ArrowTopRightOnSquareIcon,
   CodeBracketIcon,
+  AcademicCapIcon,
+  BeakerIcon,
+  ChartBarIcon,
+  EyeIcon,
 } from "@heroicons/react/24/outline";
 import { projects } from "../utils/data";
 import { motion } from "framer-motion";
@@ -11,7 +15,7 @@ import { motion } from "framer-motion";
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "AI/ML Core", "Data Science", "MLOps"];
+  const categories = ["All", "Research", "AI/ML Core", "Data Science"];
 
   const filteredProjects =
     activeCategory === "All"
@@ -20,15 +24,26 @@ const Projects = () => {
 
   const getCategoryIcon = (category) => {
     switch (category) {
+      case "Research":
+        return <AcademicCapIcon className="h-4 w-4" />;
       case "AI/ML Core":
         return <CpuChipIcon className="h-4 w-4" />;
       case "Data Science":
-        return <CodeBracketIcon className="h-4 w-4" />;
-      case "MLOps":
-        return <CpuChipIcon className="h-4 w-4" />;
+        return <ChartBarIcon className="h-4 w-4" />;
       default:
         return <CodeBracketIcon className="h-4 w-4" />;
     }
+  };
+
+  const getStatusColor = (status) => {
+    if (status?.includes("Published") || status?.includes("Accepted")) {
+      return "bg-green-500/10 text-green-600 border-green-500/20";
+    } else if (status?.includes("Under Review")) {
+      return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
+    } else if (status?.includes("Active")) {
+      return "bg-blue-500/10 text-blue-600 border-blue-500/20";
+    }
+    return "bg-gray-500/10 text-gray-600 border-gray-500/20";
   };
 
   const containerVariants = {
@@ -67,14 +82,14 @@ const Projects = () => {
             className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
             variants={itemVariants}
           >
-            AI & ML Projects
+            Research & AI Projects
           </motion.h2>
           <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Innovative projects showcasing cutting-edge AI and machine learning
-            solutions
+            Cutting-edge research in medical AI and innovative AI/ML projects
+            showcasing expertise in deep learning and computer vision
           </motion.p>
         </motion.div>
 
@@ -97,11 +112,16 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {filteredProjects.map((project) => (
-            <div
+            <motion.div
               key={project.id}
-              className="ai-card p-6 hover:scale-105 transition-all duration-300"
+              className="ai-card p-8 hover:scale-105 transition-all duration-300"
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 },
+              }}
             >
               {/* Project Header */}
               <div className="flex items-start justify-between mb-4">
@@ -111,12 +131,31 @@ const Projects = () => {
                     {project.category}
                   </span>
                 </div>
+                {project.status && (
+                  <div
+                    className={`flex items-center gap-1 px-2 py-1 rounded-full border text-xs ${getStatusColor(
+                      project.status
+                    )}`}
+                  >
+                    <span className="font-medium">{project.status}</span>
+                  </div>
+                )}
               </div>
 
               {/* Project Title */}
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                 {project.title}
               </h3>
+
+              {/* Impact Badge for Research */}
+              {project.impact && (
+                <div className="mb-4">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs rounded-full border border-purple-500/20">
+                    <BeakerIcon className="h-3 w-3" />
+                    {project.impact}
+                  </span>
+                </div>
+              )}
 
               {/* Project Description */}
               <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
@@ -147,7 +186,7 @@ const Projects = () => {
                     className="flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
                   >
                     <CodeBracketIcon className="h-4 w-4" />
-                    Code
+                    View Code
                   </a>
                 )}
                 {project.live && (
@@ -158,15 +197,15 @@ const Projects = () => {
                     className="flex items-center gap-2 px-4 py-2 ai-glass text-gray-900 dark:text-white rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
                   >
                     <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                    Demo
+                    Live Demo
                   </a>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Call to Action */}
+        {/* Research Collaboration CTA */}
         <div className="text-center mt-12">
           <div className="ai-card p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -174,14 +213,15 @@ const Projects = () => {
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Interested in collaborating on innovative AI research projects?
-              Let's explore opportunities to advance the field together.
+              Let's explore opportunities to advance medical AI and computer
+              vision together.
             </p>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
             >
-              <CpuChipIcon className="h-5 w-5" />
-              Discuss Projects
+              <AcademicCapIcon className="h-5 w-5" />
+              Discuss Research
             </a>
           </div>
         </div>

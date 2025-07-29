@@ -8,6 +8,8 @@ import {
   ClockIcon,
   EyeIcon,
   DocumentArrowDownIcon,
+  BeakerIcon,
+  StarIcon,
 } from "@heroicons/react/24/outline";
 import { researchPapers } from "../utils/data";
 
@@ -80,15 +82,58 @@ const ResearchPapers = () => {
             className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
             variants={itemVariants}
           >
-            Research Papers
+            Research Publications
           </motion.h2>
           <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Published research in AI and machine learning with focus on
-            practical applications
+            Published research in medical AI and computer vision, contributing
+            to the advancement of healthcare through innovative deep learning
+            solutions
           </motion.p>
+        </motion.div>
+
+        {/* Research Impact Stats */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-w-4xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div className="text-center" variants={itemVariants}>
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              2
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Research Papers
+            </div>
+          </motion.div>
+          <motion.div className="text-center" variants={itemVariants}>
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              IEEE
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Conference
+            </div>
+          </motion.div>
+          <motion.div className="text-center" variants={itemVariants}>
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              96.3%
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Model Accuracy
+            </div>
+          </motion.div>
+          <motion.div className="text-center" variants={itemVariants}>
+            <div className="text-3xl md:text-4xl font-bold ai-gradient-text mb-2">
+              Medical
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              AI Focus
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Research Papers Grid */}
@@ -146,10 +191,40 @@ const ResearchPapers = () => {
                 {paper.description}
               </p>
 
+              {/* Research Impact */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <StarIcon className="h-4 w-4 text-yellow-500" />
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
+                    Research Impact
+                  </h4>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 glass-card rounded-lg">
+                    <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+                      Medical AI Contribution
+                    </h5>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">
+                      Advanced deep learning models for medical image analysis
+                      and diagnosis
+                    </p>
+                  </div>
+                  <div className="p-4 glass-card rounded-lg">
+                    <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+                      Technical Innovation
+                    </h5>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">
+                      Novel hybrid architectures combining state-of-the-art
+                      neural networks
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Keywords */}
               <div className="mb-6">
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-                  Keywords
+                  Research Areas
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {paper.keywords.map((keyword, index) => (
@@ -249,7 +324,7 @@ const ResearchPapers = () => {
           ))}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Research Collaboration CTA */}
         <motion.div
           className="text-center mt-12"
           initial={{ opacity: 0, y: 20 }}
@@ -261,8 +336,9 @@ const ResearchPapers = () => {
               Research Collaboration
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Interested in collaborating on cutting-edge AI research? Let's
-              explore opportunities to advance the field together.
+              Interested in collaborating on cutting-edge medical AI research?
+              Let's explore opportunities to advance healthcare through
+              innovative deep learning solutions.
             </p>
             <motion.a
               href="#contact"
