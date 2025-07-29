@@ -10,6 +10,11 @@ import {
   DocumentArrowDownIcon,
   BeakerIcon,
   StarIcon,
+  LightBulbIcon,
+  PuzzlePieceIcon,
+  CogIcon,
+  RocketLaunchIcon,
+  CpuChipIcon,
 } from "@heroicons/react/24/outline";
 import { researchPapers } from "../utils/data";
 
@@ -21,6 +26,63 @@ const ResearchPapers = () => {
       return <CheckCircleIcon className="h-5 w-5 text-green-500" />;
     }
     return <ClockIcon className="h-5 w-5 text-yellow-500" />;
+  };
+
+  const getPaperIcon = (paper) => {
+    const title = paper.title.toLowerCase();
+    const keywords = paper.keywords.join(" ").toLowerCase();
+
+    // Medical AI papers
+    if (
+      title.includes("medical") ||
+      title.includes("brain") ||
+      title.includes("tumor") ||
+      title.includes("skin")
+    ) {
+      return <LightBulbIcon className="h-8 w-8 text-green-500" />;
+    }
+
+    // Computer vision papers
+    if (
+      title.includes("vision") ||
+      title.includes("image") ||
+      title.includes("segmentation") ||
+      keywords.includes("computer vision")
+    ) {
+      return <EyeIcon className="h-8 w-8 text-blue-500" />;
+    }
+
+    // Deep learning papers
+    if (
+      title.includes("deep") ||
+      title.includes("neural") ||
+      title.includes("cnn") ||
+      title.includes("transformer")
+    ) {
+      return <CogIcon className="h-8 w-8 text-purple-500" />;
+    }
+
+    // Research methodology papers
+    if (
+      title.includes("method") ||
+      title.includes("approach") ||
+      title.includes("architecture")
+    ) {
+      return <PuzzlePieceIcon className="h-8 w-8 text-purple-500" />;
+    }
+
+    // Accepted papers
+    if (paper.status === "Accepted") {
+      return <AcademicCapIcon className="h-8 w-8 text-blue-500" />;
+    }
+
+    // Under review papers
+    if (paper.status === "Under Review") {
+      return <CogIcon className="h-8 w-8 text-yellow-500" />;
+    }
+
+    // Default
+    return <DocumentTextIcon className="h-8 w-8 text-blue-500" />;
   };
 
   const getStatusColor = (status) => {
@@ -156,7 +218,7 @@ const ResearchPapers = () => {
               {/* Paper Header */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <DocumentTextIcon className="h-8 w-8 text-blue-500" />
+                  {getPaperIcon(paper)}
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                       {paper.title}

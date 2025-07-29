@@ -8,6 +8,10 @@ import {
   EyeIcon,
   CpuChipIcon,
   StarIcon,
+  LightBulbIcon,
+  PuzzlePieceIcon,
+  RocketLaunchIcon,
+  CogIcon,
 } from "@heroicons/react/24/outline";
 
 const About = () => {
@@ -69,7 +73,7 @@ const About = () => {
         >
           <motion.div className="ai-card p-8" variants={itemVariants}>
             <div className="flex items-center gap-3 mb-4">
-              <AcademicCapIcon className="h-8 w-8 text-blue-500" />
+              <AcademicCapIcon className="h-8 w-8 text-blue-500 dark:text-blue-400" />
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                 Research Focus
               </h3>
@@ -85,7 +89,7 @@ const About = () => {
 
           <motion.div className="ai-card p-8" variants={itemVariants}>
             <div className="flex items-center gap-3 mb-4">
-              <BeakerIcon className="h-8 w-8 text-purple-500" />
+              <CogIcon className="h-8 w-8 text-purple-500 dark:text-purple-400" />
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                 Technical Expertise
               </h3>
@@ -101,7 +105,7 @@ const About = () => {
 
           <motion.div className="ai-card p-8" variants={itemVariants}>
             <div className="flex items-center gap-3 mb-4">
-              <EyeIcon className="h-8 w-8 text-pink-500" />
+              <LightBulbIcon className="h-8 w-8 text-pink-500 dark:text-pink-400" />
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                 Medical AI Impact
               </h3>
@@ -117,7 +121,7 @@ const About = () => {
 
           <motion.div className="ai-card p-8" variants={itemVariants}>
             <div className="flex items-center gap-3 mb-4">
-              <CpuChipIcon className="h-8 w-8 text-green-500" />
+              <RocketLaunchIcon className="h-8 w-8 text-green-500 dark:text-green-400" />
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                 Innovation & Growth
               </h3>
@@ -140,7 +144,7 @@ const About = () => {
           viewport={{ once: true }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <StarIcon className="h-8 w-8 text-yellow-500" />
+            <StarIcon className="h-8 w-8 text-yellow-500 dark:text-yellow-400" />
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
               Key Achievements
             </h3>
@@ -192,7 +196,7 @@ const About = () => {
               possible in artificial intelligence.
             </p>
             <div className="flex items-center justify-center gap-2 text-blue-600 dark:text-blue-400">
-              <CpuChipIcon className="h-5 w-5" />
+              <CpuChipIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
               <span className="text-sm font-medium">
                 Advancing AI for Healthcare
               </span>
