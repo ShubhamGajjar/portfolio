@@ -192,9 +192,9 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
           variants={itemVariants}
         >
-          Pioneering the future of AI through cutting-edge research in medical
-          imaging, reinforcement learning, and deep learning. Published
-          researcher with expertise in computer vision and neural networks.
+          AI Engineer specializing in medical AI, computer vision, and deep
+          learning. Published researcher with IEEE conference publications and
+          96.3% model accuracy.
         </motion.p>
 
         {/* Enhanced Action Buttons */}
@@ -219,9 +219,9 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           </a>
         </motion.div>
 
-        {/* Enhanced AI Stats */}
+        {/* Key Stats */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mb-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
           variants={itemVariants}
         >
           <div className="text-center">
@@ -255,82 +255,6 @@ const Hero = ({ title, subtitle, resumeLink }) => {
             <div className="text-sm text-gray-600 dark:text-gray-400">
               Conference
             </div>
-          </div>
-        </motion.div>
-
-        {/* Research Highlights */}
-        <motion.div
-          className="mt-12 p-8 ai-card max-w-4xl mx-auto"
-          variants={itemVariants}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <AcademicCapIcon className="h-6 w-6 text-blue-500 dark:text-blue-400" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Research Focus Areas
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-4 glass-card rounded-lg">
-              <EyeIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-3" />
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                Medical AI
-              </h4>
-              <p className="text-xs text-gray-600 dark:text-gray-300">
-                Brain tumor segmentation & Skin cancer classification
-              </p>
-            </div>
-            <div className="text-center p-4 glass-card rounded-lg">
-              <CpuChipIcon className="h-8 w-8 text-purple-500 dark:text-purple-400 mx-auto mb-3" />
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                Reinforcement Learning
-              </h4>
-              <p className="text-xs text-gray-600 dark:text-gray-300">
-                Game AI & Autonomous decision making
-              </p>
-            </div>
-            <div className="text-center p-4 glass-card rounded-lg">
-              <ChartBarIcon className="h-8 w-8 text-pink-500 dark:text-pink-400 mx-auto mb-3" />
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                Deep Learning
-              </h4>
-              <p className="text-xs text-gray-600 dark:text-gray-300">
-                Neural networks & Computer vision
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Technical Expertise */}
-        <motion.div
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-          variants={itemVariants}
-        >
-          <div className="text-center p-6 glass-card rounded-xl">
-            <CpuChipIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Deep Learning
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
-              PyTorch, TensorFlow, CNN, ResNet, Vision Transformers
-            </p>
-          </div>
-          <div className="text-center p-6 glass-card rounded-xl">
-            <EyeIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Computer Vision
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
-              Medical Imaging, Image Segmentation, Object Detection
-            </p>
-          </div>
-          <div className="text-center p-6 glass-card rounded-xl">
-            <BeakerIcon className="h-8 w-8 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Research & Development
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
-              IEEE Publications, Experimental Design, Medical AI
-            </p>
           </div>
         </motion.div>
       </motion.div>

@@ -57,9 +57,8 @@ const About = () => {
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Passionate AI Engineer and Researcher dedicated to advancing
-            healthcare through innovative deep learning solutions and
-            cutting-edge research
+            AI Engineer and Researcher focused on medical AI applications and
+            cutting-edge deep learning solutions
           </motion.p>
         </motion.div>
 
@@ -79,11 +78,10 @@ const About = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              My research focuses on medical AI applications, particularly in
-              brain tumor segmentation and skin cancer classification. I've
-              developed novel hybrid architectures that combine the strengths of
-              different neural network models to achieve state-of-the-art
-              performance in medical image analysis.
+              Specialized in medical AI applications including brain tumor
+              segmentation and skin cancer classification. Developed hybrid
+              architectures achieving state-of-the-art performance in medical
+              image analysis.
             </p>
           </motion.div>
 
@@ -95,11 +93,9 @@ const About = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Specialized in deep learning frameworks like PyTorch and
-              TensorFlow, with expertise in computer vision, reinforcement
-              learning, and neural network architectures. My work spans from
-              medical AI to game AI, demonstrating versatility in AI
-              applications.
+              Expert in PyTorch, TensorFlow, computer vision, and neural network
+              architectures. Experience spans medical AI to game AI,
+              demonstrating versatility in AI applications.
             </p>
           </motion.div>
 
@@ -111,11 +107,9 @@ const About = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              My research contributes to the advancement of automated medical
-              diagnosis systems. The hybrid ResNet-ViT model achieved 96.3%
-              accuracy in skin cancer classification, while the VGG16-MCA UNet
-              architecture shows superior performance in brain tumor
-              segmentation.
+              Achieved 96.3% accuracy in skin cancer classification with hybrid
+              ResNet-ViT model. VGG16-MCA UNet architecture shows superior
+              performance in brain tumor segmentation.
             </p>
           </motion.div>
 
@@ -127,10 +121,9 @@ const About = () => {
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Continuously exploring new AI frontiers, from reinforcement
-              learning in gaming environments to evolutionary algorithms. My
-              projects demonstrate both theoretical understanding and practical
-              implementation skills in cutting-edge AI technologies.
+              Exploring AI frontiers from reinforcement learning to evolutionary
+              algorithms. Projects demonstrate both theoretical understanding
+              and practical implementation skills.
             </p>
           </motion.div>
         </motion.div>
@@ -189,11 +182,9 @@ const About = () => {
               Vision for the Future
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              I'm passionate about advancing AI technology to solve real-world
-              problems, particularly in healthcare. My goal is to contribute to
-              the development of AI systems that can improve medical diagnosis
-              and patient outcomes while pushing the boundaries of what's
-              possible in artificial intelligence.
+              Passionate about advancing AI technology to solve real-world
+              healthcare problems. Goal is to contribute to AI systems that
+              improve medical diagnosis and patient outcomes.
             </p>
             <div className="flex items-center justify-center gap-2 text-blue-600 dark:text-blue-400">
               <CpuChipIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
