@@ -100,7 +100,8 @@ const Skills = () => {
       skillLower.includes("neural") ||
       skillLower.includes("deep") ||
       skillLower.includes("cnn") ||
-      skillLower.includes("rnn")
+      skillLower.includes("rnn") ||
+      skillLower.includes("transformer")
     ) {
       return <CpuChipIcon className="h-4 w-4 text-blue-500" />;
     }
@@ -109,78 +110,33 @@ const Skills = () => {
     if (
       skillLower.includes("data") ||
       skillLower.includes("analytics") ||
-      skillLower.includes("pandas") ||
-      skillLower.includes("numpy")
+      skillLower.includes("statistics")
     ) {
       return <ChartBarIcon className="h-4 w-4 text-green-500" />;
     }
 
-    // Medical and healthcare
+    // Development and tools
     if (
-      skillLower.includes("medical") ||
-      skillLower.includes("health") ||
-      skillLower.includes("diagnosis")
-    ) {
-      return <LightBulbIcon className="h-4 w-4 text-green-500" />;
-    }
-
-    // Algorithms and optimization
-    if (
-      skillLower.includes("algorithm") ||
-      skillLower.includes("optimization") ||
-      skillLower.includes("genetic")
-    ) {
-      return <PuzzlePieceIcon className="h-4 w-4 text-purple-500" />;
-    }
-
-    // Frameworks and libraries
-    if (
-      skillLower.includes("framework") ||
-      skillLower.includes("library") ||
-      skillLower.includes("transformers")
+      skillLower.includes("git") ||
+      skillLower.includes("docker") ||
+      skillLower.includes("aws") ||
+      skillLower.includes("cloud")
     ) {
       return <CogIcon className="h-4 w-4 text-gray-500" />;
     }
 
-    // Natural language processing
-    if (
-      skillLower.includes("nlp") ||
-      skillLower.includes("language") ||
-      skillLower.includes("text")
-    ) {
-      return <CommandLineIcon className="h-4 w-4 text-indigo-500" />;
-    }
-
-    // Statistical analysis
-    if (
-      skillLower.includes("statistical") ||
-      skillLower.includes("scikit") ||
-      skillLower.includes("matplotlib")
-    ) {
-      return <ChartBarIcon className="h-4 w-4 text-green-500" />;
-    }
-
-    // Default icon based on category
-    return getCategoryIcon(category);
+    // Default icon
+    return <CodeBracketIcon className="h-4 w-4 text-gray-400" />;
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.8,
+        ease: "easeOut",
       },
     },
   };
@@ -191,69 +147,64 @@ const Skills = () => {
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
-          variants={containerVariants}
+          variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
-            variants={itemVariants}
-          >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text">
             Technical Skills
-          </motion.h2>
-          <motion.p
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-            variants={itemVariants}
-          >
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Specialized expertise in AI/ML, computer vision, and research
             methodologies
-          </motion.p>
+          </p>
         </motion.div>
 
         {/* Skills Categories */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mb-12"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {Object.keys(skills).map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-150 ${
                 activeCategory === category
-                  ? "ai-glass text-blue-600 dark:text-blue-400"
-                  : "glass-card text-gray-600 dark:text-gray-400 hover:scale-105"
+                  ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-700"
+                  : "bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
               }`}
             >
               {getCategoryIcon(category)}
               <span className="font-medium">{category}</span>
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Skills Grid */}
         <motion.div
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          variants={containerVariants}
+          className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           {skills[activeCategory]?.map((skill, index) => (
-            <motion.div
+            <div
               key={index}
-              className="ai-card p-6 text-center hover:scale-105 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.2 },
-              }}
+              className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200"
             >
-              <div className="flex items-center justify-center mb-4">
+              <div className="flex-shrink-0">
                 {getSkillIcon(skill, activeCategory)}
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 {skill}
-              </h3>
-            </motion.div>
+              </span>
+            </div>
           ))}
         </motion.div>
       </div>

@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useState, useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = useState("dark"); // Default to dark
+  const [theme, setTheme] = useState("light"); // Default to light
 
   // Effect to apply theme class and persist choice
   useEffect(() => {
@@ -12,8 +12,17 @@ export default function App({ Component, pageProps }) {
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
+
     // Determine initial theme: localStorage > prefers-color-scheme > default ('dark')
-    const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
+    let initialTheme;
+    if (storedTheme) {
+      // User has explicitly chosen a theme before
+      initialTheme = storedTheme;
+    } else {
+      // First time user - default to light mode
+      initialTheme = "light";
+    }
+
     setTheme(initialTheme); // Set state
 
     if (initialTheme === "dark") {
@@ -21,8 +30,6 @@ export default function App({ Component, pageProps }) {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    // Store the explicitly chosen theme, or the derived initial theme
-    localStorage.setItem("theme", initialTheme);
   }, []); // Run only once on mount to initialize
 
   const toggleTheme = () => {

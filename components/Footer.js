@@ -32,26 +32,64 @@ const Footer = () => {
             </h4>
             <div className="space-y-2">
               <a
-                href="#hero"
-                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("Footer Home clicked");
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }}
+                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm cursor-pointer"
               >
                 Home
               </a>
               <a
                 href="#skills"
-                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector("#skills");
+                  if (element) {
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm cursor-pointer"
               >
                 Skills
               </a>
               <a
                 href="#projects"
-                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector("#projects");
+                  if (element) {
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm cursor-pointer"
               >
                 Projects
               </a>
               <a
                 href="#contact"
-                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector("#contact");
+                  if (element) {
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm cursor-pointer"
               >
                 Contact
               </a>

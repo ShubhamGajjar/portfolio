@@ -74,6 +74,19 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for sticky navbar */
+}
+
+/* Improve scroll performance */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Optimize animations for better performance */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Custom focus styles */
@@ -410,6 +423,74 @@ nav::after {
 /* AI-themed gradients */
 .ai-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Liquid glass effect for loading screen */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  transition: all 0.15s ease;
+}
+
+.dark .liquid-glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.15s ease;
+}
+
+/* Prevent navbar flickering */
+nav {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Prevent scroll flickering */
+section,
+.ai-card,
+.card {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Optimize ai-card animations */
+.ai-card {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Optimize scroll performance */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for better performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scale utilities */
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+@keyframes fadeInNav {
+  to {
+    opacity: 1;
+  }
 }
 
 .ai-gradient-text {
