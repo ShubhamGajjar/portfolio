@@ -31,23 +31,49 @@ const Navbar = ({ theme, toggleTheme }) => {
   ];
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsOpen(false);
-  };
+    console.log("ScrollToSection called with:", href);
 
-  const navbarVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
+    // Close mobile menu first
+    setIsOpen(false);
+
+    // Use setTimeout to ensure menu closes before scrolling
+    setTimeout(() => {
+      if (href === "#hero") {
+        // Scroll to top of page for home button
+        console.log("Scrolling to top of page");
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          console.log("Scrolling to element:", href);
+          // Use scrollIntoView with offset for better smoothness
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+          // Add offset for sticky navbar after scroll
+          setTimeout(() => {
+            const navbarHeight = 80;
+            const currentScroll = window.pageYOffset;
+            const elementTop = element.offsetTop;
+            const offsetPosition = elementTop - navbarHeight;
+
+            if (Math.abs(currentScroll - offsetPosition) > 10) {
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
+            }
+          }, 100);
+        } else {
+          console.log("Element not found:", href);
+        }
+      }
+    }, 50);
   };
 
   const menuVariants = {
@@ -70,15 +96,16 @@ const Navbar = ({ theme, toggleTheme }) => {
   };
 
   return (
-    <motion.nav
+    <nav
       className={`sticky top-4 z-50 bg-transparent mx-4 rounded-2xl shadow-lg transition-all duration-300 ${
         scrolled
           ? "bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10"
           : ""
       }`}
-      variants={navbarVariants}
-      initial="hidden"
-      animate="visible"
+      style={{
+        opacity: 0,
+        animation: "fadeInNav 0.4s ease-out forwards",
+      }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -99,8 +126,11 @@ const Navbar = ({ theme, toggleTheme }) => {
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 font-medium"
+                onClick={() => {
+                  console.log("Button clicked:", item.name);
+                  scrollToSection(item.href);
+                }}
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -113,7 +143,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           <div className="flex items-center gap-4">
             <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-200"
+              className="p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-150"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -156,8 +186,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                 {navItems.map((item) => (
                   <motion.button
                     key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 font-medium py-2"
+                    onClick={() => {
+                      console.log("Mobile button clicked:", item.name);
+                      scrollToSection(item.href);
+                    }}
+                    className="text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium py-2 cursor-pointer"
                     whileHover={{ x: 10 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -169,7 +202,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 };
 

@@ -3,26 +3,26 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CpuChipIcon } from "@heroicons/react/24/outline";
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ theme }) => {
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center liquid-glass overflow-hidden"
+      className="fixed inset-0 z-50 flex items-center justify-center liquid-glass overflow-hidden bg-white dark:bg-gray-900"
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
         scale: 1.1,
-        transition: { duration: 0.8, ease: "easeInOut" },
+        transition: { duration: 0.3, ease: "easeInOut" },
       }}
     >
-      {/* Enhanced Background Patterns - Exact Same as Hero */}
-      <div className="absolute inset-0 ai-pattern opacity-30"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/8 via-purple-400/8 to-pink-400/8 animate-pulse-glow"></div>
+      {/* Enhanced Background Patterns - Theme-aware */}
+      <div className="absolute inset-0 ai-pattern opacity-30 dark:opacity-40"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-400/8 dark:via-purple-400/8 dark:to-pink-400/8"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/8 via-purple-400/8 to-pink-400/8 dark:from-blue-300/10 dark:via-purple-300/10 dark:to-pink-300/10 animate-pulse-glow"></div>
 
-      {/* Background morphing elements - Matching Hero exactly */}
+      {/* Background morphing elements - Theme-aware colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-3 h-3 bg-blue-400 rounded-full"
+          className="absolute top-20 left-10 w-3 h-3 bg-blue-400 dark:bg-blue-300 rounded-full"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.7, 0.3],
@@ -34,7 +34,7 @@ const LoadingSpinner = () => {
           }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-2 h-2 bg-purple-400 rounded-full"
+          className="absolute top-40 right-20 w-2 h-2 bg-purple-400 dark:bg-purple-300 rounded-full"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.7, 0.3],
@@ -47,7 +47,7 @@ const LoadingSpinner = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-40 left-20 w-4 h-4 bg-pink-400 rounded-full"
+          className="absolute bottom-40 left-20 w-4 h-4 bg-pink-400 dark:bg-pink-300 rounded-full"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.7, 0.3],
@@ -60,7 +60,7 @@ const LoadingSpinner = () => {
           }}
         />
         <motion.div
-          className="absolute top-60 left-1/4 w-2 h-2 bg-green-400 rounded-full"
+          className="absolute top-60 left-1/4 w-2 h-2 bg-green-400 dark:bg-green-300 rounded-full"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.7, 0.3],
@@ -73,7 +73,7 @@ const LoadingSpinner = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-60 right-1/3 w-3 h-3 bg-yellow-400 rounded-full"
+          className="absolute bottom-60 right-1/3 w-3 h-3 bg-yellow-400 dark:bg-yellow-300 rounded-full"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.7, 0.3],
@@ -100,7 +100,7 @@ const LoadingSpinner = () => {
           }}
           className="mb-4"
         >
-          <CpuChipIcon className="h-16 w-16 text-blue-500 mx-auto" />
+          <CpuChipIcon className="h-16 w-16 text-blue-500 dark:text-blue-400 mx-auto filter drop-shadow-lg" />
         </motion.div>
 
         <motion.h2
@@ -116,7 +116,7 @@ const LoadingSpinner = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-gray-600 dark:text-gray-300"
+          className="text-gray-600 dark:text-gray-300 text-sm sm:text-base"
         >
           Initializing AI-powered experience...
         </motion.p>
@@ -131,7 +131,7 @@ const LoadingSpinner = () => {
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-2 h-2 bg-blue-500 rounded-full"
+                className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full"
                 animate={{
                   scale: [1, 1.5, 1],
                   opacity: [0.5, 1, 0.5],

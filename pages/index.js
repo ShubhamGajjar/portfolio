@@ -1,7 +1,7 @@
 // pages/index.js
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
@@ -10,17 +10,16 @@ import ResearchPapers from "../components/ResearchPapers";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import LoadingSpinner from "../components/LoadingSpinner";
 
 // Receive theme and toggleTheme from _app.js props
 export default function Home({ theme, toggleTheme }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [pageReady, setPageReady] = useState(false);
 
   useEffect(() => {
-    // Simulate loading time
+    // Ensure page is fully rendered before starting animations
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+      setPageReady(true);
+    }, 50);
 
     return () => clearTimeout(timer);
   }, []);
@@ -28,33 +27,32 @@ export default function Home({ theme, toggleTheme }) {
   const pageVariants = {
     initial: {
       opacity: 0,
-      scale: 0.98,
-      filter: "blur(5px)",
+      scale: 0.99,
     },
-    in: {
+    animate: {
       opacity: 1,
       scale: 1,
-      filter: "blur(0px)",
       transition: {
-        duration: 1.5,
+        duration: 0.4,
         ease: "easeOut",
-      },
-    },
-    out: {
-      opacity: 0,
-      scale: 1.02,
-      filter: "blur(3px)",
-      transition: {
-        duration: 0.6,
-        ease: "easeIn",
+        staggerChildren: 0.05,
       },
     },
   };
 
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 1.0,
+  const contentVariants = {
+    initial: {
+      opacity: 0,
+      y: 10,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
@@ -98,44 +96,35 @@ export default function Home({ theme, toggleTheme }) {
         />
       </Head>
 
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <LoadingSpinner key="loading" />
-        ) : (
-          <motion.div
-            key="content"
-            className="flex flex-col min-h-screen bg-white dark:bg-gray-900"
-            variants={pageVariants}
-            initial="initial"
-            animate="in"
-            exit="out"
-            transition={pageTransition}
-          >
-            <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <motion.div
+        className={`min-h-screen bg-white dark:bg-gray-900 transition-colors duration-150`}
+        variants={pageVariants}
+        initial="initial"
+        animate={pageReady ? "animate" : "initial"}
+      >
+        {pageReady && <Navbar theme={theme} toggleTheme={toggleTheme} />}
 
-            {/* Main content grows to push footer down */}
-            <main className="flex-grow">
-              <Hero
-                title="Hi, I'm Shubham Gajjar 👋"
-                subtitle="AI Engineer & Research Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
-                resumeLink="/Shubham_Gajjar_Resume.pdf"
-              />
+        {/* Main content grows to push footer down */}
+        <motion.main className="flex-grow" variants={contentVariants}>
+          <Hero
+            title="Hi, I'm Shubham Gajjar 👋"
+            subtitle="AI Engineer & Research Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
+            resumeLink="/Shubham_Gajjar_Resume.pdf"
+          />
 
-              <About />
+          <About />
 
-              <Skills />
+          <Skills />
 
-              <ResearchPapers />
+          <ResearchPapers />
 
-              <Projects />
+          <Projects />
 
-              <Contact />
-            </main>
+          <Contact />
+        </motion.main>
 
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <Footer />
+      </motion.div>
     </>
   );
 }

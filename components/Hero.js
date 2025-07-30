@@ -87,7 +87,10 @@ const Hero = ({ title, subtitle, resumeLink }) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center liquid-glass overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center liquid-glass overflow-hidden"
+    >
       {/* Enhanced Background Patterns - Matching Loading Spinner */}
       <div className="absolute inset-0 ai-pattern opacity-30"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
