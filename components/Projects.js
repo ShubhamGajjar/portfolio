@@ -190,7 +190,7 @@ const Projects = () => {
             className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
             variants={itemVariants}
           >
-            Research & AI Projects
+            Projects
           </motion.h2>
           <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
@@ -293,7 +293,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
                   >
-                    <CodeBracketIcon className="h-4 w-4 text-gray-900 dark:text-white" />
+                    <CodeBracketIcon className="h-4 w-4 text-white dark:text-gray-900" />
                     View Code
                   </a>
                 )}
@@ -311,27 +311,6 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Research Collaboration CTA */}
-        <div className="text-center mt-12">
-          <div className="ai-card p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Research Collaboration
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Interested in collaborating on innovative AI research projects?
-              Let's explore opportunities to advance medical AI and computer
-              vision together.
-            </p>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
-            >
-              <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-              Discuss Research
-            </a>
-          </div>
         </div>
       </div>
     </section>
