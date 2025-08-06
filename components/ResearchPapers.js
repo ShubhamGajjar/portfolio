@@ -312,34 +312,6 @@ const ResearchPapers = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Research Collaboration CTA */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="ai-card p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Research Collaboration
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Interested in collaborating on cutting-edge medical AI research?
-              Let's explore opportunities to advance healthcare through
-              innovative deep learning solutions.
-            </p>
-            <motion.a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <AcademicCapIcon className="h-5 w-5" />
-              Discuss Research
-            </motion.a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -312,27 +312,6 @@ const Projects = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Research Collaboration CTA */}
-        <div className="text-center mt-12">
-          <div className="ai-card p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Research Collaboration
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Interested in collaborating on innovative AI research projects?
-              Let's explore opportunities to advance medical AI and computer
-              vision together.
-            </p>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
-            >
-              <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-              Discuss Research
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );
