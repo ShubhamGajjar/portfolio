@@ -140,11 +140,6 @@ const Footer = () => {
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 md:mb-0">
               © {currentYear} Shubham Gajjar. All rights reserved.
             </p>
-            <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 text-sm">
-              <span>Built with</span>
-              <HeartIcon className="h-4 w-4 text-red-500 animate-pulse" />
-              <span>using Next.js, Tailwind CSS & AI</span>
-            </div>
           </div>
         </div>
       </div>
