@@ -1,5 +1,5 @@
 // components/Contact.js
-import React from "react";
+import React, { useState } from "react";
 import {
   CpuChipIcon,
   EnvelopeIcon,
@@ -12,6 +12,163 @@ import {
 } from "@heroicons/react/24/outline";
 import { socialLinks } from "../utils/data";
 import { motion } from "framer-motion";
+
+// Contact Form Component
+const ContactForm = () => {
+  const [status, setStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    setStatus(null);
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // Honeypot: if filled, ignore
+    if (data.website) {
+      setStatus("Submitted.");
+      setIsSubmitting(false);
+      form.reset();
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      // Try to parse as JSON, handle both JSON and non-JSON responses
+      let result;
+      const contentType = res.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        result = await res.json();
+      } else {
+        // If it's not JSON (likely HTML error page), try to get text for debugging
+        const text = await res.text();
+        console.error(
+          "API returned non-JSON response:",
+          text.substring(0, 200)
+        );
+        setStatus(
+          "API route not found. Please restart your dev server and check that pages/api/contact.js exists."
+        );
+        return;
+      }
+
+      if (res.ok && result.ok) {
+        setStatus("Thanks! Your message was sent.");
+        form.reset();
+      } else {
+        // Show specific error message if available
+        const errorMsg =
+          result.error || "Sorry, something went wrong. Try again later.";
+        setStatus(errorMsg);
+      }
+    } catch (error) {
+      console.error("Contact form submission error:", error);
+      // Handle JSON parsing errors specifically
+      if (error instanceof SyntaxError && error.message.includes("JSON")) {
+        setStatus(
+          "Server error: API returned invalid response. Please check server logs."
+        );
+      } else {
+        setStatus(
+          "Sorry, something went wrong. Please check your connection and try again."
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-4" noValidate>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+            First Name
+          </label>
+          <input
+            name="firstName"
+            required
+            className="input"
+            disabled={isSubmitting}
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+            Last Name
+          </label>
+          <input
+            name="lastName"
+            required
+            className="input"
+            disabled={isSubmitting}
+          />
+        </div>
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+          Email
+        </label>
+        <input
+          name="email"
+          type="email"
+          required
+          className="input"
+          disabled={isSubmitting}
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+          Subject
+        </label>
+        <input
+          name="subject"
+          required
+          className="input"
+          disabled={isSubmitting}
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+          Message
+        </label>
+        <textarea
+          name="message"
+          required
+          rows={5}
+          className="textarea"
+          disabled={isSubmitting}
+        />
+      </div>
+      {/* Honeypot (hide with CSS) */}
+      <div style={{ position: "absolute", left: "-9999px" }} aria-hidden="true">
+        <label>Website</label>
+        <input name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+      <button type="submit" className="btn" disabled={isSubmitting}>
+        {isSubmitting ? "Sending..." : "Submit"}
+      </button>
+      {status && (
+        <p
+          className={`text-sm ${
+            status.includes("Thanks")
+              ? "text-green-600 dark:text-green-400"
+              : "text-red-600 dark:text-red-400"
+          }`}
+        >
+          {status}
+        </p>
+      )}
+    </form>
+  );
+};
 
 const Contact = () => {
   const containerVariants = {
@@ -293,24 +450,20 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
+        {/* Contact Form */}
+        <div className="mt-12">
           <div className="ai-card p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Research & Project Collaboration
-            </h3>
+            <motion.h3
+              className="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+              variants={itemVariants}
+            >
+              Send a Message
+            </motion.h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Interested in collaborating on cutting-edge AI research or
-              innovative machine learning projects? Let's explore opportunities
-              to advance medical AI and computer vision together.
+              innovative machine learning projects? Let's connect!
             </p>
-            <a
-              href={`mailto:${socialLinks.email}`}
-              className="inline-flex items-center gap-2 px-6 py-3 btn-ai"
-            >
-              <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-              Start Research Discussion
-            </a>
+            <ContactForm />
           </div>
         </div>
       </div>
