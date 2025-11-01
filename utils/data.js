@@ -207,7 +207,6 @@ export const researchPapers = [
       "ResNet",
       "Inverse Soft Mask Attention",
       "U-Net++",
-      "Explainable AI",
     ],
     doi: "Pending",
     pdf: "Will be available after publication",

@@ -107,12 +107,13 @@ const ResearchPapers = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
@@ -165,12 +166,8 @@ const ResearchPapers = () => {
           {researchPapers.map((paper, index) => (
             <motion.div
               key={paper.id}
-              className="ai-card p-8 hover:scale-105 transition-all duration-300"
+              className="ai-card p-8 transition-all duration-200"
               variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.2 },
-              }}
             >
               {/* Paper Header */}
               <div className="flex items-start justify-between mb-6">
