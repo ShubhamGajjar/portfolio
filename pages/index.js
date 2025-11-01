@@ -111,7 +111,7 @@ export default function Home({ theme, toggleTheme }) {
           <Hero
             title="Hi, I'm Shubham Gajjar"
             subtitle="AI Engineer & Research Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
-            resumeLink="/Shubham_Gajjar_CV.pdf"
+            resumeLink="/Shubham_Gajjar_Resume.pdf"
           />
 
           <About />

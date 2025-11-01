@@ -1,44 +1,35 @@
 // components/Hero.js
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  ArrowDownIcon,
-  DocumentArrowDownIcon,
-  CpuChipIcon,
-  AcademicCapIcon,
-  ArrowDownTrayIcon,
-  BeakerIcon,
-  ChartBarIcon,
-  EyeIcon,
-  LightBulbIcon,
-  PuzzlePieceIcon,
-  RocketLaunchIcon,
-  CommandLineIcon,
-  CogIcon,
-  CubeIcon,
-} from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 
 const Hero = ({ title, subtitle, resumeLink }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { scrollY } = useScroll();
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  // Scroll-based transforms for icons
-  const cpuIconY = useTransform(scrollY, [0, 500], [0, -100]);
-  const cpuIconX = useTransform(scrollY, [0, 500], [0, 50]);
-  const cubeIconY = useTransform(scrollY, [0, 500], [0, 80]);
-  const cubeIconX = useTransform(scrollY, [0, 500], [0, -30]);
-  const chartIconY = useTransform(scrollY, [0, 500], [0, -60]);
-  const chartIconX = useTransform(scrollY, [0, 500], [0, 40]);
-  const eyeIconY = useTransform(scrollY, [0, 500], [0, 70]);
-  const eyeIconX = useTransform(scrollY, [0, 500], [0, -20]);
-  const rocketIconY = useTransform(scrollY, [0, 500], [0, -90]);
-  const rocketIconX = useTransform(scrollY, [0, 500], [0, 60]);
-  const lightbulbIconY = useTransform(scrollY, [0, 500], [0, 50]);
-  const lightbulbIconX = useTransform(scrollY, [0, 500], [0, -40]);
+  // Skills for diagonal text
+  const skills = [
+    "Shubham Gajjar",
+    "Deep Learning",
+    "Computer Vision",
+    "Medical AI",
+    "Neural Networks",
+    "PyTorch",
+    "TensorFlow",
+    "ResNet",
+    "Vision Transformer",
+    "UNet",
+    "Reinforcement Learning",
+    "IEEE Publications",
+    "Research",
+    "AI Engineer",
+  ];
+
+  // Different speeds for each row (in seconds - higher = slower)
+  const speeds = [1600, 1800, 2000, 1700, 2200, 1760, 2400, 1840];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -63,257 +54,48 @@ const Hero = ({ title, subtitle, resumeLink }) => {
     },
   };
 
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const neuralNetworkVariants = {
-    animate: {
-      scale: [1, 1.1, 1],
-      opacity: [0.3, 0.7, 0.3],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center liquid-glass overflow-hidden"
     >
-      {/* Enhanced Background Patterns - Matching Loading Spinner */}
+      {/* Enhanced Background Patterns */}
       <div className="absolute inset-0 ai-pattern opacity-30"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/8 via-purple-400/8 to-pink-400/8 animate-pulse-glow"></div>
 
-      {/* Animated Neural Network Visualization - Enhanced for Morphing */}
+      {/* Horizontal Repeating Text Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Neural Network Nodes - Matching Loading Spinner */}
-        <motion.div
-          className="absolute top-20 left-10 w-3 h-3 bg-blue-400 rounded-full"
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute top-40 right-20 w-2 h-2 bg-purple-400 rounded-full"
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5,
-          }}
-        />
-        <motion.div
-          className="absolute bottom-40 left-20 w-4 h-4 bg-pink-400 rounded-full"
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-        <motion.div
-          className="absolute top-60 left-1/4 w-2 h-2 bg-green-400 rounded-full"
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5,
-          }}
-        />
-        <motion.div
-          className="absolute bottom-60 right-1/3 w-3 h-3 bg-yellow-400 rounded-full"
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
+        {[...Array(8)].map((_, rowIndex) => {
+          const duration = speeds[rowIndex];
+          const animationName = "scrollHorizontalRight";
 
-        {/* Floating AI Icons with Scroll-Responsive Animations Only */}
-        <motion.div
-          className="absolute top-20 left-10 text-blue-400/20"
-          style={{ y: cpuIconY, x: cpuIconX }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          whileHover={{
-            scale: 1.2,
-            rotate: 5,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <CpuChipIcon className="w-8 h-8 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-40 right-20 text-purple-400/20"
-          style={{ y: cubeIconY, x: cubeIconX }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.7 }}
-          whileHover={{
-            scale: 1.3,
-            rotate: -5,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <CubeIcon className="w-6 h-6 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-40 left-20 text-pink-400/20"
-          style={{ y: chartIconY, x: chartIconX }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          whileHover={{
-            scale: 1.4,
-            rotate: 10,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <ChartBarIcon className="w-10 h-10 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-60 left-1/4 text-green-400/20"
-          style={{ y: eyeIconY, x: eyeIconX }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.1 }}
-          whileHover={{
-            scale: 1.25,
-            rotate: -8,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <EyeIcon className="w-7 h-7 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-60 right-1/3 text-yellow-400/20"
-          style={{ y: rocketIconY, x: rocketIconX }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.3 }}
-          whileHover={{
-            scale: 1.35,
-            rotate: 12,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <RocketLaunchIcon className="w-6 h-6 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-80 left-1/3 text-indigo-400/20"
-          style={{ y: lightbulbIconY, x: lightbulbIconX }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          whileHover={{
-            scale: 1.3,
-            rotate: -15,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <LightBulbIcon className="w-5 h-5 drop-shadow-lg" />
-        </motion.div>
-
-        {/* Additional Animated Elements with Scroll Response Only */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 text-blue-300/15"
-          style={{
-            y: useTransform(scrollY, [0, 500], [0, -30]),
-            x: useTransform(scrollY, [0, 500], [0, 20]),
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.7 }}
-          whileHover={{
-            scale: 1.2,
-            rotate: 180,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <CommandLineIcon className="w-4 h-4 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-1/3 left-1/3 text-purple-300/15"
-          style={{
-            y: useTransform(scrollY, [0, 500], [0, 40]),
-            x: useTransform(scrollY, [0, 500], [0, -25]),
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.9 }}
-          whileHover={{
-            scale: 1.2,
-            rotate: -180,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <CogIcon className="w-5 h-5 drop-shadow-lg" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-1/2 right-1/3 text-green-300/15"
-          style={{
-            y: useTransform(scrollY, [0, 500], [0, -50]),
-            x: useTransform(scrollY, [0, 500], [0, 35]),
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.1 }}
-          whileHover={{
-            scale: 1.2,
-            rotate: 90,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <PuzzlePieceIcon className="w-6 h-6 drop-shadow-lg" />
-        </motion.div>
+          return (
+            <div
+              key={rowIndex}
+              className="absolute whitespace-nowrap diagonal-text-row"
+              style={{
+                top: `${rowIndex * 12.5}%`,
+                left: "50%",
+                marginLeft: "0",
+                animationName: animationName,
+                animationDuration: `${duration}s`,
+              }}
+            >
+              <div className="flex gap-8 text-6xl md:text-8xl font-bold text-gray-900/5 dark:text-white/5">
+                {[...Array(8)].map((_, repeatIndex) =>
+                  skills.map((skill, skillIndex) => (
+                    <span
+                      key={`${rowIndex}-${repeatIndex}-${skillIndex}`}
+                      className="inline-block"
+                    >
+                      {skill} •{" "}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Main Content */}
@@ -356,7 +138,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
         >
           <motion.a
             href={resumeLink}
-            download="Shubham_Gajjar_CV.pdf"
+            download="Shubham_Gajjar_Resume.pdf"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             whileHover={{
               scale: 1.05,
@@ -365,7 +147,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
             whileTap={{ scale: 0.95 }}
           >
             <DocumentArrowDownIcon className="w-5 h-5" />
-            Download CV
+            Download Resume
           </motion.a>
 
           <motion.a

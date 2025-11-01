@@ -5,23 +5,20 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = useState("light"); // Default to light
+  const [theme, setTheme] = useState("dark"); // Default to dark
 
   // Effect to apply theme class and persist choice
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
 
-    // Determine initial theme: localStorage > prefers-color-scheme > default ('dark')
+    // Determine initial theme: localStorage > default ('dark')
     let initialTheme;
     if (storedTheme) {
       // User has explicitly chosen a theme before
       initialTheme = storedTheme;
     } else {
-      // First time user - default to light mode
-      initialTheme = "light";
+      // First time user - default to dark mode
+      initialTheme = "dark";
     }
 
     setTheme(initialTheme); // Set state

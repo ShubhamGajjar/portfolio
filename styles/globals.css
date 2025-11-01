@@ -255,7 +255,7 @@ html {
 }
 
 .dark .contact-form-card:hover {
-  background: rgba(31, 41, 55, 0.85) !important;
+  background: rgba(17, 24, 39, 0.7) !important;
   box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.1);
 }
 
@@ -668,4 +668,29 @@ section,
 
 .action-button:hover svg {
   transform: none !important;
+}
+
+/* Horizontal scrolling text animations */
+@keyframes scrollHorizontalRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes scrollHorizontalLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.diagonal-text-row {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
