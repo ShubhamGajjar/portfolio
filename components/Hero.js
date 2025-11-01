@@ -115,10 +115,10 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           <motion.a
             href={resumeLink}
             download="Shubham_Gajjar_Resume.pdf"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
             whileHover={{
               scale: 1.05,
-              transition: { duration: 0.2 },
+              transition: { duration: 0.1 },
             }}
             whileTap={{ scale: 0.95 }}
           >
@@ -128,10 +128,10 @@ const Hero = ({ title, subtitle, resumeLink }) => {
 
           <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
             whileHover={{
               scale: 1.05,
-              transition: { duration: 0.2 },
+              transition: { duration: 0.1 },
             }}
             whileTap={{ scale: 0.95 }}
           >

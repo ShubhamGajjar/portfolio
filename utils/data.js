@@ -136,7 +136,6 @@ export const skills = {
     "Genetic Algorithms",
     "Game AI Development",
     "Neural Network Training",
-    "Evolutionary Strategies",
   ],
 };
 
