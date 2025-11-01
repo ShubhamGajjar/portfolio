@@ -356,8 +356,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
         >
           <motion.a
             href={resumeLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            download="Shubham_Gajjar_CV.pdf"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             whileHover={{
               scale: 1.05,
@@ -365,7 +364,8 @@ const Hero = ({ title, subtitle, resumeLink }) => {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            Download Resume
+            <DocumentArrowDownIcon className="w-5 h-5" />
+            Download CV
           </motion.a>
 
           <motion.a

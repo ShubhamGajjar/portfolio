@@ -5,6 +5,7 @@ import {
   RocketLaunchIcon,
   AcademicCapIcon,
   StarIcon,
+  DocumentArrowDownIcon,
 } from "@heroicons/react/24/outline";
 
 const About = () => {
@@ -90,6 +91,29 @@ const About = () => {
               </span>
             </div>
           </div>
+
+          {/* Download CV Button */}
+          <motion.div
+            className="mt-12 flex justify-center"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.a
+              href="/Shubham_Gajjar_CV.pdf"
+              download="Shubham_Gajjar_CV.pdf"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <DocumentArrowDownIcon className="w-5 h-5" />
+              Download My CV
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>
