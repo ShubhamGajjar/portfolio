@@ -31,8 +31,6 @@ const Navbar = ({ theme, toggleTheme }) => {
   ];
 
   const scrollToSection = (href) => {
-    console.log("ScrollToSection called with:", href);
-
     // Close mobile menu first
     setIsOpen(false);
 
@@ -40,7 +38,6 @@ const Navbar = ({ theme, toggleTheme }) => {
     setTimeout(() => {
       if (href === "#hero") {
         // Scroll to top of page for home button
-        console.log("Scrolling to top of page");
         window.scrollTo({
           top: 0,
           behavior: "smooth",
@@ -48,7 +45,6 @@ const Navbar = ({ theme, toggleTheme }) => {
       } else {
         const element = document.querySelector(href);
         if (element) {
-          console.log("Scrolling to element:", href);
           // Use scrollIntoView with offset for better smoothness
           element.scrollIntoView({
             behavior: "smooth",
@@ -69,8 +65,6 @@ const Navbar = ({ theme, toggleTheme }) => {
               });
             }
           }, 100);
-        } else {
-          console.log("Element not found:", href);
         }
       }
     }, 50);
@@ -134,10 +128,7 @@ const Navbar = ({ theme, toggleTheme }) => {
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}
-                  onClick={() => {
-                    console.log("Button clicked:", item.name);
-                    scrollToSection(item.href);
-                  }}
+                  onClick={() => scrollToSection(item.href)}
                   className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -213,10 +204,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                     {navItems.map((item) => (
                       <motion.button
                         key={item.name}
-                        onClick={() => {
-                          console.log("Mobile button clicked:", item.name);
-                          scrollToSection(item.href);
-                        }}
+                        onClick={() => scrollToSection(item.href)}
                         className="text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium py-3 px-4 cursor-pointer rounded-lg hover:bg-white/10 dark:hover:bg-white/5 w-full"
                         whileHover={{ x: 10 }}
                         whileTap={{ scale: 0.95 }}
