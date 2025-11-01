@@ -128,7 +128,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
 
           <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-white/20 dark:hover:bg-gray-800/30 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             whileHover={{
               scale: 1.05,
               transition: { duration: 0.2 },
