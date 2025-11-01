@@ -63,7 +63,9 @@ export default function Home({ theme, toggleTheme }) {
           name="description"
           content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
         />
-        <link rel="icon" href="/favicon.ico" />
+        {/* Favicon */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#3B82F6" />
         <meta
@@ -107,7 +109,7 @@ export default function Home({ theme, toggleTheme }) {
         {/* Main content grows to push footer down */}
         <motion.main className="flex-grow" variants={contentVariants}>
           <Hero
-            title="Hi, I'm Shubham Gajjar 👋"
+            title="Hi, I'm Shubham Gajjar"
             subtitle="AI Engineer & Research Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
             resumeLink="/Shubham_Gajjar_Resume.pdf"
           />
