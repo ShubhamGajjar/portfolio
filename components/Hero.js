@@ -1,15 +1,9 @@
 // components/Hero.js
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 
 const Hero = ({ title, subtitle, resumeLink }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   // Skills for diagonal text
   const skills = [
     "Shubham Gajjar",
@@ -30,29 +24,6 @@ const Hero = ({ title, subtitle, resumeLink }) => {
 
   // Different speeds for each row (in seconds - higher = slower)
   const speeds = [1600, 1800, 2000, 1700, 2200, 1760, 2400, 1840];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
 
   return (
     <section
