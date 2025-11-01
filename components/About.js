@@ -63,7 +63,7 @@ const About = () => {
               state-of-the-art performance in medical image analysis.
             </p>
             <p>
-              With expertise in PyTorch, TensorFlow, and computer vision, I've
+              With expertise in TensorFlow, PyTorch, and Computer Vision, I've
               achieved 96.3% accuracy in skin cancer classification using hybrid
               ResNet-ViT models. My work spans from medical AI to game AI,
               demonstrating versatility across different AI applications.

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  CpuChipIcon,
   Bars3Icon,
   XMarkIcon,
   SunIcon,
@@ -24,6 +23,7 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   const navItems = [
     { name: "Home", href: "#hero" },
+    { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Research", href: "#research" },
     { name: "Projects", href: "#projects" },
@@ -115,7 +115,6 @@ const Navbar = ({ theme, toggleTheme }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <CpuChipIcon className="h-8 w-8 text-blue-500" />
             <span className="text-xl font-bold ai-gradient-text">
               Shubham Gajjar
             </span>

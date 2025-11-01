@@ -1,6 +1,7 @@
 // pages/_app.js
 import "../styles/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Head from "next/head";
 import { useState, useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
@@ -56,6 +57,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.ico" />
+      </Head>
       <Component {...enhancedPageProps} /> {/* Pass props down */}
       <SpeedInsights />
     </>

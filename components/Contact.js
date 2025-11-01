@@ -257,7 +257,8 @@ const Contact = () => {
                     Expertise
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    IEEE Publications, Neural Networks, Reinforcement Learning
+                    Medical AI, Hybrid Deep Learning Architectures, Multi-Agent
+                    Systems, IEEE Publications
                   </p>
                 </div>
               </div>
