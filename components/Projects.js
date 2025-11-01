@@ -20,7 +20,7 @@ import { motion } from "framer-motion";
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "Research", "AI/ML Core", "Data Science"];
+  const categories = ["All", "AI/ML Core", "Data Science"];
 
   const filteredProjects =
     activeCategory === "All"
@@ -165,12 +165,13 @@ const Projects = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
@@ -220,16 +221,18 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-2"
+          key={activeCategory}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {filteredProjects.map((project) => (
             <motion.div
               key={project.id}
               className="ai-card p-8 hover:scale-105 transition-all duration-300"
               variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.2 },
-              }}
             >
               {/* Project Header */}
               <div className="flex items-start justify-between mb-4">
@@ -311,7 +314,7 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
