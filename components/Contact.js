@@ -1,14 +1,10 @@
 // components/Contact.js
 import React, { useState } from "react";
 import {
-  CpuChipIcon,
   EnvelopeIcon,
-  MapPinIcon,
-  PhoneIcon,
   AcademicCapIcon,
   BeakerIcon,
-  EyeIcon,
-  ChartBarIcon,
+  PaperAirplaneIcon,
 } from "@heroicons/react/24/outline";
 import { socialLinks } from "../utils/data";
 import { motion } from "framer-motion";
@@ -87,7 +83,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4" noValidate>
+    <form onSubmit={onSubmit} className="space-y-5" noValidate>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
@@ -95,6 +91,8 @@ const ContactForm = () => {
           </label>
           <input
             name="firstName"
+            type="text"
+            placeholder="Shubham"
             required
             className="input"
             disabled={isSubmitting}
@@ -106,6 +104,8 @@ const ContactForm = () => {
           </label>
           <input
             name="lastName"
+            type="text"
+            placeholder="Gajjar"
             required
             className="input"
             disabled={isSubmitting}
@@ -119,6 +119,7 @@ const ContactForm = () => {
         <input
           name="email"
           type="email"
+          placeholder="shubhamgajjar14@gmail.com"
           required
           className="input"
           disabled={isSubmitting}
@@ -130,6 +131,8 @@ const ContactForm = () => {
         </label>
         <input
           name="subject"
+          type="text"
+          placeholder="Project Collaboration Inquiry"
           required
           className="input"
           disabled={isSubmitting}
@@ -141,6 +144,7 @@ const ContactForm = () => {
         </label>
         <textarea
           name="message"
+          placeholder="Hi Shubham, I'm interested in collaborating on..."
           required
           rows={5}
           className="textarea"
@@ -152,20 +156,61 @@ const ContactForm = () => {
         <label>Website</label>
         <input name="website" tabIndex={-1} autoComplete="off" />
       </div>
-      <button type="submit" className="btn" disabled={isSubmitting}>
-        {isSubmitting ? "Sending..." : "Submit"}
-      </button>
-      {status && (
-        <p
-          className={`text-sm ${
-            status.includes("Thanks")
-              ? "text-green-600 dark:text-green-400"
-              : "text-red-600 dark:text-red-400"
-          }`}
+
+      <div className="mt-6 space-y-3">
+        <motion.button
+          type="submit"
+          className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          disabled={isSubmitting}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          {status}
-        </p>
-      )}
+          {isSubmitting ? (
+            <>
+              <svg
+                className="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <span>Sending...</span>
+            </>
+          ) : (
+            <>
+              <PaperAirplaneIcon className="h-5 w-5" />
+              <span>Send Message</span>
+            </>
+          )}
+        </motion.button>
+
+        {status && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`text-sm font-medium text-center ${
+              status.includes("Thanks")
+                ? "text-green-600 dark:text-green-400"
+                : "text-red-600 dark:text-red-400"
+            }`}
+          >
+            {status}
+          </motion.p>
+        )}
+      </div>
     </form>
   );
 };
@@ -379,93 +424,22 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Collaboration Areas */}
+          {/* Contact Form */}
           <motion.div className="space-y-6" variants={itemVariants}>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-              Research & Collaboration Areas
-            </h3>
-            <div className="grid gap-4">
-              <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 ai-glass rounded-xl">
-                    <EyeIcon className="h-6 w-6 text-blue-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Medical AI Research
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Brain tumor segmentation, skin cancer classification,
-                      medical imaging
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 ai-glass rounded-xl">
-                    <CpuChipIcon className="h-6 w-6 text-purple-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Deep Learning & Neural Networks
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      CNN, ResNet, Vision Transformers, hybrid architectures
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 ai-glass rounded-xl">
-                    <BeakerIcon className="h-6 w-6 text-pink-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Reinforcement Learning
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Game AI, autonomous agents, evolutionary algorithms
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="ai-card p-6 hover:scale-105 transition-all duration-200">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 ai-glass rounded-xl">
-                    <ChartBarIcon className="h-6 w-6 text-green-500" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Data Science & Analytics
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Sentiment analysis, predictive modeling, statistical
-                      analysis
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="contact-form-card p-8">
+              <motion.h3
+                className="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                variants={itemVariants}
+              >
+                Send a Message
+              </motion.h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Interested in collaborating on cutting-edge AI research or
+                innovative machine learning projects? Let's connect!
+              </p>
+              <ContactForm />
             </div>
           </motion.div>
-        </div>
-
-        {/* Contact Form */}
-        <div className="mt-12">
-          <div className="ai-card p-8 max-w-2xl mx-auto">
-            <motion.h3
-              className="text-2xl font-bold text-gray-900 dark:text-white mb-4"
-              variants={itemVariants}
-            >
-              Send a Message
-            </motion.h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Interested in collaborating on cutting-edge AI research or
-              innovative machine learning projects? Let's connect!
-            </p>
-            <ContactForm />
-          </div>
         </div>
       </div>
     </section>
