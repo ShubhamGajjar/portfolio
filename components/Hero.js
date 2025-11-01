@@ -67,7 +67,11 @@ const Hero = ({ title, subtitle, resumeLink }) => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(8)].map((_, rowIndex) => {
           const duration = speeds[rowIndex];
+          // All rows move in the same direction (right)
           const animationName = "scrollHorizontalRight";
+          // Different starting offsets for each row to avoid synchronized start
+          const startOffsets = [-50, -30, -70, -20, -80, -40, -60, -10];
+          const animationDelay = startOffsets[rowIndex];
 
           return (
             <div
@@ -79,10 +83,11 @@ const Hero = ({ title, subtitle, resumeLink }) => {
                 marginLeft: "0",
                 animationName: animationName,
                 animationDuration: `${duration}s`,
+                animationDelay: `${animationDelay}s`,
               }}
             >
               <div className="flex gap-8 text-6xl md:text-8xl font-bold text-gray-900/5 dark:text-white/5">
-                {[...Array(8)].map((_, repeatIndex) =>
+                {[...Array(12)].map((_, repeatIndex) =>
                   skills.map((skill, skillIndex) => (
                     <span
                       key={`${rowIndex}-${repeatIndex}-${skillIndex}`}

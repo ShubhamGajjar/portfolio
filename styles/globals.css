@@ -77,18 +77,6 @@ html {
   scroll-padding-top: 80px; /* Account for sticky navbar */
 }
 
-/* Improve scroll performance */
-* {
-  scroll-behavior: smooth;
-}
-
-/* Optimize animations for better performance */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
 /* Custom focus styles */
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900;
@@ -519,14 +507,7 @@ nav::after {
   transition: all 0.15s ease;
 }
 
-/* Prevent navbar flickering */
-nav {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-/* Prevent scroll flickering */
+/* Optimize scroll and card performance */
 section,
 .ai-card,
 .card {
@@ -538,16 +519,8 @@ section,
 
 /* Optimize ai-card animations */
 .ai-card {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
   perspective: 1000px;
   -webkit-perspective: 1000px;
-}
-
-/* Optimize scroll performance */
-* {
-  scroll-behavior: smooth;
 }
 
 /* Reduce motion for better performance */
@@ -673,19 +646,19 @@ section,
 /* Horizontal scrolling text animations */
 @keyframes scrollHorizontalRight {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
 }
 
 @keyframes scrollHorizontalLeft {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
