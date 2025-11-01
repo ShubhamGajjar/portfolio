@@ -165,11 +165,49 @@ html {
 
 /* Form input styles */
 .input {
-  @apply w-full px-4 py-3 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+  @apply w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+  background-color: rgba(255, 255, 255, 1) !important;
+  border: 1px solid rgba(209, 213, 219, 0.8) !important;
+  color: rgb(17 24 39) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.input::placeholder {
+  color: rgba(156 163 175, 0.8) !important;
+}
+
+.dark .input {
+  background-color: rgba(31, 41, 55, 0.95) !important;
+  border: 1px solid rgba(75, 85, 99, 0.4) !important;
+  color: rgb(243 244 246) !important;
+}
+
+.dark .input::placeholder {
+  color: rgba(107 114 128, 0.8) !important;
 }
 
 .textarea {
-  @apply w-full px-4 py-3 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-y;
+  @apply w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-y;
+  background-color: rgba(255, 255, 255, 1) !important;
+  border: 1px solid rgba(209, 213, 219, 0.8) !important;
+  color: rgb(17 24 39) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.textarea::placeholder {
+  color: rgba(156, 163, 175, 0.8) !important;
+}
+
+.dark .textarea {
+  background-color: rgba(31, 41, 55, 0.95) !important;
+  border: 1px solid rgba(75, 85, 99, 0.4) !important;
+  color: rgb(243 244 246) !important;
+}
+
+.dark .textarea::placeholder {
+  color: rgba(107 114 128, 0.8) !important;
 }
 
 .btn {
@@ -193,6 +231,32 @@ html {
 .dark .ai-card:hover {
   @apply bg-gradient-to-br from-blue-500/5 to-purple-600/5 border-blue-400/10;
   box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.05);
+}
+
+/* Contact form card specific styles */
+.contact-form-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.8) !important;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.15);
+}
+
+.dark .contact-form-card {
+  background: rgba(17, 24, 39, 0.7) !important;
+  border: 1px solid rgba(75, 85, 99, 0.3) !important;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.contact-form-card:hover {
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.2);
+}
+
+.dark .contact-form-card:hover {
+  background: rgba(31, 41, 55, 0.85) !important;
+  box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.1);
 }
 
 /* Section styles */
