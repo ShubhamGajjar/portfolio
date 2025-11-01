@@ -37,8 +37,7 @@ export const projects = [
       "Google Colab",
     ],
     category: "Data Science",
-    github:
-      "https://colab.research.google.com/drive/1IW9VgpNr0OJsLwleSIwMlJGr3sU1l-N2?authuser=1",
+    github: "https://github.com/ShubhamGajjar/Twitter-Sentiment-Analysis.git",
     live: null,
     image: "/sentiment.jpg",
     impact: "Social Media Analytics",
