@@ -13,8 +13,11 @@ const Navbar = ({ theme, toggleTheme }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    // Check initial scroll position
+    setScrolled(window.scrollY > 0);
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -100,11 +103,7 @@ const Navbar = ({ theme, toggleTheme }) => {
   return (
     <>
       <nav
-        className={`sticky top-4 z-50 bg-transparent mx-4 rounded-2xl shadow-lg transition-all duration-300 ${
-          scrolled
-            ? "bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10"
-            : ""
-        }`}
+        className="sticky top-4 z-50 mx-4 rounded-2xl shadow-lg transition-all duration-300 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10"
         style={{
           opacity: 0,
           animation: "fadeInNav 0.4s ease-out forwards",

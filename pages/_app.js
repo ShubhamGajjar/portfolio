@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import Chatbot from "../components/Chatbot";
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light"); // Default to light
@@ -60,6 +61,7 @@ export default function App({ Component, pageProps }) {
         <link rel="alternate icon" href="/favicon.ico" />
       </Head>
       <Component {...enhancedPageProps} /> {/* Pass props down */}
+      <Chatbot />
       <Analytics />
       <SpeedInsights />
     </>
