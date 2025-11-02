@@ -60,11 +60,18 @@ const Chatbot = ({ onToggleRef }) => {
   const [copiedMessageId, setCopiedMessageId] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [streamingMessageId, setStreamingMessageId] = useState(null);
+  const [elasticOffset, setElasticOffset] = useState(0);
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const chatWindowRef = useRef(null);
   const inputRef = useRef(null);
   const lastRequestTimeRef = useRef(0);
   const cooldownTimerRef = useRef(null);
   const streamingTimerRef = useRef(null);
+  const wheelTimeoutRef = useRef(null);
+  const touchTimeoutRef = useRef(null);
+  const momentumAnimationRef = useRef(null);
+  const touchVelocityRef = useRef({ vx: 0, vy: 0, lastTime: 0, lastY: 0 });
 
   // Minimum time between requests (2 seconds)
   const MIN_REQUEST_INTERVAL = 2000;
@@ -105,6 +112,307 @@ const Chatbot = ({ onToggleRef }) => {
     }
   }, [isOpen]);
 
+  // Prevent main window scroll when cursor is in chatbot window
+  useEffect(() => {
+    const chatWindow = chatWindowRef.current;
+    const messagesContainer = messagesContainerRef.current;
+
+    if (!chatWindow || !isOpen) return;
+
+    const handleWheel = (e) => {
+      // Always prevent scroll from propagating to main window when inside chatbot
+      e.stopPropagation();
+      e.preventDefault(); // Always prevent to stop body scroll
+
+      // Clear any existing timeout
+      if (wheelTimeoutRef.current) {
+        clearTimeout(wheelTimeoutRef.current);
+      }
+
+      if (messagesContainer) {
+        // Check if scroll is happening in the messages container area
+        const rect = messagesContainer.getBoundingClientRect();
+        const isOverMessages =
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom;
+
+        if (isOverMessages) {
+          const { scrollTop, scrollHeight, clientHeight } = messagesContainer;
+          const isAtTop = scrollTop <= 1;
+          const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+          // Check if trying to scroll past boundaries (elastic effect)
+          if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+            // Apply elastic effect - invert the direction for proper stretch
+            const resistance = 0.5; // Resistance factor
+            const offset = -e.deltaY * resistance; // Invert sign for correct direction
+            const clampedOffset = Math.max(-20, Math.min(20, offset)); // Limit to 20px
+
+            setElasticOffset(clampedOffset);
+
+            // Reset after scroll stops (reset timeout on each scroll event)
+            if (wheelTimeoutRef.current) {
+              clearTimeout(wheelTimeoutRef.current);
+            }
+            wheelTimeoutRef.current = setTimeout(() => {
+              setElasticOffset(0);
+              wheelTimeoutRef.current = null;
+            }, 200); // Wait for scroll to stop before bouncing back
+          } else {
+            // Only scroll the messages container if not at boundaries
+            messagesContainer.scrollTop += e.deltaY;
+            // Reset elastic offset immediately
+            setElasticOffset(0);
+          }
+        } else {
+          // Reset if not over messages
+          setElasticOffset(0);
+        }
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      // Always prevent main window scroll when touching chatbot
+      e.stopPropagation();
+
+      if (messagesContainer) {
+        const touch = e.touches[0] || e.changedTouches[0];
+        if (touch) {
+          const rect = messagesContainer.getBoundingClientRect();
+          const isOverMessages =
+            touch.clientX >= rect.left &&
+            touch.clientX <= rect.right &&
+            touch.clientY >= rect.top &&
+            touch.clientY <= rect.bottom;
+
+          if (isOverMessages) {
+            const { scrollTop, scrollHeight, clientHeight } = messagesContainer;
+            const tolerance = 5; // Small tolerance for boundary detection
+            const isAtTop = scrollTop <= tolerance;
+            const isAtBottom =
+              scrollTop + clientHeight >= scrollHeight - tolerance;
+
+            const prevTouchY = messagesContainer.dataset.lastTouchY;
+            const currentTime = Date.now();
+
+            // Track velocity for momentum scrolling
+            if (touchVelocityRef.current.lastTime > 0) {
+              const timeDelta = currentTime - touchVelocityRef.current.lastTime;
+              if (timeDelta > 0) {
+                const deltaY = touch.clientY - touchVelocityRef.current.lastY;
+                // Calculate velocity (pixels per millisecond)
+                touchVelocityRef.current.vy = deltaY / timeDelta;
+              }
+            }
+            touchVelocityRef.current.lastTime = currentTime;
+            touchVelocityRef.current.lastY = touch.clientY;
+
+            if (prevTouchY !== undefined) {
+              const deltaY = touch.clientY - parseFloat(prevTouchY);
+
+              // Always prevent default to stop main window scroll
+              e.preventDefault();
+
+              // Standard mobile scroll: drag down = scroll up, drag up = scroll down
+              // deltaY > 0 (finger moves down) → scroll up (decrease scrollTop)
+              // deltaY < 0 (finger moves up) → scroll down (increase scrollTop)
+
+              // Calculate new scroll position
+              const newScrollTop = messagesContainer.scrollTop - deltaY;
+              const maxScrollTop = scrollHeight - clientHeight;
+
+              // Check if trying to scroll past boundaries (would go negative or exceed max)
+              const wouldScrollPastTop = newScrollTop < 0;
+              const wouldScrollPastBottom = newScrollTop > maxScrollTop;
+
+              if (wouldScrollPastTop || wouldScrollPastBottom) {
+                // Apply elastic effect - only when actually trying to scroll past
+                const resistance = 0.5;
+                let offset;
+
+                if (wouldScrollPastTop) {
+                  // At top trying to scroll up → stretch down (positive offset)
+                  offset = Math.abs(deltaY) * resistance;
+                } else {
+                  // At bottom trying to scroll down → stretch up (negative offset)
+                  offset = -Math.abs(deltaY) * resistance;
+                }
+
+                const clampedOffset = Math.max(-20, Math.min(20, offset));
+
+                setElasticOffset(clampedOffset);
+
+                // Reset after touch stops
+                if (touchTimeoutRef.current) {
+                  clearTimeout(touchTimeoutRef.current);
+                }
+                touchTimeoutRef.current = setTimeout(() => {
+                  setElasticOffset(0);
+                  touchTimeoutRef.current = null;
+                }, 200);
+              } else {
+                // Allow normal scrolling (within boundaries)
+                messagesContainer.scrollTop = newScrollTop;
+
+                // Reset elastic if it was active
+                if (elasticOffset !== 0) {
+                  setElasticOffset(0);
+                }
+              }
+            } else {
+              // First touch move - prevent default to stop body scroll
+              e.preventDefault();
+            }
+            messagesContainer.dataset.lastTouchY = touch.clientY;
+          } else {
+            // If touch is over other parts (header, input), always prevent
+            e.preventDefault();
+          }
+        } else {
+          // No touch data, prevent to be safe
+          e.preventDefault();
+        }
+      } else {
+        // If no messages container, always prevent default
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchStart = (e) => {
+      // Always prevent main window scroll when starting touch in chatbot
+      e.stopPropagation();
+
+      // Cancel any existing momentum animation
+      if (momentumAnimationRef.current) {
+        cancelAnimationFrame(momentumAnimationRef.current);
+        momentumAnimationRef.current = null;
+      }
+
+      // Reset velocity tracking
+      touchVelocityRef.current = {
+        vx: 0,
+        vy: 0,
+        lastTime: Date.now(),
+        lastY: 0,
+      };
+
+      if (messagesContainer) {
+        const touch = e.touches[0];
+        if (touch) {
+          messagesContainer.dataset.lastTouchY = touch.clientY;
+          touchVelocityRef.current.lastY = touch.clientY;
+        }
+      }
+      // Don't prevent default on touchstart to allow native scrolling
+    };
+
+    const handleTouchEnd = () => {
+      // Reset immediately when touch ends
+      setElasticOffset(0);
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+        touchTimeoutRef.current = null;
+      }
+
+      // Apply momentum scrolling if there's velocity
+      if (messagesContainer && Math.abs(touchVelocityRef.current.vy) > 0.1) {
+        const velocity = touchVelocityRef.current.vy;
+        const deceleration = 0.95; // Deceleration factor (0.95 = 5% reduction per frame)
+        let currentVelocity = velocity * 10; // Scale velocity for smoother animation
+
+        // Cancel any existing momentum animation
+        if (momentumAnimationRef.current) {
+          cancelAnimationFrame(momentumAnimationRef.current);
+        }
+
+        const animateMomentum = () => {
+          if (Math.abs(currentVelocity) < 0.1) {
+            // Velocity too low, stop animation
+            momentumAnimationRef.current = null;
+            return;
+          }
+
+          const { scrollTop, scrollHeight, clientHeight } = messagesContainer;
+          const maxScrollTop = scrollHeight - clientHeight;
+
+          // Calculate new scroll position
+          const deltaScroll = currentVelocity;
+          let newScrollTop = scrollTop - deltaScroll;
+
+          // Clamp to boundaries
+          if (newScrollTop < 0) {
+            newScrollTop = 0;
+            currentVelocity = 0;
+          } else if (newScrollTop > maxScrollTop) {
+            newScrollTop = maxScrollTop;
+            currentVelocity = 0;
+          }
+
+          // Apply scroll
+          messagesContainer.scrollTop = newScrollTop;
+
+          // Decelerate
+          currentVelocity *= deceleration;
+
+          // Continue animation
+          momentumAnimationRef.current = requestAnimationFrame(animateMomentum);
+        };
+
+        momentumAnimationRef.current = requestAnimationFrame(animateMomentum);
+      }
+
+      // Reset velocity tracking
+      touchVelocityRef.current = { vx: 0, vy: 0, lastTime: 0, lastY: 0 };
+
+      if (messagesContainer) {
+        delete messagesContainer.dataset.lastTouchY;
+      }
+    };
+
+    // Add event listeners to entire chatbot window with capture phase to catch early
+    chatWindow.addEventListener("wheel", handleWheel, {
+      passive: false,
+      capture: true,
+    });
+    chatWindow.addEventListener("touchstart", handleTouchStart, {
+      passive: false,
+      capture: true,
+    });
+    chatWindow.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+      capture: true,
+    });
+    chatWindow.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      chatWindow.removeEventListener("wheel", handleWheel, { capture: true });
+      chatWindow.removeEventListener("touchstart", handleTouchStart, {
+        capture: true,
+      });
+      chatWindow.removeEventListener("touchmove", handleTouchMove, {
+        capture: true,
+      });
+      chatWindow.removeEventListener("touchend", handleTouchEnd);
+      // Clean up timeouts
+      if (wheelTimeoutRef.current) {
+        clearTimeout(wheelTimeoutRef.current);
+        wheelTimeoutRef.current = null;
+      }
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+        touchTimeoutRef.current = null;
+      }
+      // Clean up touch tracking data
+      if (messagesContainer) {
+        delete messagesContainer.dataset.lastTouchY;
+      }
+      // Reset elastic offset
+      setElasticOffset(0);
+    };
+  }, [isOpen]);
+
   // Cooldown timer
   useEffect(() => {
     if (rateLimited && cooldownSeconds > 0) {
@@ -129,6 +437,15 @@ const Chatbot = ({ onToggleRef }) => {
       }
       if (streamingTimerRef.current) {
         clearInterval(streamingTimerRef.current);
+      }
+      if (wheelTimeoutRef.current) {
+        clearTimeout(wheelTimeoutRef.current);
+      }
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+      }
+      if (momentumAnimationRef.current) {
+        cancelAnimationFrame(momentumAnimationRef.current);
       }
     };
   }, []);
@@ -288,8 +605,7 @@ const Chatbot = ({ onToggleRef }) => {
 
     const streamInterval = setInterval(() => {
       if (currentIndex < words.length) {
-        displayedText +=
-          (displayedText ? " " : "") + words[currentIndex];
+        displayedText += (displayedText ? " " : "") + words[currentIndex];
         currentIndex++;
 
         setMessages((prev) =>
@@ -514,12 +830,12 @@ const Chatbot = ({ onToggleRef }) => {
   const handleToggle = useCallback(() => {
     setIsOpen((prevIsOpen) => {
       const newIsOpen = !prevIsOpen;
-      
+
       // Track chat open/close
       track("chatbot_toggle", {
         action: newIsOpen ? "open" : "close",
       });
-      
+
       return newIsOpen;
     });
   }, []);
@@ -699,6 +1015,7 @@ const Chatbot = ({ onToggleRef }) => {
 
             {/* Chat Window */}
             <motion.div
+              ref={chatWindowRef}
               className="fixed bottom-6 right-6 z-50 w-[calc(100%-3rem)] md:w-96 h-[calc(100%-8rem)] md:h-[600px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700"
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -744,7 +1061,16 @@ const Chatbot = ({ onToggleRef }) => {
               </div>
 
               {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900">
+              <div
+                ref={messagesContainerRef}
+                className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900 transition-transform duration-20 ease-out"
+                style={{
+                  transform:
+                    elasticOffset !== 0
+                      ? `translateY(${elasticOffset}px)`
+                      : "translateY(0)",
+                }}
+              >
                 {/* Suggested Questions (show only when no user messages) */}
                 {showSuggestions && messages.length === 1 && (
                   <motion.div
@@ -777,7 +1103,9 @@ const Chatbot = ({ onToggleRef }) => {
                   const displayContent = msg.isStreaming
                     ? msg.streamingContent
                     : msg.content;
-                  const isStreaming = msg.isStreaming && streamingMessageId === (msg.id || messageId);
+                  const isStreaming =
+                    msg.isStreaming &&
+                    streamingMessageId === (msg.id || messageId);
 
                   return (
                     <motion.div
@@ -805,7 +1133,12 @@ const Chatbot = ({ onToggleRef }) => {
                           </p>
                           {/* Copy button */}
                           <button
-                            onClick={() => copyToClipboard(msg.content || displayContent, messageId)}
+                            onClick={() =>
+                              copyToClipboard(
+                                msg.content || displayContent,
+                                messageId
+                              )
+                            }
                             className={`absolute top-1 right-1 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity ${
                               msg.role === "user"
                                 ? "text-white/70 hover:text-white"
