@@ -3,11 +3,12 @@ import "../styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Chatbot from "../components/Chatbot";
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light"); // Default to light
+  const chatToggleRef = useRef(null);
 
   // Effect to apply theme class and persist choice
   useEffect(() => {
@@ -47,11 +48,12 @@ export default function App({ Component, pageProps }) {
     });
   };
 
-  // Pass theme and toggle function to all pages
+  // Pass theme, toggle function, and chat toggle ref to all pages
   const enhancedPageProps = {
     ...pageProps,
     theme,
     toggleTheme,
+    chatToggleRef,
   };
 
   return (
@@ -61,7 +63,7 @@ export default function App({ Component, pageProps }) {
         <link rel="alternate icon" href="/favicon.ico" />
       </Head>
       <Component {...enhancedPageProps} /> {/* Pass props down */}
-      <Chatbot />
+      <Chatbot onToggleRef={chatToggleRef} />
       <Analytics />
       <SpeedInsights />
     </>

@@ -11,8 +11,8 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
-// Receive theme and toggleTheme from _app.js props
-export default function Home({ theme, toggleTheme }) {
+// Receive theme, toggleTheme, and chatToggleRef from _app.js props
+export default function Home({ theme, toggleTheme, chatToggleRef }) {
   const [pageReady, setPageReady] = useState(false);
 
   useEffect(() => {
@@ -104,7 +104,13 @@ export default function Home({ theme, toggleTheme }) {
         initial="initial"
         animate={pageReady ? "animate" : "initial"}
       >
-        {pageReady && <Navbar theme={theme} toggleTheme={toggleTheme} />}
+        {pageReady && (
+          <Navbar
+            theme={theme}
+            toggleTheme={toggleTheme}
+            onChatToggle={() => chatToggleRef?.current?.()}
+          />
+        )}
 
         {/* Main content grows to push footer down */}
         <motion.main className="flex-grow" variants={contentVariants}>
