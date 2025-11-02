@@ -1,5 +1,5 @@
 // components/Chatbot.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChatBubbleLeftRightIcon,
@@ -25,7 +25,7 @@ const SUGGESTED_QUESTIONS = [
   "Tell me about your AI/ML work",
 ];
 
-const Chatbot = () => {
+const Chatbot = ({ onToggleRef }) => {
   const [isOpen, setIsOpen] = useState(false);
   const initialMessage = {
     role: "assistant",
@@ -511,15 +511,30 @@ const Chatbot = () => {
     }
   };
 
-  const handleToggle = () => {
-    const newIsOpen = !isOpen;
-    setIsOpen(newIsOpen);
-
-    // Track chat open/close
-    track("chatbot_toggle", {
-      action: newIsOpen ? "open" : "close",
+  const handleToggle = useCallback(() => {
+    setIsOpen((prevIsOpen) => {
+      const newIsOpen = !prevIsOpen;
+      
+      // Track chat open/close
+      track("chatbot_toggle", {
+        action: newIsOpen ? "open" : "close",
+      });
+      
+      return newIsOpen;
     });
-  };
+  }, []);
+
+  // Expose toggle function to parent via ref
+  useEffect(() => {
+    if (onToggleRef) {
+      onToggleRef.current = handleToggle;
+    }
+    return () => {
+      if (onToggleRef) {
+        onToggleRef.current = null;
+      }
+    };
+  }, [onToggleRef, handleToggle]);
 
   const clearChat = () => {
     const clearedMessages = [
@@ -629,10 +644,10 @@ const Chatbot = () => {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Floating Chat Button - Hidden on mobile, shown on desktop */}
       <motion.button
         onClick={handleToggle}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl items-center justify-center transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ scale: 0 }}

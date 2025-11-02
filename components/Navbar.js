@@ -6,23 +6,11 @@ import {
   XMarkIcon,
   SunIcon,
   MoonIcon,
+  ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 
-const Navbar = ({ theme, toggleTheme }) => {
+const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    // Check initial scroll position
-    setScrolled(window.scrollY > 0);
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const navItems = [
     { name: "Home", href: "#hero" },
@@ -107,6 +95,8 @@ const Navbar = ({ theme, toggleTheme }) => {
         style={{
           opacity: 0,
           animation: "fadeInNav 0.4s ease-out forwards",
+          backdropFilter: "blur(12px)", // Ensure blur is always applied from start
+          WebkitBackdropFilter: "blur(12px)", // Safari support
         }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -137,11 +127,12 @@ const Navbar = ({ theme, toggleTheme }) => {
               ))}
             </div>
 
-            {/* Theme Toggle & Mobile Menu Button */}
+            {/* Desktop: Theme Toggle, Mobile: Chat Button & Menu Button */}
             <div className="flex items-center gap-4">
+              {/* Desktop Theme Toggle */}
               <motion.button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-150"
+                className="hidden md:flex p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-150"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -150,6 +141,21 @@ const Navbar = ({ theme, toggleTheme }) => {
                 ) : (
                   <MoonIcon className="h-5 w-5 text-gray-700" />
                 )}
+              </motion.button>
+
+              {/* Mobile: Chat Button (replaces theme toggle) */}
+              <motion.button
+                onClick={() => {
+                  if (onChatToggle) {
+                    onChatToggle();
+                  }
+                }}
+                className="md:hidden p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-150 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                title="Open chat"
+              >
+                <ChatBubbleLeftRightIcon className="h-5 w-5" />
               </motion.button>
 
               {/* Mobile Menu Button */}
@@ -211,6 +217,29 @@ const Navbar = ({ theme, toggleTheme }) => {
                         {item.name}
                       </motion.button>
                     ))}
+                    
+                    {/* Theme Toggle in Mobile Menu */}
+                    <motion.button
+                      onClick={() => {
+                        toggleTheme();
+                        setIsOpen(false);
+                      }}
+                      className="text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium py-3 px-4 cursor-pointer rounded-lg hover:bg-white/10 dark:hover:bg-white/5 w-full flex items-center gap-3"
+                      whileHover={{ x: 10 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {theme === "dark" ? (
+                        <>
+                          <SunIcon className="h-5 w-5 text-yellow-500" />
+                          <span>Light Mode</span>
+                        </>
+                      ) : (
+                        <>
+                          <MoonIcon className="h-5 w-5 text-gray-700" />
+                          <span>Dark Mode</span>
+                        </>
+                      )}
+                    </motion.button>
                   </div>
                 </div>
               </motion.div>
