@@ -455,12 +455,14 @@ const Chatbot = ({ onToggleRef }) => {
     const actions = [];
     const lowerContent = (messageContent + " " + fullResponse).toLowerCase();
 
-    // Resume download
-    if (
-      lowerContent.includes("resume") ||
-      lowerContent.includes("cv") ||
-      lowerContent.includes("download")
-    ) {
+    // Resume and CV download - differentiate between them
+    const hasResume = lowerContent.includes("resume");
+    const hasCv =
+      lowerContent.includes("cv") || lowerContent.includes("curriculum vitae");
+    const hasDownload = lowerContent.includes("download");
+
+    if (hasResume && !hasCv) {
+      // Only resume requested
       actions.push({
         type: "download_resume",
         label: "📄 Download Resume",
@@ -470,6 +472,30 @@ const Chatbot = ({ onToggleRef }) => {
           link.download = "Shubham_Gajjar_Resume.pdf";
           link.click();
           track("chatbot_quick_action", { action: "download_resume" });
+        },
+      });
+    } else if (hasCv || (hasDownload && !hasResume && !hasCv)) {
+      // CV requested - show both Resume and CV
+      actions.push({
+        type: "download_resume",
+        label: "📄 Download Resume",
+        action: () => {
+          const link = document.createElement("a");
+          link.href = "/Shubham_Gajjar_Resume.pdf";
+          link.download = "Shubham_Gajjar_Resume.pdf";
+          link.click();
+          track("chatbot_quick_action", { action: "download_resume" });
+        },
+      });
+      actions.push({
+        type: "download_cv",
+        label: "📄 Download CV",
+        action: () => {
+          const link = document.createElement("a");
+          link.href = "/Shubham_Gajjar_CV.pdf";
+          link.download = "Shubham_Gajjar_CV.pdf";
+          link.click();
+          track("chatbot_quick_action", { action: "download_cv" });
         },
       });
     }
@@ -963,7 +989,11 @@ const Chatbot = ({ onToggleRef }) => {
       {/* Floating Chat Button - Hidden on mobile, shown on desktop */}
       <motion.button
         onClick={handleToggle}
-        className="hidden md:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl items-center justify-center transition-all duration-300"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full liquid-glass text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl items-center justify-center transition-all duration-300"
+        style={{
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+        }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ scale: 0 }}
@@ -984,7 +1014,7 @@ const Chatbot = ({ onToggleRef }) => {
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <XMarkIcon className="w-6 h-6" />
+              <XMarkIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
             </motion.div>
           ) : (
             <motion.div
@@ -994,7 +1024,7 @@ const Chatbot = ({ onToggleRef }) => {
               exit={{ scale: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChatBubbleLeftRightIcon className="w-6 h-6" />
+              <ChatBubbleLeftRightIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -1016,19 +1046,29 @@ const Chatbot = ({ onToggleRef }) => {
             {/* Chat Window */}
             <motion.div
               ref={chatWindowRef}
-              className="fixed bottom-6 right-6 z-50 w-[calc(100%-3rem)] md:w-96 h-[calc(100%-8rem)] md:h-[600px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700"
+              className="fixed bottom-6 right-6 z-50 w-[calc(100%-3rem)] md:w-96 h-[calc(100%-8rem)] md:h-[600px] bg-white/15 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-2xl shadow-lg flex flex-col overflow-hidden"
+              style={{
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+              }}
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
               {/* Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center justify-between">
+              <div
+                className="relative liquid-glass text-gray-800 dark:text-white p-4 flex items-center justify-between"
+                style={{
+                  background:
+                    "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.02)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.02)",
+                }}
+              >
                 <div>
                   <h3 className="font-bold text-lg">Ask Me Anything</h3>
-                  <p className="text-sm text-white/80">
-                    About my work, projects, or research
-                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   {/* Export Button */}
@@ -1036,7 +1076,7 @@ const Chatbot = ({ onToggleRef }) => {
                     <div className="relative group">
                       <button
                         onClick={() => exportConversation("text")}
-                        className="text-xs px-2 py-1 bg-white/20 hover:bg-white/30 rounded transition-colors flex items-center gap-1"
+                        className="text-xs px-2 py-1 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/20 rounded transition-colors flex items-center gap-1 shadow-sm text-gray-800 dark:text-white"
                         title="Export conversation"
                       >
                         <ArrowDownTrayIcon className="w-3 h-3" />
@@ -1045,14 +1085,14 @@ const Chatbot = ({ onToggleRef }) => {
                   )}
                   <button
                     onClick={clearChat}
-                    className="text-xs px-2 py-1 bg-white/20 hover:bg-white/30 rounded transition-colors"
+                    className="text-xs px-2 py-1 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/20 rounded transition-colors shadow-sm text-gray-800 dark:text-white"
                     title="Clear chat"
                   >
                     Clear
                   </button>
                   <button
                     onClick={handleToggle}
-                    className="p-1 hover:bg-white/20 rounded transition-colors"
+                    className="p-1 hover:bg-white/20 backdrop-blur-md rounded transition-colors text-gray-800 dark:text-white"
                     aria-label="Close chat"
                   >
                     <XMarkIcon className="w-5 h-5" />
@@ -1060,187 +1100,211 @@ const Chatbot = ({ onToggleRef }) => {
                 </div>
               </div>
 
-              {/* Messages Area */}
-              <div
-                ref={messagesContainerRef}
-                className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900 transition-transform duration-20 ease-out"
-                style={{
-                  transform:
-                    elasticOffset !== 0
-                      ? `translateY(${elasticOffset}px)`
-                      : "translateY(0)",
-                }}
-              >
-                {/* Suggested Questions (show only when no user messages) */}
-                {showSuggestions && messages.length === 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="space-y-2"
-                  >
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
-                      <SparklesIcon className="w-3 h-3" />
-                      Try asking:
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {SUGGESTED_QUESTIONS.slice(0, 4).map((question, idx) => (
-                        <motion.button
-                          key={idx}
-                          onClick={() => handleSuggestedQuestion(question)}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="text-xs px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
-                        >
-                          {question}
-                        </motion.button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {messages.map((msg, index) => {
-                  const messageId = msg.id || `msg-${index}-${msg.timestamp}`;
-                  const displayContent = msg.isStreaming
-                    ? msg.streamingContent
-                    : msg.content;
-                  const isStreaming =
-                    msg.isStreaming &&
-                    streamingMessageId === (msg.id || messageId);
-
-                  return (
+              {/* Messages Area Wrapper - Clips elastic effect */}
+              <div className="flex-1 overflow-hidden relative">
+                <div
+                  ref={messagesContainerRef}
+                  className="h-full overflow-y-auto p-4 space-y-4 bg-transparent transition-transform duration-200 ease-out"
+                  style={{
+                    transform:
+                      elasticOffset !== 0
+                        ? `translateY(${elasticOffset}px)`
+                        : "translateY(0)",
+                  }}
+                >
+                  {/* Suggested Questions (show only when no user messages) */}
+                  {showSuggestions && messages.length === 1 && (
                     <motion.div
-                      key={messageId}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      className={`flex ${
-                        msg.role === "user" ? "justify-end" : "justify-start"
-                      } group`}
+                      className="space-y-2"
                     >
-                      <div className="flex flex-col max-w-[80%]">
-                        <div
-                          className={`rounded-2xl px-4 py-2 relative ${
-                            msg.role === "user"
-                              ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                              : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-                          }`}
-                        >
-                          <p className="text-sm whitespace-pre-wrap break-words">
-                            {displayContent}
-                            {isStreaming && (
-                              <span className="inline-block w-2 h-4 bg-current ml-1 animate-pulse" />
-                            )}
-                          </p>
-                          {/* Copy button */}
-                          <button
-                            onClick={() =>
-                              copyToClipboard(
-                                msg.content || displayContent,
-                                messageId
-                              )
-                            }
-                            className={`absolute top-1 right-1 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity ${
-                              msg.role === "user"
-                                ? "text-white/70 hover:text-white"
-                                : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-                            }`}
-                            title="Copy message"
-                            disabled={isStreaming}
-                          >
-                            {copiedMessageId === messageId ? (
-                              <CheckIcon className="w-3 h-3" />
-                            ) : (
-                              <ClipboardDocumentIcon className="w-3 h-3" />
-                            )}
-                          </button>
-                        </div>
-
-                        {/* Quick Action Buttons */}
-                        {msg.quickActions &&
-                          msg.quickActions.length > 0 &&
-                          !isStreaming && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 5 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              className="mt-2 flex flex-wrap gap-2"
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
+                        <SparklesIcon className="w-3 h-3" />
+                        Try asking:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {SUGGESTED_QUESTIONS.slice(0, 4).map(
+                          (question, idx) => (
+                            <motion.button
+                              key={idx}
+                              onClick={() => handleSuggestedQuestion(question)}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="text-xs px-3 py-1.5 bg-blue-500/20 dark:bg-blue-500/15 backdrop-blur-md border border-blue-500/30 dark:border-blue-400/20 text-blue-700 dark:text-blue-300 rounded-full hover:bg-blue-500/30 dark:hover:bg-blue-500/20 transition-colors shadow-sm"
                             >
-                              {msg.quickActions.map((action, idx) => (
-                                <motion.button
-                                  key={idx}
-                                  onClick={action.action}
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  className="text-xs px-3 py-1.5 bg-blue-500 dark:bg-blue-600 text-white rounded-full hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors flex items-center gap-1"
-                                >
-                                  {action.label}
-                                  <ArrowRightIcon className="w-3 h-3" />
-                                </motion.button>
-                              ))}
-                            </motion.div>
-                          )}
-
-                        {msg.timestamp && (
-                          <span className="text-xs text-gray-400 dark:text-gray-500 mt-1 px-2">
-                            {formatTime(msg.timestamp)}
-                          </span>
+                              {question}
+                            </motion.button>
+                          )
                         )}
                       </div>
                     </motion.div>
-                  );
-                })}
+                  )}
 
-                {/* Loading Indicator */}
-                {isLoading && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex justify-start"
-                  >
-                    <div className="bg-gray-200 dark:bg-gray-700 rounded-2xl px-4 py-2">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                        <div
-                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                          style={{ animationDelay: "0.1s" }}
-                        />
-                        <div
-                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                          style={{ animationDelay: "0.2s" }}
-                        />
+                  {messages.map((msg, index) => {
+                    const messageId = msg.id || `msg-${index}-${msg.timestamp}`;
+                    const displayContent = msg.isStreaming
+                      ? msg.streamingContent
+                      : msg.content;
+                    const isStreaming =
+                      msg.isStreaming &&
+                      streamingMessageId === (msg.id || messageId);
+
+                    return (
+                      <motion.div
+                        key={messageId}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className={`flex ${
+                          msg.role === "user" ? "justify-end" : "justify-start"
+                        } group`}
+                      >
+                        <div className="flex flex-col max-w-[80%]">
+                          <div
+                            className={`rounded-2xl px-4 py-2 relative backdrop-blur-md ${
+                              msg.role === "user"
+                                ? "text-gray-800 dark:text-gray-200 shadow-lg"
+                                : "bg-white/20 dark:bg-black/20 text-gray-800 dark:text-gray-200 border border-white/20 dark:border-white/10 shadow-md"
+                            }`}
+                            style={
+                              msg.role === "user"
+                                ? {
+                                    background:
+                                      "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.2)",
+                                    backdropFilter: "blur(12px)",
+                                    WebkitBackdropFilter: "blur(12px)",
+                                    border:
+                                      "1px solid rgba(255, 255, 255, 0.02)",
+                                  }
+                                : undefined
+                            }
+                          >
+                            <p className="text-sm whitespace-pre-wrap break-words pr-6 pb-1">
+                              {displayContent}
+                              {isStreaming && (
+                                <span className="inline-block w-2 h-4 bg-current ml-1 animate-pulse" />
+                              )}
+                            </p>
+                            {/* Copy button */}
+                            <button
+                              onClick={() =>
+                                copyToClipboard(
+                                  msg.content || displayContent,
+                                  messageId
+                                )
+                              }
+                              className={`absolute bottom-1 right-1 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity ${
+                                msg.role === "user"
+                                  ? "text-gray-800/70 dark:text-white/70 hover:text-gray-900 dark:hover:text-white"
+                                  : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                              }`}
+                              title="Copy message"
+                              disabled={isStreaming}
+                            >
+                              {copiedMessageId === messageId ? (
+                                <CheckIcon className="w-4 h-4" />
+                              ) : (
+                                <ClipboardDocumentIcon className="w-4 h-4" />
+                              )}
+                            </button>
+                          </div>
+
+                          {/* Quick Action Buttons */}
+                          {msg.quickActions &&
+                            msg.quickActions.length > 0 &&
+                            !isStreaming && (
+                              <motion.div
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="mt-2 flex flex-wrap gap-2"
+                              >
+                                {msg.quickActions.map((action, idx) => (
+                                  <motion.button
+                                    key={idx}
+                                    onClick={action.action}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="text-xs px-3 py-1.5 liquid-glass text-gray-800 dark:text-gray-200 rounded-full transition-colors flex items-center gap-1 shadow-md"
+                                    style={{
+                                      background:
+                                        "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.2)",
+                                      backdropFilter: "blur(12px)",
+                                      WebkitBackdropFilter: "blur(12px)",
+                                      border:
+                                        "1px solid rgba(255, 255, 255, 0.02)",
+                                    }}
+                                  >
+                                    {action.label}
+                                    <ArrowRightIcon className="w-3 h-3 text-gray-800 dark:text-gray-200" />
+                                  </motion.button>
+                                ))}
+                              </motion.div>
+                            )}
+
+                          {msg.timestamp && (
+                            <span className="text-xs text-gray-400 dark:text-gray-500 mt-1 px-2">
+                              {formatTime(msg.timestamp)}
+                            </span>
+                          )}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+
+                  {/* Loading Indicator */}
+                  {isLoading && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex justify-start"
+                    >
+                      <div className="bg-white/20 dark:bg-black/20 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-2xl px-4 py-2 shadow-md">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-blue-500/70 dark:bg-blue-400/70 rounded-full animate-bounce" />
+                          <div
+                            className="w-2 h-2 bg-purple-500/70 dark:bg-purple-400/70 rounded-full animate-bounce"
+                            style={{ animationDelay: "0.1s" }}
+                          />
+                          <div
+                            className="w-2 h-2 bg-blue-500/70 dark:bg-blue-400/70 rounded-full animate-bounce"
+                            style={{ animationDelay: "0.2s" }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                )}
+                    </motion.div>
+                  )}
 
-                {/* Error Message */}
-                {error && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`px-4 py-2 rounded-lg text-sm ${
-                      error.toLowerCase().includes("rate limit")
-                        ? "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border border-yellow-300 dark:border-yellow-700"
-                        : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
-                    }`}
-                  >
-                    <div className="flex items-start gap-2">
-                      <span>⚠️</span>
-                      <span>{error}</span>
-                    </div>
-                    {error.toLowerCase().includes("rate limit") && (
-                      <p className="text-xs mt-2 opacity-75">
-                        The API has rate limits. Please wait a moment before
-                        asking another question.
-                      </p>
-                    )}
-                  </motion.div>
-                )}
+                  {/* Error Message */}
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`px-4 py-2 rounded-lg text-sm backdrop-blur-md shadow-md ${
+                        error.toLowerCase().includes("rate limit")
+                          ? "bg-yellow-500/20 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border border-yellow-400/30 dark:border-yellow-600/30"
+                          : "bg-red-500/20 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-400/30 dark:border-red-600/30"
+                      }`}
+                    >
+                      <div className="flex items-start gap-2">
+                        <span>⚠️</span>
+                        <span>{error}</span>
+                      </div>
+                      {error.toLowerCase().includes("rate limit") && (
+                        <p className="text-xs mt-2 opacity-75">
+                          The API has rate limits. Please wait a moment before
+                          asking another question.
+                        </p>
+                      )}
+                    </motion.div>
+                  )}
 
-                <div ref={messagesEndRef} />
+                  <div ref={messagesEndRef} />
+                </div>
               </div>
 
               {/* Input Area */}
-              <div className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+              <div className="relative p-4 bg-transparent backdrop-blur-md border-t border-white/20 dark:border-white/10">
                 {/* Quick Suggestions (after assistant messages) */}
                 {!isLoading &&
                   !showSuggestions &&
@@ -1257,7 +1321,7 @@ const Chatbot = ({ onToggleRef }) => {
                           onClick={() => handleSuggestedQuestion(question)}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="text-xs px-2.5 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                          className="text-xs px-2.5 py-1 bg-white/20 dark:bg-black/20 backdrop-blur-md border border-white/20 dark:border-white/10 text-gray-700 dark:text-gray-300 rounded-full hover:bg-white/30 dark:hover:bg-black/30 transition-colors shadow-sm"
                         >
                           {question.length > 30
                             ? question.substring(0, 30) + "..."
@@ -1288,7 +1352,7 @@ const Chatbot = ({ onToggleRef }) => {
                       }
                       disabled={isLoading || rateLimited}
                       maxLength={500}
-                      className="w-full px-4 py-2 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                      className="w-full px-4 py-2 pr-12 border border-white/20 dark:border-white/10 rounded-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:opacity-50 shadow-md"
                     />
                     {inputMessage.length > 0 && (
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-gray-500">
@@ -1299,7 +1363,14 @@ const Chatbot = ({ onToggleRef }) => {
                   <motion.button
                     onClick={() => handleSendMessage()}
                     disabled={isLoading || !inputMessage.trim() || rateLimited}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center"
+                    className="px-4 py-2 liquid-glass text-gray-800 dark:text-white rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center shadow-md"
+                    style={{
+                      background:
+                        "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.02)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      border: "1px solid rgba(255, 255, 255, 0.02)",
+                    }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     title={
