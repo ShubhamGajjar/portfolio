@@ -8,8 +8,13 @@ import {
   ClipboardDocumentIcon,
   CheckIcon,
   SparklesIcon,
+  ArrowDownTrayIcon,
+  DocumentTextIcon,
+  ArrowRightIcon,
+  LinkIcon,
 } from "@heroicons/react/24/outline";
 import { track } from "@vercel/analytics/react";
+import { projects } from "../utils/data";
 
 const SUGGESTED_QUESTIONS = [
   "What are your technical skills?",
@@ -27,6 +32,8 @@ const Chatbot = () => {
     content:
       "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Research Papers\n• Contact Information\n\nWhat would you like to know?",
     timestamp: new Date().toISOString(),
+    isStreaming: false,
+    streamingContent: "",
   };
 
   // Load messages from localStorage on mount
@@ -52,10 +59,12 @@ const Chatbot = () => {
   const [cooldownSeconds, setCooldownSeconds] = useState(0);
   const [copiedMessageId, setCopiedMessageId] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [streamingMessageId, setStreamingMessageId] = useState(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const lastRequestTimeRef = useRef(0);
   const cooldownTimerRef = useRef(null);
+  const streamingTimerRef = useRef(null);
 
   // Minimum time between requests (2 seconds)
   const MIN_REQUEST_INTERVAL = 2000;
@@ -63,21 +72,29 @@ const Chatbot = () => {
   // Cooldown period after rate limit (30 seconds)
   const RATE_LIMIT_COOLDOWN = 30000;
 
+  // Streaming settings
+  const STREAMING_DELAY = 30; // milliseconds between characters
+
   // Save messages to localStorage whenever they change
   useEffect(() => {
     if (typeof window !== "undefined" && messages.length > 0) {
-      localStorage.setItem("chatbot_messages", JSON.stringify(messages));
+      // Filter out streaming properties before saving
+      const messagesToSave = messages.map((msg) => {
+        const { isStreaming, streamingContent, ...msgToSave } = msg;
+        return msgToSave;
+      });
+      localStorage.setItem("chatbot_messages", JSON.stringify(messagesToSave));
     }
   }, [messages]);
 
-  // Scroll to bottom when new messages arrive
+  // Scroll to bottom when new messages arrive or streaming updates
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, streamingMessageId]);
 
   // Focus input when chat opens
   useEffect(() => {
@@ -104,14 +121,213 @@ const Chatbot = () => {
     }
   }, [rateLimited, cooldownSeconds]);
 
-  // Cleanup cooldown timer on unmount
+  // Cleanup timers on unmount
   useEffect(() => {
     return () => {
       if (cooldownTimerRef.current) {
         clearTimeout(cooldownTimerRef.current);
       }
+      if (streamingTimerRef.current) {
+        clearInterval(streamingTimerRef.current);
+      }
     };
   }, []);
+
+  // Detect quick actions from message content
+  const detectQuickActions = (messageContent, fullResponse) => {
+    const actions = [];
+    const lowerContent = (messageContent + " " + fullResponse).toLowerCase();
+
+    // Resume download
+    if (
+      lowerContent.includes("resume") ||
+      lowerContent.includes("cv") ||
+      lowerContent.includes("download")
+    ) {
+      actions.push({
+        type: "download_resume",
+        label: "📄 Download Resume",
+        action: () => {
+          const link = document.createElement("a");
+          link.href = "/Shubham_Gajjar_Resume.pdf";
+          link.download = "Shubham_Gajjar_Resume.pdf";
+          link.click();
+          track("chatbot_quick_action", { action: "download_resume" });
+        },
+      });
+    }
+
+    // Projects section
+    if (
+      lowerContent.includes("project") ||
+      lowerContent.includes("portfolio") ||
+      lowerContent.includes("work") ||
+      lowerContent.includes("github")
+    ) {
+      actions.push({
+        type: "view_projects",
+        label: "🚀 View Projects",
+        action: () => {
+          scrollToPortfolioSection("#projects");
+          track("chatbot_quick_action", { action: "view_projects" });
+        },
+      });
+    }
+
+    // Skills section
+    if (
+      lowerContent.includes("skill") ||
+      lowerContent.includes("technology") ||
+      lowerContent.includes("expertise") ||
+      lowerContent.includes("tech stack")
+    ) {
+      actions.push({
+        type: "view_skills",
+        label: "⚡ View Skills",
+        action: () => {
+          scrollToPortfolioSection("#skills");
+          track("chatbot_quick_action", { action: "view_skills" });
+        },
+      });
+    }
+
+    // Research section
+    if (
+      lowerContent.includes("research") ||
+      lowerContent.includes("paper") ||
+      lowerContent.includes("publication") ||
+      lowerContent.includes("journal")
+    ) {
+      actions.push({
+        type: "view_research",
+        label: "📚 View Research",
+        action: () => {
+          scrollToPortfolioSection("#research");
+          track("chatbot_quick_action", { action: "view_research" });
+        },
+      });
+    }
+
+    // Contact section
+    if (
+      lowerContent.includes("contact") ||
+      lowerContent.includes("email") ||
+      lowerContent.includes("reach") ||
+      lowerContent.includes("connect")
+    ) {
+      actions.push({
+        type: "view_contact",
+        label: "✉️ Get In Touch",
+        action: () => {
+          scrollToPortfolioSection("#contact");
+          track("chatbot_quick_action", { action: "view_contact" });
+        },
+      });
+    }
+
+    // Detect specific projects
+    projects.forEach((project) => {
+      if (lowerContent.includes(project.title.toLowerCase())) {
+        if (project.github) {
+          actions.push({
+            type: "view_project_github",
+            label: `🔗 ${project.title}`,
+            action: () => {
+              window.open(project.github, "_blank");
+              track("chatbot_quick_action", {
+                action: "view_project_github",
+                project: project.title,
+              });
+            },
+          });
+        }
+      }
+    });
+
+    return actions;
+  };
+
+  // Smooth scroll to portfolio section
+  const scrollToPortfolioSection = (sectionId) => {
+    // Close chat if on mobile
+    if (window.innerWidth < 768) {
+      setIsOpen(false);
+    }
+
+    setTimeout(() => {
+      const element = document.querySelector(sectionId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+        // Add offset for sticky navbar
+        setTimeout(() => {
+          const navbarHeight = 80;
+          const currentScroll = window.pageYOffset;
+          const elementTop = element.offsetTop;
+          const offsetPosition = elementTop - navbarHeight;
+
+          if (Math.abs(currentScroll - offsetPosition) > 10) {
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        }, 100);
+      }
+    }, 100);
+  };
+
+  // Streaming animation function
+  const streamMessage = (fullText, messageId) => {
+    let currentIndex = 0;
+    const words = fullText.split(" ");
+    let displayedText = "";
+
+    const streamInterval = setInterval(() => {
+      if (currentIndex < words.length) {
+        displayedText +=
+          (displayedText ? " " : "") + words[currentIndex];
+        currentIndex++;
+
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId || msg.timestamp === messageId
+              ? {
+                  ...msg,
+                  streamingContent: displayedText,
+                  isStreaming: true,
+                }
+              : msg
+          )
+        );
+
+        // Scroll to bottom during streaming
+        scrollToBottom();
+      } else {
+        // Streaming complete
+        clearInterval(streamInterval);
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId || msg.timestamp === messageId
+              ? {
+                  ...msg,
+                  content: fullText,
+                  streamingContent: "",
+                  isStreaming: false,
+                }
+              : msg
+          )
+        );
+        setStreamingMessageId(null);
+        streamingTimerRef.current = null;
+      }
+    }, STREAMING_DELAY);
+
+    streamingTimerRef.current = streamInterval;
+  };
 
   const handleSendMessage = async (retryCount = 0) => {
     const message = inputMessage.trim();
@@ -147,7 +363,7 @@ const Chatbot = () => {
 
     // Track question analytics
     track("chatbot_question", {
-      question: message.substring(0, 100), // Track first 100 chars
+      question: message.substring(0, 100),
       question_length: message.length,
       timestamp: new Date().toISOString(),
     });
@@ -167,8 +383,13 @@ const Chatbot = () => {
     setError(null);
 
     try {
-      // Get conversation history (last 10 messages)
-      const conversationHistory = [...messages, userMessage].slice(-10);
+      // Get conversation history (last 10 messages, excluding streaming props)
+      const conversationHistory = [...messages, userMessage]
+        .slice(-10)
+        .map((msg) => {
+          const { isStreaming, streamingContent, ...cleanMsg } = msg;
+          return cleanMsg;
+        });
 
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -231,15 +452,24 @@ const Chatbot = () => {
       setRateLimited(false);
       setCooldownSeconds(0);
 
-      // Add assistant response with timestamp
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.message,
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+      // Create assistant message with unique ID for streaming
+      const assistantMessageId = `assistant-${Date.now()}`;
+      const assistantMessage = {
+        role: "assistant",
+        content: data.message,
+        timestamp: new Date().toISOString(),
+        id: assistantMessageId,
+        isStreaming: false,
+        streamingContent: "",
+        quickActions: detectQuickActions(message, data.message),
+      };
+
+      // Add message first (empty for streaming)
+      setMessages((prev) => [...prev, assistantMessage]);
+
+      // Start streaming animation
+      setStreamingMessageId(assistantMessageId);
+      streamMessage(data.message, assistantMessageId);
 
       // Track successful response
       track("chatbot_response_success", {
@@ -303,6 +533,10 @@ const Chatbot = () => {
     setMessages(clearedMessages);
     setError(null);
     setShowSuggestions(true);
+    setStreamingMessageId(null);
+    if (streamingTimerRef.current) {
+      clearInterval(streamingTimerRef.current);
+    }
     localStorage.removeItem("chatbot_messages");
     localStorage.setItem("chatbot_messages", JSON.stringify(clearedMessages));
 
@@ -339,6 +573,58 @@ const Chatbot = () => {
     if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
     if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
     return date.toLocaleDateString();
+  };
+
+  // Export conversation as text
+  const exportConversation = (format = "text") => {
+    try {
+      let exportContent = "";
+      const date = new Date().toLocaleString();
+
+      if (format === "text") {
+        exportContent = `Chat Conversation - ${date}\n`;
+        exportContent += "=".repeat(50) + "\n\n";
+
+        messages.forEach((msg) => {
+          const role = msg.role === "user" ? "You" : "Assistant";
+          const content = msg.streamingContent || msg.content || "";
+          const time = msg.timestamp
+            ? formatTime(msg.timestamp)
+            : "Unknown time";
+          exportContent += `${role} (${time}):\n${content}\n\n`;
+        });
+
+        // Create and download file
+        const blob = new Blob([exportContent], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `chat_conversation_${Date.now()}.txt`;
+        link.click();
+        URL.revokeObjectURL(url);
+
+        track("chatbot_export", { format: "text" });
+      } else if (format === "json") {
+        // Export as JSON
+        const cleanMessages = messages.map((msg) => {
+          const { isStreaming, streamingContent, ...cleanMsg } = msg;
+          return cleanMsg;
+        });
+        exportContent = JSON.stringify(cleanMessages, null, 2);
+        const blob = new Blob([exportContent], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `chat_conversation_${Date.now()}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+
+        track("chatbot_export", { format: "json" });
+      }
+    } catch (err) {
+      console.error("Export failed:", err);
+      setError("Failed to export conversation. Please try again.");
+    }
   };
 
   return (
@@ -413,6 +699,18 @@ const Chatbot = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
+                  {/* Export Button */}
+                  {messages.length > 1 && (
+                    <div className="relative group">
+                      <button
+                        onClick={() => exportConversation("text")}
+                        className="text-xs px-2 py-1 bg-white/20 hover:bg-white/30 rounded transition-colors flex items-center gap-1"
+                        title="Export conversation"
+                      >
+                        <ArrowDownTrayIcon className="w-3 h-3" />
+                      </button>
+                    </div>
+                  )}
                   <button
                     onClick={clearChat}
                     className="text-xs px-2 py-1 bg-white/20 hover:bg-white/30 rounded transition-colors"
@@ -460,7 +758,12 @@ const Chatbot = () => {
                 )}
 
                 {messages.map((msg, index) => {
-                  const messageId = `msg-${index}-${msg.timestamp}`;
+                  const messageId = msg.id || `msg-${index}-${msg.timestamp}`;
+                  const displayContent = msg.isStreaming
+                    ? msg.streamingContent
+                    : msg.content;
+                  const isStreaming = msg.isStreaming && streamingMessageId === (msg.id || messageId);
+
                   return (
                     <motion.div
                       key={messageId}
@@ -480,17 +783,21 @@ const Chatbot = () => {
                           }`}
                         >
                           <p className="text-sm whitespace-pre-wrap break-words">
-                            {msg.content}
+                            {displayContent}
+                            {isStreaming && (
+                              <span className="inline-block w-2 h-4 bg-current ml-1 animate-pulse" />
+                            )}
                           </p>
                           {/* Copy button */}
                           <button
-                            onClick={() => copyToClipboard(msg.content, messageId)}
+                            onClick={() => copyToClipboard(msg.content || displayContent, messageId)}
                             className={`absolute top-1 right-1 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity ${
                               msg.role === "user"
                                 ? "text-white/70 hover:text-white"
                                 : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                             }`}
                             title="Copy message"
+                            disabled={isStreaming}
                           >
                             {copiedMessageId === messageId ? (
                               <CheckIcon className="w-3 h-3" />
@@ -499,6 +806,31 @@ const Chatbot = () => {
                             )}
                           </button>
                         </div>
+
+                        {/* Quick Action Buttons */}
+                        {msg.quickActions &&
+                          msg.quickActions.length > 0 &&
+                          !isStreaming && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="mt-2 flex flex-wrap gap-2"
+                            >
+                              {msg.quickActions.map((action, idx) => (
+                                <motion.button
+                                  key={idx}
+                                  onClick={action.action}
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  className="text-xs px-3 py-1.5 bg-blue-500 dark:bg-blue-600 text-white rounded-full hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors flex items-center gap-1"
+                                >
+                                  {action.label}
+                                  <ArrowRightIcon className="w-3 h-3" />
+                                </motion.button>
+                              ))}
+                            </motion.div>
+                          )}
+
                         {msg.timestamp && (
                           <span className="text-xs text-gray-400 dark:text-gray-500 mt-1 px-2">
                             {formatTime(msg.timestamp)}
