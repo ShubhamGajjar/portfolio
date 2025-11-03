@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  RocketLaunchIcon,
   AcademicCapIcon,
   StarIcon,
   DocumentArrowDownIcon,
@@ -35,10 +34,6 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text">
             About Me
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            AI Engineer and Researcher passionate about medical AI applications
-            and cutting-edge deep learning solutions
-          </p>
         </motion.div>
 
         {/* Main Content */}
@@ -49,30 +44,20 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="flex items-center gap-3 mb-8">
-            <RocketLaunchIcon className="h-8 w-8 text-blue-500 dark:text-blue-400" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-              My Journey
-            </h3>
-          </div>
-
           <div className="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
             <p>
-              I specialize in medical AI applications, particularly brain tumor
-              segmentation and skin cancer classification. My research focuses
-              on developing hybrid neural network architectures that achieve
-              state-of-the-art performance in medical image analysis.
+              I'm an AI researcher and graduate student at Northeastern
+              University, passionate about advancing deep learning applications
+              in biomedical imaging and computer vision. My work focuses on
+              hybrid neural architectures for tumor segmentation and skin lesion
+              classification, bridging healthcare and AI.
             </p>
             <p>
-              With expertise in TensorFlow, PyTorch, and Computer Vision, I've
-              achieved 96.3% accuracy in skin cancer classification using hybrid
-              ResNet-ViT models. My work spans from medical AI to game AI,
-              demonstrating versatility across different AI applications.
-            </p>
-            <p>
-              I'm passionate about advancing AI technology to solve real-world
-              healthcare problems and contribute to systems that improve medical
-              diagnosis and patient outcomes.
+              Previously, I've published in IEEE and contributed to research
+              under review at Elsevier, achieving state-of-the-art performance
+              in medical image analysis. I'm currently exploring the integration
+              of deep learning with healthcare and biological imaging as part of
+              my ongoing research journey.
             </p>
           </div>
 

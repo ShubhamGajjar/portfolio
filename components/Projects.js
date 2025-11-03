@@ -20,7 +20,7 @@ import { motion } from "framer-motion";
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "AI/ML Core", "Data Science"];
+  const categories = ["All", "Research", "AI/ML Core", "Data Science"];
 
   const filteredProjects =
     activeCategory === "All"
@@ -146,7 +146,7 @@ const Projects = () => {
       status?.includes("Completed")
     ) {
       return "bg-green-500/10 text-green-600 border-green-500/20";
-    } else if (status?.includes("Under Review")) {
+    } else if (status?.includes("Under Review") || status?.includes("Submitted")) {
       return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
     } else if (status?.includes("Active")) {
       return "bg-blue-500/10 text-blue-600 border-blue-500/20";

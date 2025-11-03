@@ -119,7 +119,7 @@ const ContactForm = () => {
         <input
           name="email"
           type="email"
-          placeholder="shubhamgajjar14@gmail.com"
+          placeholder="gajjar.shu@northeastern.edu"
           required
           className="input"
           disabled={isSubmitting}
@@ -259,8 +259,15 @@ const Contact = () => {
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Ready to work on cutting-edge AI research and innovative machine
-            learning projects
+            Open to research collaborations in AI for healthcare, biomedical
+            imaging, and computer vision.
+          </motion.p>
+          <motion.p
+            className="text-lg text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mt-3"
+            variants={itemVariants}
+          >
+            Based at The Roux Institute, Northeastern University — Portland,
+            Maine.
           </motion.p>
         </motion.div>
 
