@@ -2,6 +2,80 @@
 export const projects = [
   {
     id: 1,
+    title: "Skin Cancer Classification (Research)",
+    description:
+      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Accepted and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Deep Learning",
+      "Computer Vision",
+      "Medical AI",
+      "ResNet50",
+      "Vision Transformer",
+      "HAM10000 Dataset",
+      "Image Classification",
+    ],
+    category: "Research",
+    github: null,
+    live: null,
+    image: "/skin-cancer.jpg",
+    impact: "Medical AI Research - Accepted at IEEE AIC 2025",
+    status: "Accepted",
+  },
+  {
+    id: 2,
+    title: "Brain Tumor Segmentation (Research)",
+    description:
+      "Led innovation by designing VGG16-based encoder with Multi-Channel Attention decoder achieving 99.59% accuracy and 99.71% specificity on LGG Brain MRI Segmentation dataset from 110 low-grade glioma patients. Implemented ensemble learning combining multiple model configurations, improving Dice coefficient by 3.7% over standard UNet. Applied data engineering with preprocessing pipeline implementing skull stripping, intensity normalization, and resizing to 256x256 pixels for FLAIR MRI scans.",
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Deep Learning",
+      "Computer Vision",
+      "Medical Imaging",
+      "UNet",
+      "VGG16",
+      "Multi-Channel Attention",
+      "FLAIR MRI Processing",
+    ],
+    category: "Research",
+    github: null,
+    live: null,
+    image: "/brain-tumor.jpg",
+    impact: "Medical AI Research - Under Review at Elsevier",
+    status: "Under Review",
+  },
+  {
+    id: 3,
+    title:
+      "Extended ResNet50 with Inverse Soft Mask Attention for Skin Cancer (Research)",
+    description:
+      "Developed two-stage pipeline combining U-Net++ hair segmentation with Extended ResNet50 classifier featuring Inverse Soft Mask Attention mechanism, achieving 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images. Applied creativity by integrating dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation for hair-occluded and unoccluded regions. Utilized Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss, incorporating explainable AI principles ensuring model deployment readiness.",
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Deep Learning",
+      "Computer Vision",
+      "Medical AI",
+      "ResNet50",
+      "Inverse Soft Mask Attention",
+      "U-Net++",
+      "HAM10000 Dataset",
+      "Image Classification",
+    ],
+    category: "Research",
+    github: null,
+    live: null,
+    image: "/skin-cancer-advanced.jpg",
+    impact: "Medical AI Research - Submitted to Journal",
+    status: "Submitted",
+  },
+  {
+    id: 4,
     title: "TrackMania Reinforcement Learning Agent",
     description:
       "Developed an advanced reinforcement learning agent for TrackMania racing game using Implicit Quantile Networks (IQN). The agent learns optimal racing strategies through trial and error, achieving competitive lap times and demonstrating robust decision-making in unpredictable racing situations.",
@@ -22,8 +96,8 @@ export const projects = [
     status: "Completed",
   },
   {
-    id: 2,
-    title: "Twitter Sentiment Analysis System",
+    id: 5,
+    title: "Twitter Sentiment Analysis (NLP Project)",
     description:
       "Built a comprehensive sentiment analysis system using Twitter API to analyze public sentiment on various topics. Implements NLP techniques and machine learning models for real-time sentiment classification.",
     technologies: [
@@ -41,44 +115,6 @@ export const projects = [
     live: null,
     image: "/sentiment.jpg",
     impact: "Social Media Analytics",
-    status: "Completed",
-  },
-  {
-    id: 3,
-    title: "Snake Game Implementation",
-    description:
-      "Classic Snake game implementation using Python and Pygame. Features smooth gameplay mechanics, score tracking, and collision detection. Demonstrates fundamental game development concepts and object-oriented programming.",
-    technologies: [
-      "Python",
-      "Pygame",
-      "Object-Oriented Programming",
-      "Game Development",
-      "Collision Detection",
-    ],
-    category: "AI/ML Core",
-    github: "https://github.com/ShubhamGajjar/Python-Snake_game",
-    live: null,
-    image: "/snake-game.jpg",
-    impact: "Game Development Project",
-    status: "Completed",
-  },
-  {
-    id: 4,
-    title: "Flappy Bird Game Clone",
-    description:
-      "Flappy Bird game clone built with Python and Pygame. Includes physics simulation, sprite management, and user input handling. Showcases game development fundamentals and real-time rendering techniques.",
-    technologies: [
-      "Python",
-      "Pygame",
-      "Game Physics",
-      "Sprite Management",
-      "Real-time Rendering",
-    ],
-    category: "AI/ML Core",
-    github: "https://github.com/ShubhamGajjar/Python-Flappy_Bird",
-    live: null,
-    image: "/flappy-bird.jpg",
-    impact: "Game Development Project",
     status: "Completed",
   },
 ];
@@ -102,6 +138,8 @@ export const skills = {
     "RNN/LSTM",
     "Vision Transformers",
     "UNet Architectures",
+    "FastAPI",
+    "Hugging Face",
   ],
   "Computer Vision": [
     "OpenCV",
@@ -119,7 +157,6 @@ export const skills = {
     "Scikit-learn",
     "Matplotlib",
     "Seaborn",
-    "Jupyter",
     "Statistical Analysis",
   ],
   "Research & Development": [
@@ -137,6 +174,15 @@ export const skills = {
     "Game AI Development",
     "Neural Network Training",
   ],
+  "Cloud & DevOps": ["Docker", "GitHub Actions"],
+  Tools: ["Jupyter", "VSCode", "Google Colab"],
+  "Leadership & Adaptability": [
+    "Team Leadership",
+    "Adaptability",
+    "Problem Solving",
+    "Communication",
+    "Collaboration",
+  ],
 };
 
 export const researchPapers = [
@@ -150,7 +196,7 @@ export const researchPapers = [
     status: "Accepted",
     year: "2025",
     description:
-      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Presented research at IEEE World Conference on Applied Intelligence and Informatics to 100+ attendees.",
+      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Accepted and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
     keywords: [
       "Computer Vision",
       "Deep Learning",
@@ -215,9 +261,9 @@ export const researchPapers = [
 ];
 
 export const socialLinks = {
-  email: "shubhamgajjar14@gmail.com",
+  email: "gajjar.shu@northeastern.edu",
   github: "https://github.com/ShubhamGajjar",
-  linkedin: "https://www.linkedin.com/in/shubham-gajjar-b55b64143/",
+  linkedin: "https://www.linkedin.com/in/implici7/",
   x: "https://x.com/Implici7",
 };
 

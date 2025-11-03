@@ -12,11 +12,11 @@ import {
  * containing all portfolio information
  */
 export function buildChatContext() {
-  let context = `You are an AI assistant helping visitors learn about Shubham Gajjar, an AI Engineer and Research Specialist.
+  let context = `You are an AI assistant helping visitors learn about Shubham Gajjar, an AI Researcher & M.S. Artificial Intelligence Student at Northeastern University.
 
 PERSONAL INFORMATION:
 - Name: Shubham Gajjar
-- Role: AI Engineer & Research Specialist
+- Role: AI Researcher & M.S. Artificial Intelligence Student at Northeastern University
 - Experience: ${experience}
 - Email: ${socialLinks.email}
 - GitHub: ${socialLinks.github}

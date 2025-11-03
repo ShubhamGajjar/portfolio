@@ -14,6 +14,9 @@ import {
   LightBulbIcon,
   PuzzlePieceIcon,
   RocketLaunchIcon,
+  CloudIcon,
+  WrenchScrewdriverIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { skills } from "../utils/data";
 
@@ -43,6 +46,18 @@ const Skills = () => {
       case "Game AI & RL":
         return (
           <RocketLaunchIcon className="h-5 w-5 text-pink-500 dark:text-pink-400" />
+        );
+      case "Cloud & DevOps":
+        return (
+          <CloudIcon className="h-5 w-5 text-cyan-500 dark:text-cyan-400" />
+        );
+      case "Tools":
+        return (
+          <WrenchScrewdriverIcon className="h-5 w-5 text-orange-500 dark:text-orange-400" />
+        );
+      case "Leadership & Adaptability":
+        return (
+          <UserGroupIcon className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
         );
       default:
         return (

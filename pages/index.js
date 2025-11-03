@@ -58,10 +58,12 @@ export default function Home({ theme, toggleTheme, chatToggleRef }) {
   return (
     <>
       <Head>
-        <title>Shubham Gajjar | AI Engineer & Research Specialist</title>
+        <title>
+          Shubham Gajjar | AI Researcher & M.S. Artificial Intelligence Student
+        </title>
         <meta
           name="description"
-          content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
+          content="AI Researcher & M.S. Artificial Intelligence Student at Northeastern University, exploring deep learning, computer vision, and biomedical imaging. Published researcher with IEEE conference publications."
         />
         {/* Favicon */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -77,11 +79,11 @@ export default function Home({ theme, toggleTheme, chatToggleRef }) {
         {/* Open Graph Meta Tags */}
         <meta
           property="og:title"
-          content="Shubham Gajjar | AI Engineer & Research Specialist"
+          content="Shubham Gajjar | AI Researcher & M.S. Artificial Intelligence Student"
         />
         <meta
           property="og:description"
-          content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
+          content="AI Researcher & M.S. Artificial Intelligence Student at Northeastern University, exploring deep learning, computer vision, and biomedical imaging. Published researcher with IEEE conference publications."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://your-portfolio-url.com" />
@@ -90,11 +92,11 @@ export default function Home({ theme, toggleTheme, chatToggleRef }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Shubham Gajjar | AI Engineer & Research Specialist"
+          content="Shubham Gajjar | AI Researcher & M.S. Artificial Intelligence Student"
         />
         <meta
           name="twitter:description"
-          content="AI Engineer and Research Specialist with expertise in medical AI, computer vision, and deep learning. Published researcher with IEEE conference publications."
+          content="AI Researcher & M.S. Artificial Intelligence Student at Northeastern University, exploring deep learning, computer vision, and biomedical imaging. Published researcher with IEEE conference publications."
         />
       </Head>
 
@@ -116,7 +118,7 @@ export default function Home({ theme, toggleTheme, chatToggleRef }) {
         <motion.main className="flex-grow" variants={contentVariants}>
           <Hero
             title="Hi, I'm Shubham Gajjar"
-            subtitle="AI Engineer & Research Specialist pioneering the future with intelligent solutions and cutting-edge artificial intelligence."
+            subtitle="AI Researcher & M.S. Artificial Intelligence Student at Northeastern University, exploring deep learning, computer vision, and biomedical imaging."
             resumeLink="/Shubham_Gajjar_Resume.pdf"
           />
 

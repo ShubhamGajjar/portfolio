@@ -22,8 +22,11 @@ const ResearchPapers = () => {
   const [expandedPaper, setExpandedPaper] = useState(null);
 
   const getStatusIcon = (status) => {
-    if (status === "Accepted") {
+    if (status === "Accepted" || status === "Completed") {
       return <CheckCircleIcon className="h-5 w-5 text-green-500" />;
+    }
+    if (status === "Under Review" || status === "Submitted") {
+      return <ClockIcon className="h-5 w-5 text-yellow-500" />;
     }
     return <ClockIcon className="h-5 w-5 text-yellow-500" />;
   };
@@ -86,8 +89,11 @@ const ResearchPapers = () => {
   };
 
   const getStatusColor = (status) => {
-    if (status === "Accepted") {
+    if (status === "Accepted" || status === "Completed") {
       return "bg-green-500/10 text-green-600 border-green-500/20";
+    }
+    if (status === "Under Review" || status === "Submitted") {
+      return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
     }
     return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
   };

@@ -22,8 +22,9 @@ const Footer = () => {
               Shubham Gajjar
             </motion.h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4 max-w-md">
-              AI Engineer & Research Specialist pioneering the future with
-              intelligent solutions and cutting-edge artificial intelligence.
+              AI Researcher & M.S. Artificial Intelligence Student at
+              Northeastern University, exploring deep learning, computer vision,
+              and biomedical imaging.
             </p>
             <div className="flex flex-col gap-2 text-sm text-gray-600 dark:text-gray-400">
               <a
