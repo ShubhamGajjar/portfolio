@@ -82,7 +82,27 @@ const Footer = () => {
                 <span className="text-sm">GitHub</span>
               </a>
               <a
-                href={socialLinks.x}
+                href={socialLinks.orcid}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors group"
+              >
+                <div className="p-2 ai-glass rounded-lg group-hover:scale-110 transition-transform">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M86.3,186.2H70.9V79.1h15.4v48.4V186.2z"/>
+                    <path d="M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z"/>
+                    <path d="M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z"/>
+                  </svg>
+                </div>
+                <span className="text-sm">ORCID</span>
+              </a>
+              <a
+                href={socialLinks.googleScholar}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
@@ -93,10 +113,10 @@ const Footer = () => {
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
                   </svg>
                 </div>
-                <span className="text-sm">X (Twitter)</span>
+                <span className="text-sm">Google Scholar</span>
               </a>
             </div>
           </div>

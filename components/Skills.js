@@ -1,149 +1,9 @@
 // components/Skills.js
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import {
-  CpuChipIcon,
-  AcademicCapIcon,
-  BeakerIcon,
-  ChartBarIcon,
-  EyeIcon,
-  CodeBracketIcon,
-  CommandLineIcon,
-  CogIcon,
-  CubeIcon,
-  LightBulbIcon,
-  PuzzlePieceIcon,
-  RocketLaunchIcon,
-  CloudIcon,
-  WrenchScrewdriverIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/outline";
 import { skills } from "../utils/data";
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("AI/ML Core");
-
-  const getCategoryIcon = (category) => {
-    switch (category) {
-      case "AI/ML Core":
-        return (
-          <CpuChipIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-        );
-      case "Deep Learning Frameworks":
-        return (
-          <CubeIcon className="h-5 w-5 text-purple-500 dark:text-purple-400" />
-        );
-      case "Computer Vision":
-        return <EyeIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />;
-      case "Data Science & Analytics":
-        return (
-          <ChartBarIcon className="h-5 w-5 text-green-500 dark:text-green-400" />
-        );
-      case "Research & Development":
-        return (
-          <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-        );
-      case "Game AI & RL":
-        return (
-          <RocketLaunchIcon className="h-5 w-5 text-pink-500 dark:text-pink-400" />
-        );
-      case "Cloud & DevOps":
-        return (
-          <CloudIcon className="h-5 w-5 text-cyan-500 dark:text-cyan-400" />
-        );
-      case "Tools":
-        return (
-          <WrenchScrewdriverIcon className="h-5 w-5 text-orange-500 dark:text-orange-400" />
-        );
-      case "Leadership & Adaptability":
-        return (
-          <UserGroupIcon className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
-        );
-      default:
-        return (
-          <CodeBracketIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-        );
-    }
-  };
-
-  const getSkillIcon = (skill, category) => {
-    const skillLower = skill.toLowerCase();
-
-    // Programming languages
-    if (skillLower.includes("python")) {
-      return <CommandLineIcon className="h-4 w-4 text-blue-500" />;
-    }
-
-    // Deep learning frameworks
-    if (
-      skillLower.includes("pytorch") ||
-      skillLower.includes("tensorflow") ||
-      skillLower.includes("keras")
-    ) {
-      return <CubeIcon className="h-4 w-4 text-purple-500" />;
-    }
-
-    // Computer vision
-    if (
-      skillLower.includes("opencv") ||
-      skillLower.includes("vision") ||
-      skillLower.includes("image")
-    ) {
-      return <EyeIcon className="h-4 w-4 text-blue-500" />;
-    }
-
-    // Research and academic
-    if (
-      skillLower.includes("research") ||
-      skillLower.includes("ieee") ||
-      skillLower.includes("academic")
-    ) {
-      return <AcademicCapIcon className="h-4 w-4 text-blue-500" />;
-    }
-
-    // Game AI and reinforcement learning
-    if (
-      skillLower.includes("reinforcement") ||
-      skillLower.includes("game") ||
-      skillLower.includes("evolutionary")
-    ) {
-      return <RocketLaunchIcon className="h-4 w-4 text-pink-500" />;
-    }
-
-    // Neural networks and deep learning
-    if (
-      skillLower.includes("neural") ||
-      skillLower.includes("deep") ||
-      skillLower.includes("cnn") ||
-      skillLower.includes("rnn") ||
-      skillLower.includes("transformer")
-    ) {
-      return <CpuChipIcon className="h-4 w-4 text-blue-500" />;
-    }
-
-    // Data science and analytics
-    if (
-      skillLower.includes("data") ||
-      skillLower.includes("analytics") ||
-      skillLower.includes("statistics")
-    ) {
-      return <ChartBarIcon className="h-4 w-4 text-green-500" />;
-    }
-
-    // Development and tools
-    if (
-      skillLower.includes("git") ||
-      skillLower.includes("docker") ||
-      skillLower.includes("aws") ||
-      skillLower.includes("cloud")
-    ) {
-      return <CogIcon className="h-4 w-4 text-gray-500" />;
-    }
-
-    // Default icon
-    return <CodeBracketIcon className="h-4 w-4 text-gray-400" />;
-  };
-
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -156,12 +16,15 @@ const Skills = () => {
     },
   };
 
+  const categories = Object.keys(skills);
+  const maxSkills = Math.max(...Object.values(skills).map(skillList => skillList.length));
+
   return (
     <section id="skills" className="py-20 static-glass">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
@@ -176,51 +39,41 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* Skills Categories */}
+        {/* Table-like Layout */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="overflow-x-auto"
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true }}
         >
-          {Object.keys(skills).map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-150 ${
-                activeCategory === category
-                  ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-700"
-                  : "bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50"
-              }`}
-            >
-              {getCategoryIcon(category)}
-              <span className="font-medium">{category}</span>
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Skills Grid */}
-        <motion.div
-          className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {skills[activeCategory]?.map((skill, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200"
-            >
-              <div className="flex-shrink-0">
-                {getSkillIcon(skill, activeCategory)}
-              </div>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {skill}
-              </span>
-            </div>
-          ))}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {categories.map((category) => {
+              const skillList = skills[category];
+              return (
+                <div key={category} className="flex flex-col">
+                  {/* Category Header */}
+                  <div className="mb-4 px-4 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-lg border border-blue-500/20 dark:border-blue-500/30">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white text-center">
+                      {category}
+                    </h3>
+                  </div>
+                  
+                  {/* Skills List */}
+                  <div className="space-y-2">
+                    {skillList.map((skill, index) => (
+                      <div
+                        key={index}
+                        className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 text-center bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-700"
+                      >
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </motion.div>
       </div>
     </section>

@@ -53,11 +53,13 @@ const About = () => {
               classification, bridging healthcare and AI.
             </p>
             <p>
-              Previously, I've published in IEEE and contributed to research
-              under review at Elsevier, achieving state-of-the-art performance
-              in medical image analysis. I'm currently exploring the integration
-              of deep learning with healthcare and biological imaging as part of
-              my ongoing research journey.
+              I've published my research on "Hybrid ResNet-ViT for Skin Cancer Classification" 
+              at the 4th IEEE World Conference on Applied Intelligence and Computing (AIC 2025), 
+              achieving 96.3% accuracy and Area Under Curve of 1.00 across all classes. I've also 
+              contributed to research currently under review at Elsevier, focusing on VGG16-MCA UNet 
+              for brain tumor segmentation. My work demonstrates state-of-the-art performance in 
+              medical image analysis, and I'm currently exploring the integration of deep learning 
+              with healthcare and biological imaging as part of my ongoing research journey.
             </p>
           </div>
 
@@ -66,7 +68,7 @@ const About = () => {
             <div className="flex items-center gap-3 px-6 py-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
               <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                IEEE AIC 2025 - Accepted Paper
+                Published at IEEE AIC 2025
               </span>
             </div>
             <div className="flex items-center gap-3 px-6 py-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
