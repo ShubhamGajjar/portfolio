@@ -299,9 +299,9 @@ const ResearchPapers = () => {
                   </motion.a>
                 )}
                 {paper.status === "Accepted" &&
-                  paper.doi !== "Pending - IEEE Xplore" && (
+                  (paper.ieeeUrl || (paper.doi && paper.doi !== "Pending - IEEE Xplore" && !paper.doi.includes("Pending"))) && (
                     <motion.a
-                      href={`https://doi.org/${paper.doi}`}
+                      href={paper.ieeeUrl || `https://doi.org/${paper.doi}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 glass-card text-gray-900 dark:text-white rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"

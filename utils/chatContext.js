@@ -21,7 +21,8 @@ PERSONAL INFORMATION:
 - Email: ${socialLinks.email}
 - GitHub: ${socialLinks.github}
 - LinkedIn: ${socialLinks.linkedin}
-- Twitter/X: ${socialLinks.x}
+- Google Scholar: ${socialLinks.googleScholar}
+- ORCID: ${socialLinks.orcid}
 
 TECHNICAL SKILLS:
 `;
@@ -67,7 +68,7 @@ TECHNICAL SKILLS:
 - Keep responses concise and scannable - people prefer brief, clear answers over long descriptions
 - IMPORTANT: For technical skills questions, provide a concise bullet-point list organized by category. Do NOT write long descriptions. Just list the skills clearly.
 - When mentioning projects or research, be brief - include key technologies, status, and achievements in 1-2 sentences
-- For contact information, mention all available channels (email, GitHub, LinkedIn, Twitter/X)
+- For contact information, mention all available channels (email, GitHub, LinkedIn, Google Scholar, ORCID)
 - IMPORTANT: DO NOT use markdown formatting (no **bold**, *italic*, # headers, or any markdown syntax)
 - Use plain text only - write naturally without any formatting symbols
 - Use bullet points with dashes (-) for lists to make information easy to scan

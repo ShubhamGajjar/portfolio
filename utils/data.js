@@ -205,7 +205,8 @@ export const researchPapers = [
       "ResNet",
       "Vision Transformer",
     ],
-    doi: "Pending - IEEE Xplore",
+    doi: "10.1109/AIC60235.2025.11212073",
+    ieeeUrl: "https://ieeexplore.ieee.org/document/11212073",
     pdf: "/AIC 2025 Certificate.pdf",
     certificate: "/AIC_2025_Presentation_Certificate.pdf",
     abstract:
@@ -230,7 +231,6 @@ export const researchPapers = [
       "Multi-Channel Attention",
     ],
     doi: "Pending",
-    pdf: "Will be available after publication",
     abstract:
       "Computer vision-based automated brain tumor segmentation is crucial in medical imaging for accurate diagnosis and treatment planning. This research proposes a novel hybrid deep learning approach combining VGG16 architecture with Multi-Channel Attention (MCA) and UNet for enhanced brain tumor segmentation in FLAIR MRI images. The proposed VGG16-MCA UNet architecture leverages VGG16's robust feature extraction capabilities, enhanced by multi-channel attention mechanisms that capture both local and global spatial information. The model achieved 99.59% accuracy and 99.71% specificity on LGG Brain MRI Segmentation dataset from 110 low-grade glioma patients. Ensemble learning combining multiple model configurations improved Dice coefficient by 3.7% over standard UNet. The preprocessing pipeline implements skull stripping, intensity normalization, and resizing to 256x256 pixels for FLAIR MRI scans, adhering to AI ethics for medical applications. This work contributes to the advancement of automated medical image analysis with potential applications in clinical decision support systems.",
   },
@@ -254,7 +254,6 @@ export const researchPapers = [
       "U-Net++",
     ],
     doi: "Pending",
-    pdf: "Will be available after publication",
     abstract:
       "Skin cancer detection from dermoscopic images is challenging due to hair occlusion and varying lesion characteristics. This work presents an extended ResNet50 architecture with Inverse Soft Mask Attention mechanism for robust skin cancer classification. The two-stage pipeline first uses U-Net++ for precise hair segmentation, then employs Extended ResNet50 classifier with Inverse Soft Mask Attention to process both hair-occluded and unoccluded regions. The architecture integrates dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation, enabling the model to handle complex dermatoscopic images. Training utilizes Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss. The model achieved 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images, demonstrating superior performance in handling hair-occluded lesions. This work incorporates explainable AI principles, ensuring model deployment readiness for clinical applications.",
   },
@@ -264,7 +263,8 @@ export const socialLinks = {
   email: "gajjar.shu@northeastern.edu",
   github: "https://github.com/ShubhamGajjar",
   linkedin: "https://www.linkedin.com/in/implici7/",
-  x: "https://x.com/Implici7",
+  googleScholar: "https://scholar.google.com/citations?user=MDS9t3QAAAAJ&hl=en",
+  orcid: "https://orcid.org/0009-0007-4654-2525",
 };
 
 export const experience = "7+ months";
