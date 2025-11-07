@@ -14,12 +14,12 @@ const Hero = ({ title, subtitle, resumeLink }) => {
   const skillCategories = [
     allCategories[2], // Computer Vision -> Row 1
     allCategories[1], // Deep Learning Frameworks -> Row 2
-    allCategories[0], // Tools -> Row 3
+    allCategories[0], // AI/ML Core -> Row 3
     allCategories[3], // Data Science & Analytics -> Row 4
     allCategories[4], // Research & Development -> Row 5
     allCategories[5], // Game AI & RL -> Row 6
     allCategories[6], // Cloud & DevOps -> Row 7
-    allCategories[7], // AI/ML Core -> Row 8
+    allCategories[7], // Tools -> Row 8
     allCategories[8], // Leadership & Adaptability -> Row 9
   ];
 
