@@ -18,6 +18,8 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
     { name: "Skills", href: "#skills" },
     { name: "Research", href: "#research" },
     { name: "Projects", href: "#projects" },
+    { name: "Certificates", href: "#certificates" },
+    { name: "Badges", href: "#badges" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -217,7 +219,7 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
                         {item.name}
                       </motion.button>
                     ))}
-                    
+
                     {/* Theme Toggle in Mobile Menu */}
                     <motion.button
                       onClick={() => {
