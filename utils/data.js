@@ -268,3 +268,29 @@ export const socialLinks = {
 };
 
 export const experience = "7+ months";
+
+// Work Experience Data
+export const workExperience = [
+  {
+    id: 1,
+    position: "Artificial Intelligence Engineer",
+    company: "BigCircle (UPSAAS Technologies LLP)",
+    location: "Gandhinagar, India",
+    duration: "January 2025 - August 2025",
+    description:
+      "Developed and deployed AI solutions, optimized system performance, and delivered mobile applications in an Agile environment.",
+    responsibilities: [
+      "Demonstrated problem-solving by architecting a multi-agent Application Programming Interface system using distributed computing, reducing report generation from 20 to 5 minutes for 10,000+ queries",
+      "Exhibited creativity by engineering pagination and authentication systems for dashboards, accelerating page load times by 80%, and ensuring model deployment stability for 500+ concurrent sessions",
+      "Applied continuous learning to deliver iOS applications using React Native, increasing mobile engagement by 45% within the first quarter",
+      "Collaborated with a 5-member team in Agile sprints; performed code reviews to improve quality metrics by 30%",
+    ],
+    technologies: [
+      "React Native",
+      "API Development",
+      "Agile Methodologies",
+      "System Architecture",
+      "Performance Optimization",
+    ],
+  },
+];

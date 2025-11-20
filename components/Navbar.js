@@ -16,6 +16,7 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#work-experience" },
     { name: "Research", href: "#research" },
     { name: "Projects", href: "#projects" },
     { name: "Certificates", href: "#certificates" },

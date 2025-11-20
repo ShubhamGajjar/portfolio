@@ -10,6 +10,7 @@ import ResearchPapers from "../components/ResearchPapers";
 import Projects from "../components/Projects";
 import Certificates from "../components/Certificates";
 import Badges from "../components/Badges";
+import WorkExperience from "../components/WorkExperience";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
@@ -127,6 +128,8 @@ export default function Home({ theme, toggleTheme, chatToggleRef }) {
           <About />
 
           <Skills />
+
+          <WorkExperience />
 
           <ResearchPapers />
 
