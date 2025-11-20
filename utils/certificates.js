@@ -56,6 +56,13 @@ export const badges = [
     file: "/badges/Foundations of Software Engineering and Data Management Learning.pdf",
     badge: "https://api.badgr.io/public/badges/QrJM4yNFQdWdOP0jMuuVqw/image",
   },
+  {
+    id: "graduate-leadership-institute",
+    title: "Graduate Leadership Institute",
+    issuer: "Northeastern University",
+    file: "/badges/GLI Certificate - Shubham.pdf",
+    badge: "https://api.badgr.io/public/badges/cF9bMLzRTRirciup-ysJcA/image",
+  },
 ];
 
 // Default export for backward compatibility
