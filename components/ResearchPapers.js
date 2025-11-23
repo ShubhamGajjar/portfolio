@@ -22,7 +22,7 @@ const ResearchPapers = () => {
   const [expandedPaper, setExpandedPaper] = useState(null);
 
   const getStatusIcon = (status) => {
-    if (status === "Accepted" || status === "Completed") {
+    if (status === "Published" || status === "Completed") {
       return <CheckCircleIcon className="h-5 w-5 text-green-500" />;
     }
     if (status === "Under Review" || status === "Submitted") {
@@ -74,8 +74,8 @@ const ResearchPapers = () => {
       return <PuzzlePieceIcon className="h-8 w-8 text-purple-500" />;
     }
 
-    // Accepted papers
-    if (paper.status === "Accepted") {
+    // Published papers
+    if (paper.status === "Published") {
       return <AcademicCapIcon className="h-8 w-8 text-blue-500" />;
     }
 
@@ -89,7 +89,7 @@ const ResearchPapers = () => {
   };
 
   const getStatusColor = (status) => {
-    if (status === "Accepted" || status === "Completed") {
+    if (status === "Published" || status === "Completed") {
       return "bg-green-500/10 text-green-600 border-green-500/20";
     }
     if (status === "Under Review" || status === "Submitted") {
@@ -298,7 +298,7 @@ const ResearchPapers = () => {
                     View Paper
                   </motion.a>
                 )}
-                {paper.status === "Accepted" &&
+                {paper.status === "Published" &&
                   (paper.ieeeUrl ||
                     (paper.doi &&
                       paper.doi !== "Pending - IEEE Xplore" &&
