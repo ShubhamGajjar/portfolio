@@ -4,7 +4,7 @@ export const projects = [
     id: 1,
     title: "Skin Cancer Classification (Research)",
     description:
-      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Accepted and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
+      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Published and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
     technologies: [
       "Python",
       "TensorFlow",
@@ -21,8 +21,8 @@ export const projects = [
     github: null,
     live: null,
     image: "/skin-cancer.jpg",
-    impact: "Medical AI Research - Accepted at IEEE AIC 2025",
-    status: "Accepted",
+    impact: "Medical AI Research - Published at IEEE AIC 2025",
+    status: "Published",
   },
   {
     id: 2,
@@ -117,6 +117,28 @@ export const projects = [
     impact: "Social Media Analytics",
     status: "Completed",
   },
+  {
+    id: 6,
+    title: "Interactive Image Mosaic Generator",
+    description:
+      "Developed an interactive web application for generating artistic image mosaics using vectorized NumPy operations. Built with Gradio for an intuitive user interface, enabling users to create stunning mosaic art from input images through efficient computational image processing techniques.",
+    technologies: [
+      "Python",
+      "NumPy",
+      "Gradio",
+      "Image Processing",
+      "Computer Vision",
+      "Vectorized Operations",
+    ],
+    category: "AI/ML Core",
+    github:
+      "https://github.com/ShubhamGajjar/Interactive-Image-Mosaic-Generator.git",
+    live: null,
+    demoUrl: "https://implici7-image-mosaic-generator.hf.space",
+    image: "/mosaic.jpg",
+    impact: "Creative AI & Image Processing",
+    status: "Completed",
+  },
 ];
 
 export const skills = {
@@ -193,10 +215,10 @@ export const researchPapers = [
       "Shubham Gajjar, Harshal Joshi, Om Rathod, Vishal Barot, Deep Joshi",
     conference:
       "4th IEEE World Conference on Applied Intelligence and Computing (AIC 2025)",
-    status: "Accepted",
+    status: "Published",
     year: "2025",
     description:
-      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Accepted and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
+      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Published and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
     keywords: [
       "Computer Vision",
       "Deep Learning",

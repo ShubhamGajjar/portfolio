@@ -1,5 +1,5 @@
 // components/Projects.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CpuChipIcon,
   ArrowTopRightOnSquareIcon,
@@ -13,19 +13,49 @@ import {
   PuzzlePieceIcon,
   CommandLineIcon,
   CogIcon,
+  PlayIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { projects } from "../utils/data";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedDemo, setSelectedDemo] = useState(null);
 
-  const categories = ["All", "Research", "AI/ML Core", "Data Science"];
+  const categories = ["All", "AI/ML Core", "Data Science"];
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
+  const closeModal = () => {
+    setSelectedDemo(null);
+  };
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    if (!selectedDemo) {
+      return;
+    }
+
+    const handleEsc = (event) => {
+      if (event.keyCode === 27 || event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        closeModal();
+      }
+    };
+
+    // Don't prevent body scroll - allow scrolling even when modal is open
+    window.addEventListener("keydown", handleEsc, true);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc, true);
+    };
+  }, [selectedDemo]);
+
+  const filteredProjects = projects
+    .filter((project) => project.category !== "Research")
+    .filter((project) =>
+      activeCategory === "All" ? true : project.category === activeCategory
+    );
 
   const getCategoryIcon = (category) => {
     switch (category) {
@@ -146,7 +176,10 @@ const Projects = () => {
       status?.includes("Completed")
     ) {
       return "bg-green-500/10 text-green-600 border-green-500/20";
-    } else if (status?.includes("Under Review") || status?.includes("Submitted")) {
+    } else if (
+      status?.includes("Under Review") ||
+      status?.includes("Submitted")
+    ) {
       return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
     } else if (status?.includes("Active")) {
       return "bg-blue-500/10 text-blue-600 border-blue-500/20";
@@ -188,7 +221,7 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
+            className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text leading-relaxed pb-1"
             variants={itemVariants}
           >
             Projects
@@ -254,7 +287,7 @@ const Projects = () => {
               </div>
 
               {/* Project Title */}
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-normal">
                 {project.title}
               </h3>
 
@@ -288,7 +321,7 @@ const Projects = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap">
                 {project.github && (
                   <a
                     href={project.github}
@@ -299,6 +332,15 @@ const Projects = () => {
                     <CodeBracketIcon className="h-4 w-4 text-white dark:text-gray-900" />
                     View Code
                   </a>
+                )}
+                {project.demoUrl && project.github && (
+                  <button
+                    onClick={() => setSelectedDemo(project)}
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
+                  >
+                    <PlayIcon className="h-4 w-4" />
+                    Run Demo
+                  </button>
                 )}
                 {project.live && (
                   <a
@@ -316,6 +358,166 @@ const Projects = () => {
           ))}
         </motion.div>
       </div>
+
+      {/* Demo Modal - Redesigned */}
+      <AnimatePresence>
+        {selectedDemo && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeModal}
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-50"
+            />
+
+            {/* Modal - Slides up from bottom */}
+            <motion.div
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+              className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 rounded-t-3xl shadow-2xl flex flex-col"
+              style={{ height: "90vh", maxHeight: "90vh" }}
+            >
+              {/* Header with close button */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-t-3xl">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg">
+                    <PlayIcon className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                      {selectedDemo.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Running from GitHub
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={selectedDemo.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    View Code
+                  </a>
+                  <button
+                    onClick={closeModal}
+                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors group"
+                    aria-label="Close (ESC)"
+                    title="Close (ESC)"
+                  >
+                    <XMarkIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Content Area - Scrollable */}
+              <div className="flex-1 overflow-y-auto relative">
+                <div className="p-6 space-y-4">
+                  {/* Live Demo Option if available */}
+                  {selectedDemo.demoUrl && (
+                    <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border-2 border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 bg-purple-600 rounded-lg">
+                          <PlayIcon className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-purple-900 dark:text-purple-100">
+                            Live Demo Available
+                          </h4>
+                          <p className="text-sm text-purple-700 dark:text-purple-300">
+                            Try the application right now
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href={selectedDemo.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                        Open Live Demo
+                      </a>
+                    </div>
+                  )}
+
+                  {/* Instructions */}
+                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                      Run Locally
+                    </h4>
+                    <ol className="list-decimal list-inside space-y-2 text-sm text-blue-800 dark:text-blue-200">
+                      <li>
+                        Clone the repository:{" "}
+                        <code className="bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded text-xs">
+                          git clone {selectedDemo.github}
+                        </code>
+                      </li>
+                      <li>
+                        Install dependencies:{" "}
+                        <code className="bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded text-xs">
+                          pip install -r requirements.txt
+                        </code>
+                      </li>
+                      <li>
+                        Run the application:{" "}
+                        <code className="bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded text-xs">
+                          python app.py
+                        </code>{" "}
+                        or{" "}
+                        <code className="bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded text-xs">
+                          gradio app.py
+                        </code>
+                      </li>
+                      <li>
+                        Open the local URL shown in the terminal (usually{" "}
+                        <code className="bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded text-xs">
+                          http://localhost:7860
+                        </code>
+                        )
+                      </li>
+                    </ol>
+                  </div>
+
+                  {/* Direct GitHub Link */}
+                  {selectedDemo.github && (
+                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <a
+                        href={selectedDemo.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <CodeBracketIcon className="h-4 w-4" />
+                        View Source Code on GitHub
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Footer with instructions */}
+              <div className="p-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-600 dark:text-gray-400 text-center">
+                Press{" "}
+                <kbd className="px-2 py-1 bg-white dark:bg-gray-700 rounded border border-gray-300 dark:border-gray-600">
+                  ESC
+                </kbd>{" "}
+                to close • Click outside to close
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
