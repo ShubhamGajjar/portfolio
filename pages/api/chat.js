@@ -8,31 +8,31 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // Strip markdown formatting from text
 function stripMarkdown(text) {
   if (!text) return text;
-  
+
   // First, normalize bullet points to use • so we can distinguish them
-  let cleaned = text.replace(/^(\s*)[-*]\s+/gm, '$1• ');
-  
+  let cleaned = text.replace(/^(\s*)[-*]\s+/gm, "$1• ");
+
   // Remove **bold**
-  cleaned = cleaned.replace(/\*\*([^*]+)\*\*/g, '$1');
-  
+  cleaned = cleaned.replace(/\*\*([^*]+)\*\*/g, "$1");
+
   // Remove *italic* but NOT bullet points (which now use •)
-  cleaned = cleaned.replace(/\*([^*\n]+)\*/g, '$1');
-  
+  cleaned = cleaned.replace(/\*([^*\n]+)\*/g, "$1");
+
   // Remove headers
-  cleaned = cleaned.replace(/#{1,6}\s+/g, '');
-  
+  cleaned = cleaned.replace(/#{1,6}\s+/g, "");
+
   // Remove inline code
-  cleaned = cleaned.replace(/`([^`]+)`/g, '$1');
-  
+  cleaned = cleaned.replace(/`([^`]+)`/g, "$1");
+
   // Remove code blocks
-  cleaned = cleaned.replace(/```[\s\S]*?```/g, '');
-  
+  cleaned = cleaned.replace(/```[\s\S]*?```/g, "");
+
   // Remove links but keep text
-  cleaned = cleaned.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
-  
+  cleaned = cleaned.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+
   // Remove strikethrough
-  cleaned = cleaned.replace(/~~(.*?)~~/g, '$1');
-  
+  cleaned = cleaned.replace(/~~(.*?)~~/g, "$1");
+
   return cleaned.trim();
 }
 
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
 
     // Build conversation history for context
     let conversationContext = context;
-    
+
     // Add recent conversation history (last 5 messages for context)
     if (conversationHistory.length > 0) {
       const recentHistory = conversationHistory.slice(-5);
@@ -93,15 +93,22 @@ export default async function handler(req, res) {
     }
 
     // Add reminder about no markdown
-    conversationContext += "\n\nREMINDER: Respond in plain text only. Do not use markdown formatting like **bold** or *italic*. Write naturally without formatting symbols.";
+    conversationContext +=
+      "\n\nREMINDER: Respond in plain text only. Do not use markdown formatting like **bold** or *italic*. Write naturally without formatting symbols.";
 
     // Try different models in order of preference
     // Updated to use available models from API
     const modelNames = [
-      "gemini-2.5-flash-preview-05-20", // Fast and efficient
-      "gemini-2.5-pro-preview-03-25", // More capable
-      "gemini-1.5-flash", // Fallback
-      "gemini-1.5-pro", // Fallback
+      // --- TIER 1: The Frontier (Newest & Smartest) ---
+      "gemini-3-pro-preview", // Newly released (Nov 2025). Highest reasoning capability.
+
+      // --- TIER 2: Stable Workhorses (Best for Production) ---
+      "gemini-2.5-pro", // Stable version. High capability, reliable.
+      "gemini-2.5-flash", // Stable version. Fast, cheap, high-throughput.
+
+      // --- TIER 3: Efficient/Fallback ---
+      "gemini-2.5-flash-lite", // Extremely fast and cheap. Replaces Gemini 1.5 Flash.
+      "gemini-2.0-flash", // Reliable previous gen fallback.
     ];
     let text = null;
     let lastError = null;
