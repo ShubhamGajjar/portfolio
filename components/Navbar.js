@@ -24,36 +24,6 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
     { name: "Contact", href: "#contact" },
   ];
 
-  const lenisScrollTo = (target, options = {}) => {
-    if (typeof window === "undefined") return;
-
-    const lenis = window.__lenis;
-    const defaultOptions = {
-      offset: -80, // account for sticky navbar
-      duration: 1.5, // Shorter duration for faster scroll-to
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smoother easing
-      ...options,
-    };
-
-    if (lenis && typeof lenis.scrollTo === "function") {
-      lenis.scrollTo(target, defaultOptions);
-    } else {
-      // Fallback to native smooth scroll
-      if (typeof target === "number") {
-        window.scrollTo({
-          top: target + (defaultOptions.offset || 0),
-          behavior: "smooth",
-        });
-      } else if (target && target.scrollIntoView) {
-        const elementTop = target.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: elementTop + (defaultOptions.offset || 0),
-          behavior: "smooth",
-        });
-      }
-    }
-  };
-
   const scrollToSection = (href) => {
     // Close mobile menu first
     setIsOpen(false);
@@ -62,11 +32,21 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
     setTimeout(() => {
       if (href === "#hero") {
         // Scroll to top of page for home button
-        lenisScrollTo(0);
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       } else {
         const element = document.querySelector(href);
         if (element) {
-          lenisScrollTo(element);
+          const navOffset = 80; // approximate navbar height
+          const elementTop =
+            element.getBoundingClientRect().top + window.pageYOffset;
+
+          window.scrollTo({
+            top: elementTop - navOffset,
+            behavior: "smooth",
+          });
         }
       }
     }, 50);
