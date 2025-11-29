@@ -100,7 +100,8 @@ export default async function handler(req, res) {
     // Updated to use available models from API
     const modelNames = [
       // --- TIER 1: The Frontier (Newest & Smartest) ---
-      "gemini-3-pro-preview", // Newly released (Nov 2025). Highest reasoning capability.
+      "gemini-flash-latest",
+      "gemini-3-pro-preview", // Highest reasoning capability.
 
       // --- TIER 2: Stable Workhorses (Best for Production) ---
       "gemini-2.5-pro", // Stable version. High capability, reliable.
