@@ -986,16 +986,16 @@ const Chatbot = ({ onToggleRef }) => {
 
   return (
     <>
-      {/* Floating Chat Button - Hidden on mobile, shown on desktop */}
+      {/* Floating Chat Button - Hidden on mobile, shown on desktop (icon only, rectangular) */}
       <motion.button
         onClick={handleToggle}
-        className="hidden md:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full liquid-glass text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl items-center justify-center transition-all duration-300"
+        className="hidden md:inline-flex fixed bottom-6 right-6 z-50 items-center justify-center px-4 py-4 rounded-2xl liquid-glass text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl transition-all duration-300"
         style={{
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
         }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.96 }}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{
@@ -1003,7 +1003,7 @@ const Chatbot = ({ onToggleRef }) => {
           stiffness: 260,
           damping: 20,
         }}
-        aria-label="Open chat"
+        aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -1013,18 +1013,20 @@ const Chatbot = ({ onToggleRef }) => {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
+              className="flex items-center justify-center"
             >
-              <XMarkIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <XMarkIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             </motion.div>
           ) : (
             <motion.div
               key="chat"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
               transition={{ duration: 0.2 }}
+              className="flex items-center justify-center"
             >
-              <ChatBubbleLeftRightIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <ChatBubbleLeftRightIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             </motion.div>
           )}
         </AnimatePresence>

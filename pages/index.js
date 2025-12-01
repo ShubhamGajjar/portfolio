@@ -6,11 +6,10 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Skills from "../components/Skills";
-import ResearchPapers from "../components/ResearchPapers";
 import Projects from "../components/Projects";
 import Certificates from "../components/Certificates";
 import Badges from "../components/Badges";
-import WorkExperience from "../components/WorkExperience";
+import Journey from "../components/Journey";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
@@ -129,9 +128,8 @@ export default function Home({ theme, toggleTheme, chatToggleRef }) {
 
           <Skills />
 
-          <WorkExperience />
-
-          <ResearchPapers />
+          {/* Unified Journey timeline (work + research) */}
+          <Journey />
 
           <Projects />
 

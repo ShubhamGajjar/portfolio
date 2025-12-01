@@ -47,19 +47,22 @@ const About = () => {
           <div className="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
             <p>
               I'm an AI researcher and graduate student at Northeastern
-              University, passionate about advancing deep learning applications
-              in biomedical imaging and computer vision. My work focuses on
-              hybrid neural architectures for tumor segmentation and skin lesion
+              University, Interested in advancing deep learning applications in
+              biomedical imaging and computer vision. My work focuses on hybrid
+              neural architectures for tumor segmentation and skin lesion
               classification, bridging healthcare and AI.
             </p>
             <p>
-              I've published my research on "Hybrid ResNet-ViT for Skin Cancer Classification" 
-              at the 4th IEEE World Conference on Applied Intelligence and Computing (AIC 2025), 
-              achieving 96.3% accuracy and Area Under Curve of 1.00 across all classes. I've also 
-              contributed to research currently under review at Elsevier, focusing on VGG16-MCA UNet 
-              for brain tumor segmentation. My work demonstrates state-of-the-art performance in 
-              medical image analysis, and I'm currently exploring the integration of deep learning 
-              with healthcare and biological imaging as part of my ongoing research journey.
+              I've published my research on "Hybrid ResNet-ViT for Skin Cancer
+              Classification" at the 4th IEEE World Conference on Applied
+              Intelligence and Computing (AIC 2025), achieving 96.3% accuracy
+              and Area Under Curve of 1.00 across all classes. I've also
+              contributed to research currently under review at Elsevier,
+              focusing on VGG16-MCA UNet for brain tumor segmentation. My work
+              demonstrates state-of-the-art performance in medical image
+              analysis, and I'm currently exploring the integration of deep
+              learning with healthcare and biological imaging as part of my
+              ongoing research journey.
             </p>
           </div>
 
