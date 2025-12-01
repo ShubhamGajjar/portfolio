@@ -8,19 +8,19 @@ const Hero = ({ title, subtitle, resumeLink }) => {
   // Get all skill categories and their skills
   const allCategories = Object.entries(skills);
 
-  // Reorder: Replace 1st with 3rd, and 3rd with 8th
+  // Custom order for scrolling text rows
   // Original order: 0=AI/ML Core, 1=Deep Learning Frameworks, 2=Computer Vision, 3=Data Science, 4=Research, 5=Game AI, 6=Cloud, 7=Tools, 8=Leadership
-  // New order: 0=Computer Vision (was 2), 1=Deep Learning Frameworks, 2=Tools (was 7), 3=Data Science, 4=Research, 5=Game AI, 6=Cloud, 7=AI/ML Core (was 0), 8=Leadership
+  // New order: 0=blank row, 1=Deep Learning Frameworks, 2=AI/ML Core, 3=Data Science, 4=Research, 5=Game AI, 6=Tools, 7=Leadership
   const skillCategories = [
-    allCategories[2], // Computer Vision -> Row 1
+    ["", []], // Blank row -> Row 1
     allCategories[1], // Deep Learning Frameworks -> Row 2
     allCategories[0], // AI/ML Core -> Row 3
     allCategories[3], // Data Science & Analytics -> Row 4
     allCategories[4], // Research & Development -> Row 5
     allCategories[5], // Game AI & RL -> Row 6
-    allCategories[6], // Cloud & DevOps -> Row 7
-    allCategories[7], // Tools -> Row 8
-    allCategories[8], // Leadership & Adaptability -> Row 9
+    allCategories[2], // Computer Vision -> Row 1
+    allCategories[7], // Tools -> Row 7
+    allCategories[8], // Leadership & Adaptability -> Row 8
   ];
 
   // Different speeds for each row (in seconds - higher = slower)
