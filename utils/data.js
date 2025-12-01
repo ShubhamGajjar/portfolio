@@ -281,6 +281,165 @@ export const researchPapers = [
   },
 ];
 
+// Unified Journey Timeline (Work + Research + Projects)
+export const journey = [
+  // Chronological order (oldest to newest) for Research + Work
+  {
+    id: "journey-3",
+    type: "Research",
+    title: "VGG16‑MCA UNet for Brain Tumor Segmentation",
+    organization: "Elsevier (Under Review)",
+    location: "BraTS 2019 Dataset for Brain Tumor Segmentation",
+    period: "December 2023 – April 2025",
+    status: "Under Review",
+    year: "2025",
+    summary:
+      "Proposed VGG16‑MCA UNet achieving 99.59% accuracy and 99.71% specificity for brain tumor segmentation in FLAIR MRI images.",
+    highlights: [
+      "Integrated multi‑channel attention with VGG16 encoder and UNet decoder for improved tumor delineation.",
+      "Designed full preprocessing pipeline with skull stripping, intensity normalization, and 256×256 resizing.",
+    ],
+    tags: ["Research", "Medical Imaging", "UNet"],
+    conference: "Elsevier",
+    doi: "Pending",
+    abstract:
+      "Computer vision-based automated brain tumor segmentation is crucial in medical imaging for accurate diagnosis and treatment planning. This research proposes a novel hybrid deep learning approach combining VGG16 architecture with Multi-Channel Attention (MCA) and UNet for enhanced brain tumor segmentation in FLAIR MRI images. The proposed VGG16-MCA UNet architecture leverages VGG16's robust feature extraction capabilities, enhanced by multi-channel attention mechanisms that capture both local and global spatial information. The model achieved 99.59% accuracy and 99.71% specificity on LGG Brain MRI Segmentation dataset from 110 low-grade glioma patients. Ensemble learning combining multiple model configurations improved Dice coefficient by 3.7% over standard UNet. The preprocessing pipeline implements skull stripping, intensity normalization, and resizing to 256x256 pixels for FLAIR MRI scans, adhering to AI ethics for medical applications. This work contributes to the advancement of automated medical image analysis with potential applications in clinical decision support systems.",
+  },
+  {
+    id: "journey-2",
+    type: "Research",
+    title: "Hybrid ResNet‑ViT for Skin Cancer Classification",
+    organization: "Published at IEEE AIC 2025",
+    location: "IEEE World Conference on Applied Intelligence and Computing",
+    period: "September 2024 – July 2025",
+    status: "Published",
+    year: "2025",
+    summary:
+      "Published hybrid ResNet50–Vision Transformer model achieving 96.3% accuracy and perfect AUC on HAM10000 for seven-class skin lesion classification.",
+    highlights: [
+      "Combined frozen ResNet50 feature extractor with four‑head Vision Transformer blocks for balanced local and global feature learning.",
+      "Achieved macro F1 of 0.961 and AUC of 1.00 across all classes, presented to 100+ attendees.",
+    ],
+    tags: ["Research", "Medical AI", "Computer Vision"],
+    conference:
+      "4th IEEE World Conference on Applied Intelligence and Computing (AIC 2025)",
+    doi: "10.1109/AIC60235.2025.11212073",
+    abstract:
+      "Correct identification of different skin lesions, such as melanoma, from dermatoscopic images is a major challenge for automated systems, thus causing delay in early diagnosis. Most of the current models are unable to achieve an optimal balance between local feature extraction and global context understanding. Our work overcomes this challenge by proposing a hybrid ResNet50-ViT model. This architecture combines frozen ResNet50 feature extractor with four-head Vision Transformer blocks, allowing the categorization of seven lesion classes from the HAM10000 dataset by fusing ViT's global context awareness with ResNet's strong local feature extraction. The designed model demonstrated 96.3% accuracy, macro F1 of 0.961, and Area Under Curve of 1.00 across all classes, which is a major breakthrough in computer-aided dermatological diagnosis.",
+    links: {
+      paper: "https://ieeexplore.ieee.org/document/11212073",
+    },
+  },
+  {
+    id: "journey-4",
+    type: "Research",
+    title: "Extended ResNet50 with Inverse Soft Mask Attention",
+    organization: "Journal Submission",
+    location: "HAM10000 Dataset for Dermatoscopic Images of Skin Cancer",
+    period: "January 2025 – May 2025",
+    status: "Submitted",
+    year: "2025",
+    summary:
+      "Developed a two‑stage pipeline with U‑Net++ hair segmentation and Extended ResNet50 classifier, achieving 97.89% accuracy on HAM10000.",
+    highlights: [
+      "Introduced Inverse Soft Mask Attention to handle hair‑occluded and unoccluded regions jointly.",
+      "Used dense residual blocks and Squeeze‑and‑Excitation modules with learnable feature aggregation.",
+    ],
+    tags: ["Research", "Skin Cancer", "Attention Mechanisms"],
+    conference: "Journal Submission",
+    doi: "Pending",
+    abstract:
+      "Skin cancer detection from dermoscopic images is challenging due to hair occlusion and varying lesion characteristics. This work presents an extended ResNet50 architecture with Inverse Soft Mask Attention mechanism for robust skin cancer classification. The two-stage pipeline first uses U-Net++ for precise hair segmentation, then employs Extended ResNet50 classifier with Inverse Soft Mask Attention to process both hair-occluded and unoccluded regions. The architecture integrates dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation, enabling the model to handle complex dermatoscopic images. Training utilizes Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss. The model achieved 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images, demonstrating superior performance in handling hair-occluded lesions. This work incorporates explainable AI principles, ensuring model deployment readiness for clinical applications.",
+  },
+  {
+    id: "journey-1",
+    type: "Work",
+    title: "Artificial Intelligence Engineer",
+    organization: "BigCircle (UPSAAS Technologies LLP)",
+    location: "Gujarat, India",
+    period: "Jan 2025 – Aug 2025",
+    summary:
+      "Developed and deployed AI solutions, optimized dashboards, and delivered mobile apps in an Agile environment.",
+    highlights: [],
+    responsibilities: [
+      "Demonstrated problem-solving by architecting a multi-agent Application Programming Interface system using distributed computing, reducing report generation from 20 to 5 minutes for 10,000+ queries.",
+      "Exhibited creativity by engineering pagination and authentication systems for dashboards, accelerating page load times by 80%, and ensuring model deployment stability for 500+ concurrent sessions.",
+      "Applied continuous learning to deliver iOS applications using React Native, increasing mobile engagement by 45% within the first quarter.",
+      "Collaborated with a 5-member team in Agile sprints; performed code reviews to improve quality metrics by 30%.",
+    ],
+    technologies: [
+      "React Native",
+      "API Development",
+      "Agile Methodologies",
+      "System Architecture",
+      "Performance Optimization",
+    ],
+    tags: [
+      "Work Experience",
+      "AI Engineering",
+      "React Native",
+      "Distributed Systems",
+    ],
+  },
+  {
+    id: "journey-5",
+    type: "Project",
+    title: "TrackMania Reinforcement Learning Agent",
+    organization: "Personal Project",
+    location: "Game AI & RL",
+    period: "2024",
+    summary:
+      "Built an advanced reinforcement learning agent using Implicit Quantile Networks (IQN) to learn competitive racing strategies in TrackMania.",
+    highlights: [
+      "Implemented continuous control with IQN to handle stochastic rewards and varying track dynamics.",
+      "Demonstrated robust decision‑making and competitive lap times under noisy observations.",
+    ],
+    tags: ["Project", "Reinforcement Learning", "PyTorch"],
+    links: {
+      github:
+        "https://github.com/ShubhamGajjar/TrackMania-ReinforcementLearning",
+    },
+  },
+  {
+    id: "journey-6",
+    type: "Project",
+    title: "Interactive Image Mosaic Generator",
+    organization: "Personal Project",
+    location: "Creative AI & Image Processing",
+    period: "2024",
+    summary:
+      "Developed a Gradio-based web app to generate artistic image mosaics using vectorized NumPy operations.",
+    highlights: [
+      "Leveraged efficient vectorized pipelines to create high‑resolution mosaics in real time.",
+      "Designed intuitive UI allowing users to control mosaic density and style.",
+    ],
+    tags: ["Project", "Computer Vision", "NumPy", "Gradio"],
+    links: {
+      github:
+        "https://github.com/ShubhamGajjar/Interactive-Image-Mosaic-Generator.git",
+      demo: "https://implici7-image-mosaic-generator.hf.space",
+    },
+  },
+  {
+    id: "journey-7",
+    type: "Project",
+    title: "Twitter Sentiment Analysis",
+    organization: "Personal Project",
+    location: "Social Media Analytics",
+    period: "2023",
+    summary:
+      "Built an end‑to‑end sentiment analysis pipeline on Twitter data using classical ML and NLP tooling.",
+    highlights: [
+      "Collected and cleaned tweets via Twitter API for multi‑topic sentiment analysis.",
+      "Implemented feature extraction and ML classifiers using NLTK, TextBlob, and scikit‑learn.",
+    ],
+    tags: ["Project", "NLP", "Data Science"],
+    links: {
+      github: "https://github.com/ShubhamGajjar/Twitter-Sentiment-Analysis.git",
+    },
+  },
+];
+
 export const socialLinks = {
   email: "gajjar.shu@northeastern.edu",
   github: "https://github.com/ShubhamGajjar",
