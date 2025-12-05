@@ -119,7 +119,7 @@ const ContactForm = () => {
         <input
           name="email"
           type="email"
-          placeholder="gajjar.shu@northeastern.edu"
+          placeholder="your.email@example.com"
           required
           className="input"
           disabled={isSubmitting}
@@ -132,7 +132,7 @@ const ContactForm = () => {
         <input
           name="subject"
           type="text"
-          placeholder="Project Collaboration Inquiry"
+          placeholder="Collaboration Inquiry"
           required
           className="input"
           disabled={isSubmitting}
