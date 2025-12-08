@@ -271,7 +271,13 @@ const Contact = () => {
           </motion.p>
         </motion.div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
+        <motion.div
+          className="grid gap-12 lg:grid-cols-2"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {/* Contact Information */}
           <motion.div className="space-y-6" variants={itemVariants}>
             <div className="space-y-4">
@@ -488,7 +494,7 @@ const Contact = () => {
               <ContactForm />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
