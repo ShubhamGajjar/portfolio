@@ -5,6 +5,11 @@ import {
   researchPapers,
   socialLinks,
   experience,
+  workExperience,
+  journey,
+  education,
+  relevantCoursework,
+  certifications,
 } from "./data";
 
 /**
@@ -18,7 +23,10 @@ PERSONAL INFORMATION:
 - Name: Shubham Gajjar
 - Role: AI Researcher & M.S. Artificial Intelligence Student at Northeastern University
 - Experience: ${experience}
+- Location: ${socialLinks.location}
+- Phone: ${socialLinks.phone}
 - Email: ${socialLinks.email}
+- Website: ${socialLinks.website}
 - GitHub: ${socialLinks.github}
 - LinkedIn: ${socialLinks.linkedin}
 - Google Scholar: ${socialLinks.googleScholar}
@@ -34,6 +42,28 @@ TECHNICAL SKILLS:
       context += `  - ${skill}\n`;
     });
   }
+
+  context += `\n\nEDUCATION (${education.length} degrees):\n`;
+  education.forEach((edu, index) => {
+    context += `\n${index + 1}. ${edu.degree}\n`;
+    context += `   Institution: ${edu.institution}\n`;
+    context += `   Location: ${edu.location}\n`;
+    context += `   Period: ${edu.period}\n`;
+    context += `   GPA: ${edu.gpa}\n`;
+    context += `   Status: ${edu.status}\n`;
+  });
+
+  context += `\n\nRELEVANT COURSEWORK:\n`;
+  relevantCoursework.forEach((course) => {
+    context += `  - ${course}\n`;
+  });
+
+  context += `\n\nCERTIFICATIONS (${certifications.length} total):\n`;
+  certifications.forEach((cert, index) => {
+    context += `\n${index + 1}. ${cert.name}\n`;
+    context += `   Issuer: ${cert.issuer}\n`;
+    context += `   Year: ${cert.year}\n`;
+  });
 
   context += `\n\nPROJECTS (${projects.length} total):\n`;
   projects.forEach((project, index) => {
@@ -60,6 +90,50 @@ TECHNICAL SKILLS:
     }
   });
 
+  context += `\n\nWORK EXPERIENCE (${workExperience.length} total):\n`;
+  workExperience.forEach((work, index) => {
+    context += `\n${index + 1}. ${work.position} at ${work.company}\n`;
+    context += `   Location: ${work.location}\n`;
+    context += `   Duration: ${work.duration}\n`;
+    context += `   Description: ${work.description}\n`;
+    if (work.responsibilities && work.responsibilities.length > 0) {
+      context += `   Key Responsibilities:\n`;
+      work.responsibilities.forEach((resp) => {
+        context += `     - ${resp}\n`;
+      });
+    }
+    if (work.technologies && work.technologies.length > 0) {
+      context += `   Technologies: ${work.technologies.join(", ")}\n`;
+    }
+  });
+
+  context += `\n\nJOURNEY TIMELINE (Work + Research + Projects):\n`;
+  journey.forEach((item, index) => {
+    context += `\n${index + 1}. ${item.title} (${item.type})\n`;
+    context += `   Organization: ${item.organization}\n`;
+    context += `   Location: ${item.location}\n`;
+    context += `   Period: ${item.period}\n`;
+    context += `   Summary: ${item.summary}\n`;
+    if (item.highlights && item.highlights.length > 0) {
+      context += `   Highlights:\n`;
+      item.highlights.forEach((highlight) => {
+        context += `     - ${highlight}\n`;
+      });
+    }
+    if (item.responsibilities && item.responsibilities.length > 0) {
+      context += `   Responsibilities:\n`;
+      item.responsibilities.forEach((resp) => {
+        context += `     - ${resp}\n`;
+      });
+    }
+    if (item.technologies && item.technologies.length > 0) {
+      context += `   Technologies: ${item.technologies.join(", ")}\n`;
+    }
+    if (item.status) {
+      context += `   Status: ${item.status}\n`;
+    }
+  });
+
   context += `\n\nINSTRUCTIONS:
 - Answer questions about Shubham's resume, CV, skills, projects, research, and portfolio
 - Be conversational, friendly, and helpful
@@ -76,10 +150,14 @@ TECHNICAL SKILLS:
 
 You can answer questions about:
 - Resume and CV content
+- Education background and academic achievements
 - Technical skills and expertise (provide concise lists, not descriptions)
+- Work experience and professional background
+- Certifications
 - Projects (brief summaries with key technologies and status)
 - Research papers and publications (brief summaries with status)
-- Contact information
+- Journey timeline (work, research, and projects)
+- Contact information (email, phone, location, website, social media)
 - Overall background and experience`;
 
   return context;

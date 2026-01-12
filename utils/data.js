@@ -151,10 +151,18 @@ export const skills = {
     "Reinforcement Learning",
     "Evolutionary Algorithms",
   ],
+  "Programming Languages": [
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "Next.js",
+    "React",
+  ],
   "Deep Learning Frameworks": [
     "TensorFlow",
     "PyTorch",
     "Keras",
+    "CUDA",
     "Transformers",
     "CNN/ResNet",
     "RNN/LSTM",
@@ -165,6 +173,8 @@ export const skills = {
   ],
   "Computer Vision": [
     "OpenCV",
+    "Matplotlib",
+    "Albumentations",
     "Medical Imaging",
     "Image Segmentation",
     "Object Detection",
@@ -180,6 +190,14 @@ export const skills = {
     "Matplotlib",
     "Seaborn",
     "Statistical Analysis",
+    "Jupyter",
+  ],
+  "Tools & Technologies": [
+    "Git",
+    "Vercel",
+    "Framer Motion",
+    "Docker",
+    "Flask",
   ],
   "Research & Development": [
     "Academic Writing",
@@ -443,6 +461,9 @@ export const journey = [
 
 export const socialLinks = {
   email: "gajjar.shu@northeastern.edu",
+  phone: "(207) 332-2039",
+  location: "Portland, Maine",
+  website: "shubhamgajjar.dev",
   github: "https://github.com/ShubhamGajjar",
   linkedin: "https://www.linkedin.com/in/implici7/",
   googleScholar: "https://scholar.google.com/citations?user=MDS9t3QAAAAJ&hl=en",
@@ -450,6 +471,61 @@ export const socialLinks = {
 };
 
 export const experience = "7+ months";
+
+// Education Data
+export const education = [
+  {
+    id: 1,
+    degree: "Master of Science in Artificial Intelligence",
+    institution: "Northeastern University",
+    location: "Portland, Maine",
+    period: "September 2025 – May 2027",
+    gpa: "4.0/4.0",
+    status: "Current",
+  },
+  {
+    id: 2,
+    degree: "Bachelor of Engineering in Computer Engineering",
+    institution: "LDRP Institute of Technology and Research",
+    location: "Gandhinagar, India",
+    period: "September 2022 – May 2025",
+    gpa: "8.41/10.0",
+    status: "Completed",
+  },
+  {
+    id: 3,
+    degree: "Diploma in Computer Engineering",
+    institution: "VPMP Polytechnic",
+    location: "Gandhinagar, India",
+    period: "September 2019 – May 2022",
+    gpa: "9.22/10.0",
+    status: "Completed",
+  },
+];
+
+export const relevantCoursework = [
+  "Machine Learning",
+  "Deep Learning",
+  "Computer Vision",
+  "Data Structures and Algorithms",
+  "Image Processing",
+];
+
+// Certifications Data
+export const certifications = [
+  {
+    id: 1,
+    name: "Python for Data Science",
+    issuer: "Indian Institute of Technology Madras",
+    year: "2024",
+  },
+  {
+    id: 2,
+    name: "Python Data Structures",
+    issuer: "University of Michigan, Coursera",
+    year: "2024",
+  },
+];
 
 // Work Experience Data
 export const workExperience = [
@@ -462,14 +538,21 @@ export const workExperience = [
     description:
       "Developed and deployed AI solutions, optimized system performance, and delivered mobile applications in an Agile environment.",
     responsibilities: [
-      "Demonstrated problem-solving by architecting a multi-agent Application Programming Interface system using distributed computing, reducing report generation from 20 to 5 minutes for 10,000+ queries",
-      "Exhibited creativity by engineering pagination and authentication systems for dashboards, accelerating page load times by 80%, and ensuring model deployment stability for 500+ concurrent sessions",
-      "Applied continuous learning to deliver iOS applications using React Native, increasing mobile engagement by 45% within the first quarter",
-      "Collaborated with a 5-member team in Agile sprints; performed code reviews to improve quality metrics by 30%",
+      "Architected multi-agent API system using Python and Flask with distributed computing, reducing report generation from 20 to 5 minutes for 10,000+ queries",
+      "Engineered pagination and authentication systems using JavaScript and Next.js, accelerating page load times by 80% with Docker containerization for 500+ concurrent sessions",
+      "Delivered iOS applications using React Native for enhanced user experience",
+      "Collaborated with 5-member Agile team using Git for version control; performed code reviews to improve code quality",
     ],
     technologies: [
+      "Python",
+      "Flask",
+      "JavaScript",
+      "Next.js",
       "React Native",
+      "Docker",
+      "Git",
       "API Development",
+      "Distributed Computing",
       "Agile Methodologies",
       "System Architecture",
       "Performance Optimization",
