@@ -192,13 +192,7 @@ export const skills = {
     "Statistical Analysis",
     "Jupyter",
   ],
-  "Tools & Technologies": [
-    "Git",
-    "Vercel",
-    "Framer Motion",
-    "Docker",
-    "Flask",
-  ],
+  "Tools & Technologies": ["Git", "Vercel", "Framer Motion", "Docker", "Flask"],
   "Research & Development": [
     "Academic Writing",
     "Literature Review",
@@ -301,7 +295,65 @@ export const researchPapers = [
 
 // Unified Journey Timeline (Work + Research + Projects)
 export const journey = [
-  // Chronological order (oldest to newest) for Research + Work
+  // Chronological order (oldest to newest) - will be reversed to show latest first
+  {
+    id: "journey-edu-3",
+    type: "Education",
+    title: "Diploma in Computer Engineering",
+    organization: "VPMP Polytechnic",
+    location: "Gandhinagar, India",
+    period: "September 2019 – May 2022",
+    status: "Completed",
+    summary:
+      "Completed Diploma in Computer Engineering with a GPA of 9.22/10.0.",
+    gpa: "9.22/10.0",
+    relevantCoursework: [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Data Structures and Algorithms",
+      "Image Processing",
+    ],
+    tags: ["Education", "Diploma", "Computer Engineering"],
+  },
+  {
+    id: "journey-edu-2",
+    type: "Education",
+    title: "Bachelor of Engineering in Computer Engineering",
+    organization: "LDRP Institute of Technology and Research",
+    location: "Gandhinagar, India",
+    period: "September 2022 – May 2025",
+    status: "Completed",
+    summary:
+      "Completed Bachelor of Engineering in Computer Engineering with a GPA of 8.41/10.0.",
+    gpa: "8.41/10.0",
+    relevantCoursework: [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Data Structures and Algorithms",
+      "Image Processing",
+    ],
+    tags: ["Education", "Bachelor's", "Computer Engineering"],
+  },
+  {
+    id: "journey-7",
+    type: "Project",
+    title: "Twitter Sentiment Analysis",
+    organization: "Personal Project",
+    location: "Social Media Analytics",
+    period: "2023",
+    summary:
+      "Built an end‑to‑end sentiment analysis pipeline on Twitter data using classical ML and NLP tooling.",
+    highlights: [
+      "Collected and cleaned tweets via Twitter API for multi‑topic sentiment analysis.",
+      "Implemented feature extraction and ML classifiers using NLTK, TextBlob, and scikit‑learn.",
+    ],
+    tags: ["Project", "NLP", "Data Science"],
+    links: {
+      github: "https://github.com/ShubhamGajjar/Twitter-Sentiment-Analysis.git",
+    },
+  },
   {
     id: "journey-3",
     type: "Research",
@@ -346,6 +398,45 @@ export const journey = [
       "Correct identification of different skin lesions, such as melanoma, from dermatoscopic images is a major challenge for automated systems, thus causing delay in early diagnosis. Most of the current models are unable to achieve an optimal balance between local feature extraction and global context understanding. Our work overcomes this challenge by proposing a hybrid ResNet50-ViT model. This architecture combines frozen ResNet50 feature extractor with four-head Vision Transformer blocks, allowing the categorization of seven lesion classes from the HAM10000 dataset by fusing ViT's global context awareness with ResNet's strong local feature extraction. The designed model demonstrated 96.3% accuracy, macro F1 of 0.961, and Area Under Curve of 1.00 across all classes, which is a major breakthrough in computer-aided dermatological diagnosis.",
     links: {
       paper: "https://ieeexplore.ieee.org/document/11212073",
+    },
+  },
+  {
+    id: "journey-5",
+    type: "Project",
+    title: "TrackMania Reinforcement Learning Agent",
+    organization: "Personal Project",
+    location: "Game AI & RL",
+    period: "2024",
+    summary:
+      "Built an advanced reinforcement learning agent using Implicit Quantile Networks (IQN) to learn competitive racing strategies in TrackMania.",
+    highlights: [
+      "Implemented continuous control with IQN to handle stochastic rewards and varying track dynamics.",
+      "Demonstrated robust decision‑making and competitive lap times under noisy observations.",
+    ],
+    tags: ["Project", "Reinforcement Learning", "PyTorch"],
+    links: {
+      github:
+        "https://github.com/ShubhamGajjar/TrackMania-ReinforcementLearning",
+    },
+  },
+  {
+    id: "journey-6",
+    type: "Project",
+    title: "Interactive Image Mosaic Generator",
+    organization: "Personal Project",
+    location: "Creative AI & Image Processing",
+    period: "2024",
+    summary:
+      "Developed a Gradio-based web app to generate artistic image mosaics using vectorized NumPy operations.",
+    highlights: [
+      "Leveraged efficient vectorized pipelines to create high‑resolution mosaics in real time.",
+      "Designed intuitive UI allowing users to control mosaic density and style.",
+    ],
+    tags: ["Project", "Computer Vision", "NumPy", "Gradio"],
+    links: {
+      github:
+        "https://github.com/ShubhamGajjar/Interactive-Image-Mosaic-Generator.git",
+      demo: "https://implici7-image-mosaic-generator.hf.space",
     },
   },
   {
@@ -401,61 +492,24 @@ export const journey = [
     ],
   },
   {
-    id: "journey-5",
-    type: "Project",
-    title: "TrackMania Reinforcement Learning Agent",
-    organization: "Personal Project",
-    location: "Game AI & RL",
-    period: "2024",
+    id: "journey-edu-1",
+    type: "Education",
+    title: "Master of Science in Artificial Intelligence",
+    organization: "Northeastern University",
+    location: "Portland, Maine",
+    period: "September 2025 – May 2027",
+    status: "Current",
     summary:
-      "Built an advanced reinforcement learning agent using Implicit Quantile Networks (IQN) to learn competitive racing strategies in TrackMania.",
-    highlights: [
-      "Implemented continuous control with IQN to handle stochastic rewards and varying track dynamics.",
-      "Demonstrated robust decision‑making and competitive lap times under noisy observations.",
+      "Pursuing Master of Science in Artificial Intelligence with a current GPA of 4.0/4.0.",
+    gpa: "4.0/4.0",
+    relevantCoursework: [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Data Structures and Algorithms",
+      "Image Processing",
     ],
-    tags: ["Project", "Reinforcement Learning", "PyTorch"],
-    links: {
-      github:
-        "https://github.com/ShubhamGajjar/TrackMania-ReinforcementLearning",
-    },
-  },
-  {
-    id: "journey-6",
-    type: "Project",
-    title: "Interactive Image Mosaic Generator",
-    organization: "Personal Project",
-    location: "Creative AI & Image Processing",
-    period: "2024",
-    summary:
-      "Developed a Gradio-based web app to generate artistic image mosaics using vectorized NumPy operations.",
-    highlights: [
-      "Leveraged efficient vectorized pipelines to create high‑resolution mosaics in real time.",
-      "Designed intuitive UI allowing users to control mosaic density and style.",
-    ],
-    tags: ["Project", "Computer Vision", "NumPy", "Gradio"],
-    links: {
-      github:
-        "https://github.com/ShubhamGajjar/Interactive-Image-Mosaic-Generator.git",
-      demo: "https://implici7-image-mosaic-generator.hf.space",
-    },
-  },
-  {
-    id: "journey-7",
-    type: "Project",
-    title: "Twitter Sentiment Analysis",
-    organization: "Personal Project",
-    location: "Social Media Analytics",
-    period: "2023",
-    summary:
-      "Built an end‑to‑end sentiment analysis pipeline on Twitter data using classical ML and NLP tooling.",
-    highlights: [
-      "Collected and cleaned tweets via Twitter API for multi‑topic sentiment analysis.",
-      "Implemented feature extraction and ML classifiers using NLTK, TextBlob, and scikit‑learn.",
-    ],
-    tags: ["Project", "NLP", "Data Science"],
-    links: {
-      github: "https://github.com/ShubhamGajjar/Twitter-Sentiment-Analysis.git",
-    },
+    tags: ["Education", "Master's", "Artificial Intelligence"],
   },
 ];
 
