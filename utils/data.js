@@ -304,8 +304,7 @@ export const journey = [
     location: "Gandhinagar, India",
     period: "September 2019 – May 2022",
     status: "Completed",
-    summary:
-      "Completed Diploma in Computer Engineering with a GPA of 9.22/10.0.",
+    summary: "Completed Diploma in Computer Engineering.",
     gpa: "9.22/10.0",
     relevantCoursework: [
       "Machine Learning",
@@ -324,8 +323,7 @@ export const journey = [
     location: "Gandhinagar, India",
     period: "September 2022 – May 2025",
     status: "Completed",
-    summary:
-      "Completed Bachelor of Engineering in Computer Engineering with a GPA of 8.41/10.0.",
+    summary: "Completed Bachelor of Engineering in Computer Engineering.",
     gpa: "8.41/10.0",
     relevantCoursework: [
       "Machine Learning",
@@ -499,8 +497,7 @@ export const journey = [
     location: "Portland, Maine",
     period: "September 2025 – May 2027",
     status: "Current",
-    summary:
-      "Pursuing Master of Science in Artificial Intelligence with a current GPA of 4.0/4.0.",
+    summary: "Pursuing Master of Science in Artificial Intelligence.",
     gpa: "4.0/4.0",
     relevantCoursework: [
       "Machine Learning",
