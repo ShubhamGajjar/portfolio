@@ -9,20 +9,22 @@ export const certificates = [
   {
     id: "machine-learning-2025",
     title: "Machine Learning Certificate",
-    issuer: "Northeastern University",
-    date: "2024",
+    issuer: "Tops Technologies",
+    date: "2022",
     file: "/certificates/Machine_Learning_Certificate.pdf",
   },
   {
     id: "python-data-structures",
     title: "Python Data Structures (Coursera)",
     issuer: "Coursera",
+    date: "2023",
     file: "/certificates/Coursera-Python Data Structures.pdf",
   },
   {
     id: "python-ds-222",
     title: "Python For Data Science",
-    issuer: "(Course)",
+    issuer: "Indian Institute of Technology Madras",
+    date: "2023",
     file: "/certificates/Python For Data Science.pdf",
   },
 ];

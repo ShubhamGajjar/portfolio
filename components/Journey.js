@@ -48,6 +48,11 @@ const Journey = () => {
         <AcademicCapIcon className="h-5 w-5 text-purple-500 dark:text-purple-400" />
       );
     }
+    if (type === "Education") {
+      return (
+        <AcademicCapIcon className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
+      );
+    }
     return (
       <CodeBracketIcon className="h-5 w-5 text-emerald-500 dark:text-emerald-400" />
     );
@@ -59,6 +64,9 @@ const Journey = () => {
     }
     if (type === "Research") {
       return "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20";
+    }
+    if (type === "Education") {
+      return "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20";
     }
     return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20";
   };
@@ -79,9 +87,9 @@ const Journey = () => {
     setExpandedId((current) => (current === id ? null : id));
   };
 
-  // Only show Work and Research items on the journey timeline (latest first)
+  // Show Education, Work, and Research items on the journey timeline (latest first)
   const visibleJourney = journey
-    .filter((item) => item.type === "Work" || item.type === "Research")
+    .filter((item) => item.type === "Work" || item.type === "Research" || item.type === "Education")
     .slice()
     .reverse();
 
@@ -96,7 +104,15 @@ const Journey = () => {
         variants={itemVariants}
       >
         {/* Timeline dot */}
-        <div className="absolute left-6 top-2 w-4 h-4 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg"></div>
+        <div className={`absolute left-6 top-2 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900 shadow-lg ${
+          item.type === "Education" 
+            ? "bg-gradient-to-r from-indigo-500 to-indigo-600" 
+            : item.type === "Work"
+            ? "bg-gradient-to-r from-blue-500 to-blue-600"
+            : item.type === "Research"
+            ? "bg-gradient-to-r from-purple-500 to-purple-600"
+            : "bg-gradient-to-r from-emerald-500 to-emerald-600"
+        }`}></div>
 
         {/* Left-side meta (type + date) completely outside the card */}
         <div className="absolute -left-40 top-0 flex flex-col items-start gap-1 text-xs text-left">
@@ -145,6 +161,8 @@ const Journey = () => {
                       ) : (
                         <BeakerIcon className="h-4 w-4" />
                       )
+                    ) : item.type === "Education" ? (
+                      <AcademicCapIcon className="h-4 w-4" />
                     ) : (
                       <MapPinIcon className="h-4 w-4" />
                     )}
@@ -216,6 +234,54 @@ const Journey = () => {
                               className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full"
                             >
                               {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* Education details */}
+                {item.type === "Education" && (
+                  <>
+                    {item.summary && (
+                      <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+                        {item.summary}
+                      </p>
+                    )}
+
+                    {item.gpa && (
+                      <div className="mb-3">
+                        <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                          GPA:{" "}
+                        </span>
+                        <span className="text-sm text-gray-600 dark:text-gray-300">
+                          {item.gpa}
+                        </span>
+                      </div>
+                    )}
+
+                    {item.status && (
+                      <div className="mb-4">
+                        <span className="px-2 py-0.5 rounded-full border text-[11px] bg-indigo-500/5 text-indigo-700 dark:text-indigo-300 border-indigo-500/20">
+                          {item.status}
+                        </span>
+                      </div>
+                    )}
+
+                    {item.relevantCoursework && item.relevantCoursework.length > 0 && (
+                      <div className="mb-2">
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+                          Relevant Coursework
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {item.relevantCoursework.map((course, idx) => (
+                            <span
+                              key={idx}
+                              className="px-3 py-1 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs rounded-full border border-indigo-500/20"
+                            >
+                              {course}
                             </span>
                           ))}
                         </div>
@@ -395,7 +461,7 @@ const Journey = () => {
             Journey
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            A unified timeline of work experience, research publications, and
+            A unified timeline of education, work experience, research publications, and
             key projects that shaped my path in AI.
           </p>
         </motion.div>
@@ -410,7 +476,7 @@ const Journey = () => {
         >
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 dark:from-blue-400 dark:via-purple-400 dark:to-emerald-400 opacity-30"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500 via-blue-500 via-purple-500 to-emerald-500 dark:from-indigo-400 via-blue-400 dark:via-purple-400 dark:to-emerald-400 opacity-30"></div>
 
             <div className="space-y-12">
               {visibleJourney.map(renderJourneyItem)}
