@@ -19,7 +19,6 @@ import { projects } from "../utils/data";
 const SUGGESTED_QUESTIONS = [
   "What are your technical skills?",
   "Tell me about your projects",
-  "What research have you published?",
   "How can I contact you?",
   "What's your experience?",
   "Tell me about your AI/ML work",
@@ -30,7 +29,7 @@ const Chatbot = ({ onToggleRef }) => {
   const initialMessage = {
     role: "assistant",
     content:
-      "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Research Papers\n• Contact Information\n\nWhat would you like to know?",
+      "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Journey & Research\n• Contact Information\n\nWhat would you like to know?",
     timestamp: new Date().toISOString(),
     isStreaming: false,
     streamingContent: "",
@@ -534,7 +533,7 @@ const Chatbot = ({ onToggleRef }) => {
       });
     }
 
-    // Research section
+    // Research section - redirect to journey since research is now there
     if (
       lowerContent.includes("research") ||
       lowerContent.includes("paper") ||
@@ -542,11 +541,11 @@ const Chatbot = ({ onToggleRef }) => {
       lowerContent.includes("journal")
     ) {
       actions.push({
-        type: "view_research",
-        label: "📚 View Research",
+        type: "view_journey",
+        label: "📚 View Journey",
         action: () => {
-          scrollToPortfolioSection("#research");
-          track("chatbot_quick_action", { action: "view_research" });
+          scrollToPortfolioSection("#journey");
+          track("chatbot_quick_action", { action: "view_journey" });
         },
       });
     }
@@ -883,7 +882,7 @@ const Chatbot = ({ onToggleRef }) => {
       {
         role: "assistant",
         content:
-          "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Research Papers\n• Contact Information\n\nWhat would you like to know?",
+          "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Journey & Research\n• Contact Information\n\nWhat would you like to know?",
         timestamp: new Date().toISOString(),
       },
     ];
