@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   AcademicCapIcon,
-  StarIcon,
   DocumentArrowDownIcon,
 } from "@heroicons/react/24/outline";
 
@@ -55,8 +54,8 @@ const About = () => {
             <p>
               I've published my research on "Hybrid ResNet-ViT for Skin Cancer
               Classification" at the 4th IEEE World Conference on Applied
-              Intelligence and Computing (AIC 2025), achieving 96.3% accuracy
-              and Area Under Curve of 1.00 across all classes. I've also
+              Intelligence and Computing (AIC 2025), with Area Under Curve of
+              1.00 across all classes. I've also
               contributed to research currently under review at Elsevier,
               focusing on VGG16-MCA UNet for brain tumor segmentation. My work
               demonstrates state-of-the-art performance in medical image
@@ -72,12 +71,6 @@ const About = () => {
               <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Published at IEEE AIC 2025
-              </span>
-            </div>
-            <div className="flex items-center gap-3 px-6 py-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-              <StarIcon className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                96.3% Model Accuracy Achieved
               </span>
             </div>
           </div>

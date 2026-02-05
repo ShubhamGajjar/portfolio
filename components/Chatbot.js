@@ -985,10 +985,10 @@ const Chatbot = ({ onToggleRef }) => {
 
   return (
     <>
-      {/* Floating Chat Button - Hidden on mobile, shown on desktop (icon only, rectangular) */}
+      {/* Floating Chat Button - Hidden on mobile, shown on desktop (icon + text) */}
       <motion.button
         onClick={handleToggle}
-        className="hidden md:inline-flex fixed bottom-6 right-6 z-50 items-center justify-center px-4 py-4 rounded-2xl liquid-glass text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl transition-all duration-300"
+        className="hidden md:inline-flex fixed bottom-6 right-6 z-50 flex-col items-center justify-center gap-1 px-4 py-3 rounded-2xl liquid-glass text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl transition-all duration-300"
         style={{
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
@@ -1012,9 +1012,10 @@ const Chatbot = ({ onToggleRef }) => {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <XMarkIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Chat</span>
             </motion.div>
           ) : (
             <motion.div
@@ -1023,9 +1024,10 @@ const Chatbot = ({ onToggleRef }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 4 }}
               transition={{ duration: 0.2 }}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <ChatBubbleLeftRightIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Chat</span>
             </motion.div>
           )}
         </AnimatePresence>
