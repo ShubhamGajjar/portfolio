@@ -109,9 +109,9 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* Horizontal Layout */}
+        {/* Layout: left = category title, right = skills */}
         <motion.div
-          className="space-y-8"
+          className="space-y-6"
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
@@ -120,27 +120,20 @@ const Skills = () => {
           {categories.map((category) => {
             const skillList = filteredSkills[category];
             return (
-              <div key={category} className="space-y-4">
-                {/* Category Header */}
-                <div className="px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-lg border border-blue-500/20 dark:border-blue-500/30 inline-block">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+              <div
+                key={category}
+                className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6"
+              >
+                {/* Left: Category title */}
+                <div className="flex-shrink-0 sm:w-56">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white whitespace-nowrap">
                     {category}
                   </h3>
                 </div>
-                
-                {/* Skills List - Horizontal */}
-                <div className="flex flex-wrap gap-2">
-                  {skillList.map((skill, index) => (
-                    <motion.span
-                      key={index}
-                      className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 rounded-full border border-gray-200 dark:border-gray-700 whitespace-nowrap"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
+                {/* Right: Skills as plain text */}
+                <p className="text-sm text-gray-700 dark:text-gray-300 flex-1">
+                  {skillList.join(", ")}
+                </p>
               </div>
             );
           })}
