@@ -192,15 +192,6 @@ export const skills = {
     "Statistical Analysis",
     "Jupyter",
   ],
-  "Tools & Technologies": ["Git", "Vercel", "Framer Motion", "Docker", "Flask"],
-  "Research & Development": [
-    "Academic Writing",
-    "Literature Review",
-    "Experimental Design",
-    "IEEE Publications",
-    "Research Methodology",
-    "Medical AI Research",
-  ],
   "Game AI & RL": [
     "Reinforcement Learning",
     "Deep Q-Networks",
@@ -209,7 +200,6 @@ export const skills = {
     "Neural Network Training",
   ],
   "Cloud & DevOps": ["Docker", "GitHub Actions"],
-  Tools: ["Jupyter", "VSCode", "Google Colab"],
   "Leadership & Adaptability": [
     "Team Leadership",
     "Adaptability",

@@ -333,7 +333,7 @@ const Projects = () => {
                     View Code
                   </a>
                 )}
-                {project.demoUrl && project.github && (
+{project.demoUrl && (
                   <button
                     onClick={() => setSelectedDemo(project)}
                     className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:scale-105 transition-all duration-200 text-sm font-medium"

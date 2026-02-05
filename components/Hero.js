@@ -5,22 +5,11 @@ import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import { skills } from "../utils/data";
 
 const Hero = ({ title, subtitle, resumeLink }) => {
-  // Get all skill categories and their skills
-  const allCategories = Object.entries(skills);
-
-  // Custom order for scrolling text rows
-  // Original order: 0=AI/ML Core, 1=Deep Learning Frameworks, 2=Computer Vision, 3=Data Science, 4=Research, 5=Game AI, 6=Cloud, 7=Tools, 8=Leadership
-  // New order: 0=blank row, 1=Deep Learning Frameworks, 2=AI/ML Core, 3=Data Science, 4=Research, 5=Game AI, 6=Tools, 7=Leadership
+  // Build scrolling rows from current skills – order by name so it stays valid when categories change
+  const entries = Object.entries(skills);
   const skillCategories = [
-    ["", []], // Blank row -> Row 1
-    allCategories[1], // Deep Learning Frameworks -> Row 2
-    allCategories[0], // AI/ML Core -> Row 3
-    allCategories[3], // Data Science & Analytics -> Row 4
-    allCategories[4], // Research & Development -> Row 5
-    allCategories[5], // Game AI & RL -> Row 6
-    allCategories[2], // Computer Vision -> Row 1
-    allCategories[7], // Tools -> Row 7
-    allCategories[8], // Leadership & Adaptability -> Row 8
+    ["", []], // Blank row
+    ...entries.filter(([category, skillsList]) => Array.isArray(skillsList) && skillsList.length > 0),
   ];
 
   // Different speeds for each row (in seconds - higher = slower)
