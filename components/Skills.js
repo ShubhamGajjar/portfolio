@@ -1,7 +1,12 @@
 // components/Skills.js
 import React from "react";
 import { motion } from "framer-motion";
-import { skills, projects, researchPapers, workExperience } from "../utils/data";
+import {
+  skills,
+  projects,
+  researchPapers,
+  workExperience,
+} from "../utils/data";
 
 const Skills = () => {
   const fadeInUp = {
@@ -19,61 +24,64 @@ const Skills = () => {
   // Collect all skills mentioned in projects, research, and work experience
   const getMentionedSkills = () => {
     const mentioned = new Set();
-    
+
     // Normalize function for case-insensitive comparison
-    const normalize = (str) => str.toLowerCase().trim().replace(/\s+/g, ' ');
-    
+    const normalize = (str) => str.toLowerCase().trim().replace(/\s+/g, " ");
+
     // From projects
     projects.forEach((project) => {
       project.technologies?.forEach((tech) => {
         mentioned.add(normalize(tech));
       });
     });
-    
+
     // From research papers
     researchPapers.forEach((paper) => {
       paper.keywords?.forEach((keyword) => {
         mentioned.add(normalize(keyword));
       });
     });
-    
+
     // From work experience
     workExperience.forEach((work) => {
       work.technologies?.forEach((tech) => {
         mentioned.add(normalize(tech));
       });
     });
-    
+
     return mentioned;
   };
 
   const mentionedSkills = getMentionedSkills();
-  
+
   // Filter out skills that are already mentioned
   const filterSkills = (skillList) => {
-    const normalize = (str) => str.toLowerCase().trim().replace(/\s+/g, ' ');
-    
+    const normalize = (str) => str.toLowerCase().trim().replace(/\s+/g, " ");
+
     return skillList.filter((skill) => {
       const normalizedSkill = normalize(skill);
-      
+
       // Check for exact match first
       if (mentionedSkills.has(normalizedSkill)) {
         return false;
       }
-      
+
       // For multi-word skills, check if they appear as complete phrases in mentioned skills
       // e.g., "Deep Learning" matches "Deep Learning Frameworks" but "React" doesn't match "React Native"
-      const words = normalizedSkill.split(' ');
+      const words = normalizedSkill.split(" ");
       if (words.length > 1) {
         // Multi-word skill: check if it appears as a complete phrase
-        const isMentioned = Array.from(mentionedSkills).some(mentioned => {
+        const isMentioned = Array.from(mentionedSkills).some((mentioned) => {
           // Check if all words appear as complete words in sequence
-          const regex = new RegExp(`\\b${normalizedSkill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+          const regex = new RegExp(
+            `\\b${normalizedSkill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+            "i",
+          );
           return regex.test(mentioned);
         });
         if (isMentioned) return false;
       }
-      
+
       return true;
     });
   };
