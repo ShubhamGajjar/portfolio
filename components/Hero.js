@@ -129,12 +129,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
           >
             <div className="glass-card p-6 sm:p-7">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="text-base font-semibold text-fg">
-                  Highlights
-                </h2>
-                <span className="text-xs text-muted">
-                  Quick scan
-                </span>
+                <h2 className="text-base font-semibold text-fg">Highlights</h2>
               </div>
 
               <div className="mt-5 space-y-4">
@@ -145,7 +140,8 @@ const Hero = ({ title, subtitle, resumeLink }) => {
                       : "Published research • IEEE conference"}
                   </p>
                   <p className="mt-1 text-sm text-muted leading-relaxed">
-                    Hybrid deep learning for skin lesion classification (HAM10000).
+                    Hybrid deep learning for skin lesion classification
+                    (HAM10000).
                   </p>
                   {published?.ieeeUrl && (
                     <a
@@ -162,10 +158,13 @@ const Hero = ({ title, subtitle, resumeLink }) => {
 
                 <div className="rounded-xl border border-border/60 bg-card/40 p-4">
                   <p className="text-sm font-semibold text-fg">
-                    {underReview ? "Under review • Elsevier" : "Ongoing research"}
+                    {underReview
+                      ? "Under review • Elsevier"
+                      : "Ongoing research"}
                   </p>
                   <p className="mt-1 text-sm text-muted leading-relaxed">
-                    Brain tumor segmentation in FLAIR MRI with attention-enhanced UNet variants.
+                    Brain tumor segmentation in FLAIR MRI with
+                    attention-enhanced UNet variants.
                   </p>
                 </div>
 
@@ -174,7 +173,8 @@ const Hero = ({ title, subtitle, resumeLink }) => {
                     Engineering experience
                   </p>
                   <p className="mt-1 text-sm text-muted leading-relaxed">
-                    Built production systems: multi-agent APIs, dashboards, and mobile apps.
+                    Built production systems: multi-agent APIs, dashboards, and
+                    mobile apps.
                   </p>
                 </div>
               </div>
