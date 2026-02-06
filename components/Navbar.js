@@ -53,21 +53,13 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
   const menuVariants = {
     closed: {
       opacity: 0,
-      scale: 0.95,
-      y: -20,
-      transition: {
-        duration: 0.15,
-        ease: "easeIn",
-      },
+      y: -8,
+      transition: { duration: 0.2, ease: "easeOut" },
     },
     open: {
       opacity: 1,
-      scale: 1,
       y: 0,
-      transition: {
-        duration: 0.25,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.25, ease: "easeOut" },
     },
   };
 
@@ -76,6 +68,19 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Prevent body scroll and flash when mobile menu is open
+  useEffect(() => {
+    if (!mounted) return;
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mounted, isOpen]);
 
   return (
     <>
@@ -128,10 +133,10 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
                     <ChatBubbleLeftRightIcon className="h-5 w-5" />
                   </motion.button>
 
-                  {/* Theme Toggle */}
+                  {/* Theme Toggle - desktop only; on mobile it's inside the hamburger menu */}
                   <motion.button
                     onClick={toggleTheme}
-                    className="focus-ring rounded-xl p-2 glass"
+                    className="hidden md:block focus-ring rounded-xl p-2 glass"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     aria-label="Toggle theme"
@@ -187,11 +192,12 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
             {isOpen && (
               <motion.div
                 key="mobile-menu"
-                className="md:hidden fixed top-24 left-4 right-4 liquid-glass shadow-2xl z-[60] overflow-hidden"
+                className="md:hidden fixed top-24 left-4 right-4 liquid-glass shadow-2xl z-[60] overflow-hidden rounded-2xl"
                 variants={menuVariants}
                 initial="closed"
                 animate="open"
                 exit="closed"
+                style={{ willChange: "opacity, transform" }}
               >
                 <div className="px-4 py-6">
                   <div className="flex flex-col gap-2">
