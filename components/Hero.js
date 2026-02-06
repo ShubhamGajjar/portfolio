@@ -1,133 +1,186 @@
 // components/Hero.js
 import React from "react";
 import { motion } from "framer-motion";
-import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
-import { skills } from "../utils/data";
+import {
+  ArrowTopRightOnSquareIcon,
+  DocumentArrowDownIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
+import { researchPapers, socialLinks } from "../utils/data";
 
 const Hero = ({ title, subtitle, resumeLink }) => {
-  // Build scrolling rows from current skills – order by name so it stays valid when categories change
-  const entries = Object.entries(skills);
-  const skillCategories = [
-    ["", []], // Blank row
-    ...entries.filter(([category, skillsList]) => Array.isArray(skillsList) && skillsList.length > 0),
-  ];
-
-  // Different speeds for each row (in seconds - higher = slower)
-  const speeds = [1600, 1800, 2000, 1700, 2200, 1760, 2400, 1840];
+  const published = researchPapers?.find((p) => p.status === "Published");
+  const underReview = researchPapers?.find((p) => p.status === "Under Review");
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center liquid-glass overflow-hidden"
+      className="relative overflow-hidden pt-28 pb-16 sm:pb-20"
     >
-      {/* Enhanced Background Patterns */}
-      <div className="absolute inset-0 ai-pattern opacity-30"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
+      {/* Background is site-wide (see index.js); hero has no local gradient so it never “ends” */}
 
-      {/* Horizontal Repeating Text Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {skillCategories.map(([category, categorySkills], rowIndex) => {
-          const duration = speeds[rowIndex % speeds.length];
-          // All rows move in the same direction (right)
-          const animationName = "scrollHorizontalRight";
-          // Different starting offsets for each row to avoid synchronized start
-          const startOffsets = [-50, -30, -70, -20, -80, -40, -60, -10];
-          const animationDelay = startOffsets[rowIndex % startOffsets.length];
-
-          return (
-            <div
-              key={category}
-              className="absolute whitespace-nowrap diagonal-text-row"
-              style={{
-                top: `${(rowIndex / skillCategories.length) * 100}%`,
-                left: "50%",
-                marginLeft: "0",
-                animationName: animationName,
-                animationDuration: `${duration}s`,
-                animationDelay: `${animationDelay}s`,
-              }}
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-12">
+          {/* Left */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-sm text-fg/80 backdrop-blur-md"
             >
-              <div className="flex gap-8 text-6xl md:text-8xl font-bold text-gray-900/5 dark:text-white/5">
-                {[...Array(12)].map((_, repeatIndex) =>
-                  categorySkills.map((skill, skillIndex) => (
-                    <span
-                      key={`${category}-${repeatIndex}-${skillIndex}`}
-                      className="inline-block"
+              <MapPinIcon className="h-4 w-4 text-brand" />
+              <span>{socialLinks?.location || "Portland, Maine"}</span>
+              <span className="text-muted">•</span>
+              <span className="text-fg/80">AI • Medical imaging • Systems</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.05, ease: "easeOut" }}
+              className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-fg font-display"
+            >
+              <span className="block">{title}</span>
+              <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl font-semibold text-fg/80">
+                Building practical AI for healthcare and real-world systems.
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.12, ease: "easeOut" }}
+              className="mt-6 text-base sm:text-lg text-muted leading-relaxed max-w-2xl"
+            >
+              {subtitle}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18, ease: "easeOut" }}
+              className="mt-8 flex flex-col sm:flex-row gap-3 sm:items-center"
+            >
+              <a
+                href={resumeLink}
+                download="Shubham_Gajjar_Resume.pdf"
+                className="btn-primary"
+              >
+                <DocumentArrowDownIcon className="h-5 w-5" />
+                Download resume
+              </a>
+              <a href="#experience" className="btn-secondary">
+                View experience
+              </a>
+              <a href="#contact" className="btn-ai">
+                Get in touch
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="mt-8 flex flex-wrap items-center gap-3 text-sm"
+            >
+              {socialLinks?.linkedin && (
+                <a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-4 py-2 text-fg/80 hover:text-fg transition-colors"
+                >
+                  LinkedIn
+                  <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                </a>
+              )}
+              {socialLinks?.github && (
+                <a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-4 py-2 text-fg/80 hover:text-fg transition-colors"
+                >
+                  GitHub
+                  <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                </a>
+              )}
+              {socialLinks?.googleScholar && (
+                <a
+                  href={socialLinks.googleScholar}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-4 py-2 text-fg/80 hover:text-fg transition-colors"
+                >
+                  Google Scholar
+                  <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                </a>
+              )}
+            </motion.div>
+          </div>
+
+          {/* Right */}
+          <motion.aside
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.12, ease: "easeOut" }}
+            className="lg:col-span-5"
+          >
+            <div className="glass-card p-6 sm:p-7">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="text-base font-semibold text-fg">
+                  Highlights
+                </h2>
+                <span className="text-xs text-muted">
+                  Quick scan
+                </span>
+              </div>
+
+              <div className="mt-5 space-y-4">
+                <div className="rounded-xl border border-border/60 bg-card/40 p-4">
+                  <p className="text-sm font-semibold text-fg">
+                    {published
+                      ? `Published • ${published.conference}`
+                      : "Published research • IEEE conference"}
+                  </p>
+                  <p className="mt-1 text-sm text-muted leading-relaxed">
+                    Hybrid deep learning for skin lesion classification (HAM10000).
+                  </p>
+                  {published?.ieeeUrl && (
+                    <a
+                      href={published.ieeeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center gap-2 text-sm text-brand hover:opacity-80 transition-colors"
                     >
-                      {skill} •{" "}
-                    </span>
-                  ))
-                )}
+                      View on IEEE Xplore
+                      <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-card/40 p-4">
+                  <p className="text-sm font-semibold text-fg">
+                    {underReview ? "Under review • Elsevier" : "Ongoing research"}
+                  </p>
+                  <p className="mt-1 text-sm text-muted leading-relaxed">
+                    Brain tumor segmentation in FLAIR MRI with attention-enhanced UNet variants.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-card/40 p-4">
+                  <p className="text-sm font-semibold text-fg">
+                    Engineering experience
+                  </p>
+                  <p className="mt-1 text-sm text-muted leading-relaxed">
+                    Built production systems: multi-agent APIs, dashboards, and mobile apps.
+                  </p>
+                </div>
               </div>
             </div>
-          );
-        })}
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-        <motion.h1
-          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            duration: 1.2,
-            delay: 0.3,
-            ease: "easeOut",
-          }}
-          className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6"
-        >
-          {title}
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.0,
-            delay: 0.6,
-            ease: "easeOut",
-          }}
-          className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
-        >
-          {subtitle}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.0,
-            delay: 0.9,
-            ease: "easeOut",
-          }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <motion.a
-            href={resumeLink}
-            download="Shubham_Gajjar_Resume.pdf"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.1 },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <DocumentArrowDownIcon className="w-5 h-5" />
-            Download Resume
-          </motion.a>
-
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.1 },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get In Touch
-          </motion.a>
-        </motion.div>
+          </motion.aside>
+        </div>
       </div>
     </section>
   );

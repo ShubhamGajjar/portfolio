@@ -38,7 +38,10 @@ const Certificates = () => {
   };
 
   return (
-    <section id="certificates" className="py-20 static-glass">
+    <section
+      id="certificates"
+      className="py-20"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12"
@@ -47,11 +50,11 @@ const Certificates = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 ai-gradient-text">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 ai-gradient-text font-display">
             Certificates
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Academic and professional certificates. Click to view or download.
+            Selected certificates and credentials. Click to view or download.
           </p>
         </motion.div>
 
@@ -65,14 +68,14 @@ const Certificates = () => {
           {certificates.map((cert) => (
             <motion.div
               key={cert.id}
-              className="flex items-center justify-between bg-white/60 dark:bg-gray-800/40 rounded-lg p-6 shadow-md border border-transparent hover:shadow-lg transition"
+              className="flex items-center justify-between glass-card p-6"
               variants={itemVariants}
             >
               <div className="flex-1">
-                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 mb-1">
+                <h3 className="font-semibold text-lg text-fg mb-1">
                   {cert.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-muted">
                   {cert.issuer} {cert.date ? `• ${cert.date}` : ""}
                 </p>
               </div>
@@ -80,12 +83,12 @@ const Certificates = () => {
                 href={cert.file}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-md hover:opacity-90 font-medium"
+                className="btn-secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <DocumentArrowDownIcon className="w-5 h-5" />
-                View
+                Open
               </motion.a>
             </motion.div>
           ))}

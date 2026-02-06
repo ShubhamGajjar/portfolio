@@ -38,7 +38,7 @@ const Badges = () => {
   };
 
   return (
-    <section id="badges" className="py-20 static-glass">
+    <section id="badges" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12"
@@ -47,11 +47,11 @@ const Badges = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 ai-gradient-text leading-normal overflow-visible pb-2">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 ai-gradient-text font-display leading-normal overflow-visible pb-2">
             Badges
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Digital badges and credentials from Northeastern University
+            Digital badges and learning credentials.
           </p>
         </motion.div>
 
@@ -65,7 +65,7 @@ const Badges = () => {
           {badges.map((badge) => (
             <motion.div
               key={badge.id}
-              className="flex flex-col items-center bg-white/60 dark:bg-gray-800/40 rounded-lg p-6 shadow-md border border-transparent hover:shadow-lg transition text-center"
+              className="flex flex-col items-center glass-card p-6 text-center"
               variants={itemVariants}
             >
               <img
@@ -73,22 +73,22 @@ const Badges = () => {
                 alt={`${badge.title} badge`}
                 className="w-24 h-24 object-contain rounded mb-4"
               />
-              <h3 className="font-semibold text-base text-gray-800 dark:text-gray-100 mb-2">
+              <h3 className="font-semibold text-base text-fg mb-2">
                 {badge.title}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              <p className="text-sm text-muted mb-4">
                 {badge.issuer}
               </p>
               <motion.a
                 href={badge.file}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:opacity-90 text-sm"
+                className="btn-secondary px-4 py-2 text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <DocumentArrowDownIcon className="w-4 h-4" />
-                View Credential
+                Open credential
               </motion.a>
             </motion.div>
           ))}

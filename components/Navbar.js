@@ -79,87 +79,87 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
 
   return (
     <>
-      <nav
-        className="sticky top-4 z-50 mx-4 rounded-2xl shadow-lg transition-all duration-300 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10"
-        style={{
-          opacity: 0,
-          animation: "fadeInNav 0.4s ease-out forwards",
-          backdropFilter: "blur(12px)", // Ensure blur is always applied from start
-          WebkitBackdropFilter: "blur(12px)", // Safari support
-        }}
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <motion.div
-              className="flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="text-xl font-bold ai-gradient-text">
-                Shubham Gajjar
-              </span>
-            </motion.div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+      <nav className="sticky top-4 z-50 px-4">
+        <div className="mx-auto max-w-6xl">
+          <div
+            className="liquid-glass"
+            style={{ opacity: 0, animation: "fadeInNav 0.4s ease-out forwards" }}
+          >
+            <div className="px-4 sm:px-6">
+              <div className="flex items-center justify-between h-16">
+                {/* Logo */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("#hero")}
+                  className="focus-ring rounded-xl px-2 py-1"
+                  aria-label="Go to top"
                 >
-                  {item.name}
-                </motion.button>
-              ))}
-            </div>
+                  <span className="text-lg sm:text-xl font-bold ai-gradient-text font-display">
+                    Shubham Gajjar
+                  </span>
+                </button>
 
-            {/* Desktop: Theme Toggle, Mobile: Chat Button & Menu Button */}
-            <div className="flex items-center gap-4">
-              {/* Desktop Theme Toggle */}
-              <motion.button
-                onClick={toggleTheme}
-                className="hidden md:flex p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-150"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {theme === "dark" ? (
-                  <SunIcon className="h-5 w-5 text-yellow-500" />
-                ) : (
-                  <MoonIcon className="h-5 w-5 text-gray-700" />
-                )}
-              </motion.button>
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-1">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => scrollToSection(item.href)}
+                      className="group focus-ring rounded-xl px-3 py-2 text-sm font-medium text-fg/80 hover:text-fg transition-colors"
+                    >
+                      <span className="relative">
+                        {item.name}
+                        <span className="absolute left-0 -bottom-1 h-px w-0 bg-brand transition-all duration-200 group-hover:w-full" />
+                      </span>
+                    </button>
+                  ))}
+                </div>
 
-              {/* Mobile: Chat Button (replaces theme toggle) */}
-              <motion.button
-                onClick={() => {
-                  if (onChatToggle) {
-                    onChatToggle();
-                  }
-                }}
-                className="md:hidden p-2 rounded-lg ai-glass hover:scale-105 transition-all duration-150 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                title="Open chat"
-              >
-                <ChatBubbleLeftRightIcon className="h-5 w-5" />
-              </motion.button>
+                {/* Actions */}
+                <div className="flex items-center gap-2">
+                  {/* Chat */}
+                  <motion.button
+                    onClick={() => onChatToggle?.()}
+                    className="focus-ring rounded-xl p-2 ai-glass text-fg"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    title="Open chat"
+                  >
+                    <ChatBubbleLeftRightIcon className="h-5 w-5" />
+                  </motion.button>
 
-              {/* Mobile Menu Button */}
-              <motion.button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 rounded-lg ai-glass"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {isOpen ? (
-                  <XMarkIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-                ) : (
-                  <Bars3Icon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-                )}
-              </motion.button>
+                  {/* Theme Toggle */}
+                  <motion.button
+                    onClick={toggleTheme}
+                    className="focus-ring rounded-xl p-2 glass"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    aria-label="Toggle theme"
+                    title="Toggle theme"
+                  >
+                    {theme === "dark" ? (
+                      <SunIcon className="h-5 w-5 text-amber-400" />
+                    ) : (
+                      <MoonIcon className="h-5 w-5 text-fg/80" />
+                    )}
+                  </motion.button>
+
+                  {/* Mobile Menu Button */}
+                  <motion.button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="md:hidden focus-ring rounded-xl p-2 glass"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    aria-label={isOpen ? "Close menu" : "Open menu"}
+                  >
+                    {isOpen ? (
+                      <XMarkIcon className="h-6 w-6 text-fg/80" />
+                    ) : (
+                      <Bars3Icon className="h-6 w-6 text-fg/80" />
+                    )}
+                  </motion.button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
             {isOpen && (
               <motion.div
                 key="mobile-backdrop"
-                className="fixed inset-0 bg-black/20 z-[55] md:hidden"
+                className="fixed inset-0 bg-black/30 z-[55] md:hidden"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -187,7 +187,7 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
             {isOpen && (
               <motion.div
                 key="mobile-menu"
-                className="md:hidden fixed top-24 left-4 right-4 liquid-glass rounded-2xl shadow-2xl z-[60] overflow-hidden"
+                className="md:hidden fixed top-24 left-4 right-4 liquid-glass shadow-2xl z-[60] overflow-hidden"
                 variants={menuVariants}
                 initial="closed"
                 animate="open"
@@ -199,7 +199,7 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
                       <motion.button
                         key={item.name}
                         onClick={() => scrollToSection(item.href)}
-                        className="text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium py-3 px-4 cursor-pointer rounded-lg hover:bg-white/10 dark:hover:bg-white/5 w-full"
+                        className="text-left text-fg/85 hover:text-fg transition-colors font-medium py-3 px-4 cursor-pointer rounded-xl hover:bg-card/40 w-full focus-ring"
                         whileHover={{ x: 10 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -213,18 +213,18 @@ const Navbar = ({ theme, toggleTheme, onChatToggle }) => {
                         toggleTheme();
                         setIsOpen(false);
                       }}
-                      className="text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-150 font-medium py-3 px-4 cursor-pointer rounded-lg hover:bg-white/10 dark:hover:bg-white/5 w-full flex items-center gap-3"
+                      className="text-left text-fg/85 hover:text-fg transition-colors font-medium py-3 px-4 cursor-pointer rounded-xl hover:bg-card/40 w-full flex items-center gap-3 focus-ring"
                       whileHover={{ x: 10 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       {theme === "dark" ? (
                         <>
-                          <SunIcon className="h-5 w-5 text-yellow-500" />
+                          <SunIcon className="h-5 w-5 text-amber-400" />
                           <span>Light Mode</span>
                         </>
                       ) : (
                         <>
-                          <MoonIcon className="h-5 w-5 text-gray-700" />
+                          <MoonIcon className="h-5 w-5 text-fg/80" />
                           <span>Dark Mode</span>
                         </>
                       )}
