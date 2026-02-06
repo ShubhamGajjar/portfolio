@@ -4,7 +4,22 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
+import { Poppins } from "next/font/google";
 import Chatbot from "../components/Chatbot";
+
+const fontSans = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const fontDisplay = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light"); // Default to light
@@ -62,8 +77,12 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="alternate icon" href="/favicon.ico" />
       </Head>
-      <Component {...enhancedPageProps} /> {/* Pass props down */}
-      <Chatbot onToggleRef={chatToggleRef} />
+      <div
+        className={`${fontSans.variable} ${fontDisplay.variable} font-sans antialiased`}
+      >
+        <Component {...enhancedPageProps} /> {/* Pass props down */}
+        <Chatbot onToggleRef={chatToggleRef} />
+      </div>
       <Analytics />
       <SpeedInsights />
     </>

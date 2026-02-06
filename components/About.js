@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   AcademicCapIcon,
+  BeakerIcon,
   DocumentArrowDownIcon,
 } from "@heroicons/react/24/outline";
 
@@ -20,7 +21,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-20 static-glass">
+    <section id="about" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -30,7 +31,7 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text font-display">
             About Me
           </h2>
         </motion.div>
@@ -43,35 +44,40 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+          <div className="space-y-5 text-muted leading-relaxed text-base sm:text-lg">
             <p>
-              I'm an AI researcher and graduate student at Northeastern
-              University, Interested in advancing deep learning applications in
-              biomedical imaging and computer vision. My work focuses on hybrid
-              neural architectures for tumor segmentation and skin lesion
-              classification, bridging healthcare and AI.
+              I’m an AI researcher and M.S. Artificial Intelligence student at Northeastern
+              University (The Roux Institute). I work at the intersection of deep learning,
+              computer vision, and biomedical imaging.
             </p>
             <p>
-              I've published my research on "Hybrid ResNet-ViT for Skin Cancer
-              Classification" at the 4th IEEE World Conference on Applied
-              Intelligence and Computing (AIC 2025), with Area Under Curve of
-              1.00 across all classes. I've also
-              contributed to research currently under review at Elsevier,
-              focusing on VGG16-MCA UNet for brain tumor segmentation. My work
-              demonstrates state-of-the-art performance in medical image
-              analysis, and I'm currently exploring the integration of deep
-              learning with healthcare and biological imaging as part of my
-              ongoing research journey.
+              I’ve published and presented research at <span className="text-fg">IEEE AIC 2025</span>,
+              and I have ongoing work under review (Elsevier) on attention‑enhanced segmentation
+              models for brain tumor MRI. I’m especially interested in hybrid architectures
+              (CNNs + Transformers), strong evaluation, and building ML systems that are reliable
+              in practice.
             </p>
           </div>
 
           {/* Key Highlights */}
-          <div className="mt-12 flex flex-wrap gap-6 justify-center">
-            <div className="flex items-center gap-3 px-6 py-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <AcademicCapIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Published at IEEE AIC 2025
-              </span>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            <div className="glass-card p-5">
+              <div className="flex items-center gap-3">
+                <AcademicCapIcon className="h-5 w-5 text-brand" />
+                <p className="text-sm font-semibold text-fg">Research focus</p>
+              </div>
+              <p className="mt-2 text-sm text-muted">
+                Medical imaging, computer vision, and hybrid deep learning architectures.
+              </p>
+            </div>
+            <div className="glass-card p-5">
+              <div className="flex items-center gap-3">
+                <BeakerIcon className="h-5 w-5 text-brand" />
+                <p className="text-sm font-semibold text-fg">Recent highlights</p>
+              </div>
+              <p className="mt-2 text-sm text-muted">
+                Published at IEEE AIC 2025 • Brain tumor segmentation work under review.
+              </p>
             </div>
           </div>
 
@@ -86,15 +92,15 @@ const About = () => {
             <motion.a
               href="/Shubham_Gajjar_CV.pdf"
               download="Shubham_Gajjar_CV.pdf"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="btn-secondary"
               whileHover={{
-                scale: 1.05,
+                scale: 1.02,
                 transition: { duration: 0.2 },
               }}
               whileTap={{ scale: 0.95 }}
             >
               <DocumentArrowDownIcon className="w-5 h-5" />
-              Download My CV
+              Download CV
             </motion.a>
           </motion.div>
         </motion.div>

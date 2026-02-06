@@ -2,90 +2,15 @@
 export const projects = [
   {
     id: 1,
-    title: "Skin Cancer Classification (Research)",
-    description:
-      "Designed hybrid architecture combining frozen ResNet50 feature extractor with four-head Vision Transformer blocks, attaining 96.3% accuracy and macro F1 of 0.961 on HAM10000 dataset. Integrated Global Average Pooling and multi-head self-attention for seven-class skin lesion classification, achieving Area Under Curve of 1.00 across all classes. Published and presented at IEEE World Conference on Applied Intelligence and Computing (AIC 2025) to 100+ attendees.",
-    technologies: [
-      "Python",
-      "TensorFlow",
-      "PyTorch",
-      "Deep Learning",
-      "Computer Vision",
-      "Medical AI",
-      "ResNet50",
-      "Vision Transformer",
-      "HAM10000 Dataset",
-      "Image Classification",
-    ],
-    category: "Research",
-    github: null,
-    live: null,
-    image: "/skin-cancer.jpg",
-    impact: "Medical AI Research - Published at IEEE AIC 2025",
-    status: "Published",
-  },
-  {
-    id: 2,
-    title: "Brain Tumor Segmentation (Research)",
-    description:
-      "Led innovation by designing VGG16-based encoder with Multi-Channel Attention decoder achieving 99.59% accuracy and 99.71% specificity on LGG Brain MRI Segmentation dataset from 110 low-grade glioma patients. Implemented ensemble learning combining multiple model configurations, improving Dice coefficient by 3.7% over standard UNet. Applied data engineering with preprocessing pipeline implementing skull stripping, intensity normalization, and resizing to 256x256 pixels for FLAIR MRI scans.",
-    technologies: [
-      "Python",
-      "TensorFlow",
-      "PyTorch",
-      "Deep Learning",
-      "Computer Vision",
-      "Medical Imaging",
-      "UNet",
-      "VGG16",
-      "Multi-Channel Attention",
-      "FLAIR MRI Processing",
-    ],
-    category: "Research",
-    github: null,
-    live: null,
-    image: "/brain-tumor.jpg",
-    impact: "Medical AI Research - Under Review at Elsevier",
-    status: "Under Review",
-  },
-  {
-    id: 3,
-    title:
-      "Extended ResNet50 with Inverse Soft Mask Attention for Skin Cancer (Research)",
-    description:
-      "Developed two-stage pipeline combining U-Net++ hair segmentation with Extended ResNet50 classifier featuring Inverse Soft Mask Attention mechanism, achieving 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images. Applied creativity by integrating dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation for hair-occluded and unoccluded regions. Utilized Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss, incorporating explainable AI principles ensuring model deployment readiness.",
-    technologies: [
-      "Python",
-      "TensorFlow",
-      "PyTorch",
-      "Deep Learning",
-      "Computer Vision",
-      "Medical AI",
-      "ResNet50",
-      "Inverse Soft Mask Attention",
-      "U-Net++",
-      "HAM10000 Dataset",
-      "Image Classification",
-    ],
-    category: "Research",
-    github: null,
-    live: null,
-    image: "/skin-cancer-advanced.jpg",
-    impact: "Medical AI Research - Submitted to Journal",
-    status: "Submitted",
-  },
-  {
-    id: 4,
     title: "TrackMania Reinforcement Learning Agent",
     description:
-      "Developed an advanced reinforcement learning agent for TrackMania racing game using Implicit Quantile Networks (IQN). The agent learns optimal racing strategies through trial and error, achieving competitive lap times and demonstrating robust decision-making in unpredictable racing situations.",
+      "Built a reinforcement learning agent for TrackMania using Implicit Quantile Networks (IQN), training policies to drive competitively under noisy observations and shifting track dynamics.",
     technologies: [
       "Python",
       "PyTorch",
       "Reinforcement Learning",
       "Implicit Quantile Networks",
-      "Neural Networks",
-      "Computer Vision",
+      "Deep RL",
       "dxcam",
     ],
     category: "AI/ML Core",
@@ -96,10 +21,10 @@ export const projects = [
     status: "Completed",
   },
   {
-    id: 5,
+    id: 2,
     title: "Twitter Sentiment Analysis (NLP Project)",
     description:
-      "Built a comprehensive sentiment analysis system using Twitter API to analyze public sentiment on various topics. Implements NLP techniques and machine learning models for real-time sentiment classification.",
+      "Built an end-to-end sentiment analysis pipeline over Twitter data, combining API ingestion, cleaning, feature extraction, and classical ML classifiers for topic-level sentiment.",
     technologies: [
       "Python",
       "Twitter API",
@@ -118,10 +43,10 @@ export const projects = [
     status: "Completed",
   },
   {
-    id: 6,
+    id: 3,
     title: "Interactive Image Mosaic Generator",
     description:
-      "Developed an interactive web application for generating artistic image mosaics using vectorized NumPy operations. Built with Gradio for an intuitive user interface, enabling users to create stunning mosaic art from input images through efficient computational image processing techniques.",
+      "Built a Gradio app that generates artistic image mosaics using vectorized NumPy pipelines, giving users a fast, interactive UI to control mosaic density and style.",
     technologies: [
       "Python",
       "NumPy",
@@ -234,7 +159,7 @@ export const researchPapers = [
     pdf: "/AIC 2025 Certificate.pdf",
     certificate: "/AIC_2025_Presentation_Certificate.pdf",
     abstract:
-      "Correct identification of different skin lesions, such as melanoma, from dermatoscopic images is a major challenge for automated systems, thus causing delay in early diagnosis. Most of the current models are unable to achieve an optimal balance between local feature extraction and global context understanding. Our work overcomes this challenge by proposing a hybrid ResNet50-ViT model. This architecture combines frozen ResNet50 feature extractor with four-head Vision Transformer blocks, allowing the categorization of seven lesion classes from the HAM10000 dataset by fusing ViT's global context awareness with ResNet's strong local feature extraction. The designed model demonstrated 96.3% accuracy, macro F1 of 0.961, and Area Under Curve of 1.00 across all classes, which is a major breakthrough in computer-aided dermatological diagnosis.",
+      "We propose a hybrid ResNet50–Vision Transformer model for seven-class skin lesion classification on HAM10000. By combining strong local features with global context modeling, the approach achieves 96.3% accuracy, macro F1 0.961, and AUC 1.00 across classes.",
   },
   {
     id: 2,
@@ -256,7 +181,7 @@ export const researchPapers = [
     ],
     doi: "Pending",
     abstract:
-      "Computer vision-based automated brain tumor segmentation is crucial in medical imaging for accurate diagnosis and treatment planning. This research proposes a novel hybrid deep learning approach combining VGG16 architecture with Multi-Channel Attention (MCA) and UNet for enhanced brain tumor segmentation in FLAIR MRI images. The proposed VGG16-MCA UNet architecture leverages VGG16's robust feature extraction capabilities, enhanced by multi-channel attention mechanisms that capture both local and global spatial information. The model achieved 99.59% accuracy and 99.71% specificity on LGG Brain MRI Segmentation dataset from 110 low-grade glioma patients. Ensemble learning combining multiple model configurations improved Dice coefficient by 3.7% over standard UNet. The preprocessing pipeline implements skull stripping, intensity normalization, and resizing to 256x256 pixels for FLAIR MRI scans, adhering to AI ethics for medical applications. This work contributes to the advancement of automated medical image analysis with potential applications in clinical decision support systems.",
+      "We introduce an attention-enhanced VGG16–MCA UNet for brain tumor segmentation in FLAIR MRI. The model reaches 99.59% accuracy and 99.71% specificity on an LGG dataset, and ensemble variants improve Dice over standard UNet baselines.",
   },
   {
     id: 3,
@@ -279,7 +204,7 @@ export const researchPapers = [
     ],
     doi: "Pending",
     abstract:
-      "Skin cancer detection from dermoscopic images is challenging due to hair occlusion and varying lesion characteristics. This work presents an extended ResNet50 architecture with Inverse Soft Mask Attention mechanism for robust skin cancer classification. The two-stage pipeline first uses U-Net++ for precise hair segmentation, then employs Extended ResNet50 classifier with Inverse Soft Mask Attention to process both hair-occluded and unoccluded regions. The architecture integrates dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation, enabling the model to handle complex dermatoscopic images. Training utilizes Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss. The model achieved 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images, demonstrating superior performance in handling hair-occluded lesions. This work incorporates explainable AI principles, ensuring model deployment readiness for clinical applications.",
+      "We present a two-stage pipeline for skin lesion classification under hair occlusion: U‑Net++ hair segmentation followed by an Extended ResNet50 classifier with Inverse Soft Mask Attention. The method reaches 97.89% accuracy on HAM10000 and improves robustness across occluded and unoccluded regions.",
   },
 ];
 
@@ -361,7 +286,7 @@ export const journey = [
     conference: "Elsevier",
     doi: "Pending",
     abstract:
-      "Computer vision-based automated brain tumor segmentation is crucial in medical imaging for accurate diagnosis and treatment planning. This research proposes a novel hybrid deep learning approach combining VGG16 architecture with Multi-Channel Attention (MCA) and UNet for enhanced brain tumor segmentation in FLAIR MRI images. The proposed VGG16-MCA UNet architecture leverages VGG16's robust feature extraction capabilities, enhanced by multi-channel attention mechanisms that capture both local and global spatial information. The model achieved 99.59% accuracy and 99.71% specificity on LGG Brain MRI Segmentation dataset from 110 low-grade glioma patients. Ensemble learning combining multiple model configurations improved Dice coefficient by 3.7% over standard UNet. The preprocessing pipeline implements skull stripping, intensity normalization, and resizing to 256x256 pixels for FLAIR MRI scans, adhering to AI ethics for medical applications. This work contributes to the advancement of automated medical image analysis with potential applications in clinical decision support systems.",
+      "Attention-enhanced VGG16–MCA UNet for brain tumor segmentation in FLAIR MRI. Achieves 99.59% accuracy and 99.71% specificity on an LGG dataset, with ensemble variants improving Dice over standard UNet baselines.",
   },
   {
     id: "journey-2",
@@ -383,7 +308,7 @@ export const journey = [
       "4th IEEE World Conference on Applied Intelligence and Computing (AIC 2025)",
     doi: "10.1109/AIC60235.2025.11212073",
     abstract:
-      "Correct identification of different skin lesions, such as melanoma, from dermatoscopic images is a major challenge for automated systems, thus causing delay in early diagnosis. Most of the current models are unable to achieve an optimal balance between local feature extraction and global context understanding. Our work overcomes this challenge by proposing a hybrid ResNet50-ViT model. This architecture combines frozen ResNet50 feature extractor with four-head Vision Transformer blocks, allowing the categorization of seven lesion classes from the HAM10000 dataset by fusing ViT's global context awareness with ResNet's strong local feature extraction. The designed model demonstrated 96.3% accuracy, macro F1 of 0.961, and Area Under Curve of 1.00 across all classes, which is a major breakthrough in computer-aided dermatological diagnosis.",
+      "Hybrid ResNet50–Vision Transformer model for seven-class skin lesion classification on HAM10000. Combines local feature learning with global context modeling, achieving 96.3% accuracy, macro F1 0.961, and AUC 1.00 across classes.",
     links: {
       paper: "https://ieeexplore.ieee.org/document/11212073",
     },
@@ -447,7 +372,7 @@ export const journey = [
     conference: "Journal Submission",
     doi: "Pending",
     abstract:
-      "Skin cancer detection from dermoscopic images is challenging due to hair occlusion and varying lesion characteristics. This work presents an extended ResNet50 architecture with Inverse Soft Mask Attention mechanism for robust skin cancer classification. The two-stage pipeline first uses U-Net++ for precise hair segmentation, then employs Extended ResNet50 classifier with Inverse Soft Mask Attention to process both hair-occluded and unoccluded regions. The architecture integrates dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation, enabling the model to handle complex dermatoscopic images. Training utilizes Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss. The model achieved 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images, demonstrating superior performance in handling hair-occluded lesions. This work incorporates explainable AI principles, ensuring model deployment readiness for clinical applications.",
+      "Two-stage pipeline for hair-occluded skin lesion classification: U‑Net++ hair segmentation followed by an Extended ResNet50 classifier with Inverse Soft Mask Attention. Achieves 97.89% accuracy on HAM10000 with improved robustness across occluded/unoccluded regions.",
   },
   {
     id: "journey-1",
@@ -460,10 +385,10 @@ export const journey = [
       "Developed and deployed AI solutions, optimized dashboards, and delivered mobile apps in an Agile environment.",
     highlights: [],
     responsibilities: [
-      "Demonstrated problem-solving by architecting a multi-agent Application Programming Interface system using distributed computing, reducing report generation from 20 to 5 minutes for 10,000+ queries.",
-      "Exhibited creativity by engineering pagination and authentication systems for dashboards, accelerating page load times by 80%, and ensuring model deployment stability for 500+ concurrent sessions.",
-      "Applied continuous learning to deliver iOS applications using React Native, increasing mobile engagement by 45% within the first quarter.",
-      "Collaborated with a 5-member team in Agile sprints; performed code reviews to improve quality metrics by 30%.",
+      "Architected a multi-agent API using distributed compute; reduced report generation from 20 → 5 minutes for 10,000+ queries.",
+      "Built pagination + authentication for dashboards; improved load time by ~80% and supported 500+ concurrent sessions.",
+      "Shipped iOS apps with React Native; increased mobile engagement by ~45% in the first quarter.",
+      "Collaborated in a 5-person Agile team; code reviews improved quality metrics by ~30%.",
     ],
     technologies: [
       "React Native",

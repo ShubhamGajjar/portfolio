@@ -9,8 +9,8 @@ import {
   journey,
   education,
   relevantCoursework,
-  certifications,
 } from "./data";
+import { certificates, badges } from "./certificates";
 
 /**
  * Builds a comprehensive context string for the Gemini API
@@ -58,11 +58,17 @@ TECHNICAL SKILLS:
     context += `  - ${course}\n`;
   });
 
-  context += `\n\nCERTIFICATIONS (${certifications.length} total):\n`;
-  certifications.forEach((cert, index) => {
-    context += `\n${index + 1}. ${cert.name}\n`;
+  context += `\n\nCERTIFICATES (${certificates.length} total):\n`;
+  certificates.forEach((cert, index) => {
+    context += `\n${index + 1}. ${cert.title}\n`;
     context += `   Issuer: ${cert.issuer}\n`;
-    context += `   Year: ${cert.year}\n`;
+    context += `   Date: ${cert.date}\n`;
+  });
+
+  context += `\n\nBADGES (${badges.length} total):\n`;
+  badges.forEach((badge, index) => {
+    context += `\n${index + 1}. ${badge.title}\n`;
+    context += `   Issuer: ${badge.issuer}\n`;
   });
 
   context += `\n\nPROJECTS (${projects.length} total):\n`;
@@ -71,9 +77,8 @@ TECHNICAL SKILLS:
     context += `   Description: ${project.description}\n`;
     context += `   Technologies: ${project.technologies.join(", ")}\n`;
     context += `   Category: ${project.category}\n`;
-    if (project.github) {
-      context += `   GitHub: ${project.github}\n`;
-    }
+    if (project.github) context += `   GitHub: ${project.github}\n`;
+    if (project.demoUrl) context += `   Live demo: ${project.demoUrl}\n`;
     context += `   Status: ${project.status}\n`;
   });
 
@@ -85,7 +90,11 @@ TECHNICAL SKILLS:
     context += `   Status: ${paper.status}\n`;
     context += `   Year: ${paper.year}\n`;
     context += `   Description: ${paper.description}\n`;
-    if (paper.keywords && paper.keywords.length > 0) {
+    if (paper.abstract) context += `   Abstract: ${paper.abstract}\n`;
+    if (paper.doi && paper.doi !== "Pending" && !paper.doi.includes("Pending")) {
+      context += `   DOI: ${paper.doi}\n`;
+    }
+    if (paper.keywords?.length > 0) {
       context += `   Keywords: ${paper.keywords.join(", ")}\n`;
     }
   });
@@ -107,31 +116,31 @@ TECHNICAL SKILLS:
     }
   });
 
-  context += `\n\nJOURNEY TIMELINE (Work + Research + Projects):\n`;
+  context += `\n\nEXPERIENCE (Work, Education, Research & Projects - unified timeline):\n`;
   journey.forEach((item, index) => {
     context += `\n${index + 1}. ${item.title} (${item.type})\n`;
-    context += `   Organization: ${item.organization}\n`;
-    context += `   Location: ${item.location}\n`;
-    context += `   Period: ${item.period}\n`;
-    context += `   Summary: ${item.summary}\n`;
-    if (item.highlights && item.highlights.length > 0) {
+    context += `   Organization: ${item.organization || "—"}\n`;
+    if (item.location) context += `   Location: ${item.location}\n`;
+    context += `   Period: ${item.period || "—"}\n`;
+    context += `   Summary: ${item.summary || "—"}\n`;
+    if (item.gpa) context += `   GPA: ${item.gpa}\n`;
+    if (item.relevantCoursework?.length > 0) {
+      context += `   Relevant coursework: ${item.relevantCoursework.join(", ")}\n`;
+    }
+    if (item.highlights?.length > 0) {
       context += `   Highlights:\n`;
-      item.highlights.forEach((highlight) => {
-        context += `     - ${highlight}\n`;
-      });
+      item.highlights.forEach((h) => { context += `     - ${h}\n`; });
     }
-    if (item.responsibilities && item.responsibilities.length > 0) {
+    if (item.responsibilities?.length > 0) {
       context += `   Responsibilities:\n`;
-      item.responsibilities.forEach((resp) => {
-        context += `     - ${resp}\n`;
-      });
+      item.responsibilities.forEach((r) => { context += `     - ${r}\n`; });
     }
-    if (item.technologies && item.technologies.length > 0) {
+    if (item.technologies?.length > 0) {
       context += `   Technologies: ${item.technologies.join(", ")}\n`;
     }
-    if (item.status) {
-      context += `   Status: ${item.status}\n`;
-    }
+    if (item.abstract) context += `   Abstract: ${item.abstract}\n`;
+    if (item.conference) context += `   Conference: ${item.conference}\n`;
+    if (item.status) context += `   Status: ${item.status}\n`;
   });
 
   context += `\n\nINSTRUCTIONS:
@@ -153,10 +162,10 @@ You can answer questions about:
 - Education background and academic achievements
 - Technical skills and expertise (provide concise lists, not descriptions)
 - Work experience and professional background
-- Certifications
-- Projects (brief summaries with key technologies and status)
-- Research papers and publications (brief summaries with status)
-- Journey timeline (work, research, and projects)
+- Certificates and badges (same as on the portfolio)
+- Projects (brief summaries with key technologies, status, and demo links when available)
+- Research papers and publications (brief summaries with status, DOI when available)
+- Experience section (work, education, research, and projects in one timeline)
 - Contact information (email, phone, location, website, social media)
 - Overall background and experience`;
 

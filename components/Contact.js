@@ -48,10 +48,10 @@ const ContactForm = () => {
         const text = await res.text();
         console.error(
           "API returned non-JSON response:",
-          text.substring(0, 200)
+          text.substring(0, 200),
         );
         setStatus(
-          "API route not found. Please restart your dev server and check that pages/api/contact.js exists."
+          "API route not found. Please restart your dev server and check that pages/api/contact.js exists.",
         );
         return;
       }
@@ -70,11 +70,11 @@ const ContactForm = () => {
       // Handle JSON parsing errors specifically
       if (error instanceof SyntaxError && error.message.includes("JSON")) {
         setStatus(
-          "Server error: API returned invalid response. Please check server logs."
+          "Server error: API returned invalid response. Please check server logs.",
         );
       } else {
         setStatus(
-          "Sorry, something went wrong. Please check your connection and try again."
+          "Sorry, something went wrong. Please check your connection and try again.",
         );
       }
     } finally {
@@ -160,7 +160,7 @@ const ContactForm = () => {
       <div className="mt-6 space-y-3">
         <motion.button
           type="submit"
-          className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={isSubmitting}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -239,7 +239,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 static-glass">
+    <section id="contact" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -250,7 +250,7 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text"
+            className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text font-display"
             variants={itemVariants}
           >
             Let's Collaborate
@@ -259,8 +259,8 @@ const Contact = () => {
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Open to research collaborations in AI for healthcare, biomedical
-            imaging, and computer vision.
+            Open to research and engineering collaborations in medical AI,
+            computer vision, and ML systems.
           </motion.p>
           <motion.p
             className="text-lg text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mt-3"
@@ -282,14 +282,14 @@ const Contact = () => {
           <motion.div className="space-y-6" variants={itemVariants}>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <EnvelopeIcon className="w-6 h-6 text-blue-500" />
+                <EnvelopeIcon className="w-6 h-6 text-brand" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">
                     Email
                   </p>
                   <a
                     href={`mailto:${socialLinks.email}`}
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors"
+                    className="text-gray-600 dark:text-gray-300 hover:text-brand transition-colors"
                   >
                     {socialLinks.email}
                   </a>
@@ -299,7 +299,7 @@ const Contact = () => {
               {socialLinks.phone && (
                 <div className="flex items-center gap-3">
                   <svg
-                    className="w-6 h-6 text-blue-500"
+                    className="w-6 h-6 text-brand"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -317,7 +317,7 @@ const Contact = () => {
                     </p>
                     <a
                       href={`tel:${socialLinks.phone}`}
-                      className="text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors"
+                      className="text-gray-600 dark:text-gray-300 hover:text-brand transition-colors"
                     >
                       {socialLinks.phone}
                     </a>
@@ -326,26 +326,26 @@ const Contact = () => {
               )}
 
               <div className="flex items-center gap-3">
-                <AcademicCapIcon className="w-6 h-6 text-blue-500" />
+                <AcademicCapIcon className="w-6 h-6 text-brand" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">
                     Research Focus
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Medical AI, Computer Vision, Deep Learning
+                    Computer Vision, Deep Learning
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <BeakerIcon className="w-6 h-6 text-blue-500" />
+                <BeakerIcon className="w-6 h-6 text-brand" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">
                     Expertise
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Medical AI, Hybrid Deep Learning Architectures, Multi-Agent
-                    Systems, IEEE Publications
+                    Hybrid Deep Learning Architectures, Multi-Agent Systems,
+                    Medical AI
                   </p>
                 </div>
               </div>
@@ -361,13 +361,13 @@ const Contact = () => {
                   href={socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ai-card p-4 hover:scale-105 transition-all duration-200 block"
+                  className="ai-card p-4 transition-all duration-200 block hover:shadow-soft"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 ai-glass rounded-lg">
                         <svg
-                          className="h-5 w-5 text-blue-500"
+                          className="h-5 w-5 text-brand"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
@@ -384,7 +384,7 @@ const Contact = () => {
                       </div>
                     </div>
                     <svg
-                      className="h-4 w-4 text-blue-500"
+                      className="h-4 w-4 text-brand"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -396,13 +396,13 @@ const Contact = () => {
                   href={socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ai-card p-4 hover:scale-105 transition-all duration-200 block"
+                  className="ai-card p-4 transition-all duration-200 block hover:shadow-soft"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 ai-glass rounded-lg">
                         <svg
-                          className="h-5 w-5 text-blue-500"
+                          className="h-5 w-5 text-brand"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
@@ -419,7 +419,7 @@ const Contact = () => {
                       </div>
                     </div>
                     <svg
-                      className="h-4 w-4 text-blue-500"
+                      className="h-4 w-4 text-brand"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -431,7 +431,7 @@ const Contact = () => {
                   href={socialLinks.orcid}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ai-card p-4 hover:scale-105 transition-all duration-200 block"
+                  className="ai-card p-4 transition-all duration-200 block hover:shadow-soft"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -472,13 +472,13 @@ const Contact = () => {
                   href={socialLinks.googleScholar}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ai-card p-4 hover:scale-105 transition-all duration-200 block"
+                  className="ai-card p-4 transition-all duration-200 block hover:shadow-soft"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 ai-glass rounded-lg">
                         <svg
-                          className="h-5 w-5 text-blue-500"
+                          className="h-5 w-5 text-brand"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
@@ -495,7 +495,7 @@ const Contact = () => {
                       </div>
                     </div>
                     <svg
-                      className="h-4 w-4 text-blue-500"
+                      className="h-4 w-4 text-brand"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >

@@ -29,7 +29,7 @@ const Chatbot = ({ onToggleRef }) => {
   const initialMessage = {
     role: "assistant",
     content:
-      "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Journey & Research\n• Contact Information\n\nWhat would you like to know?",
+      "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Experience & Research\n• Contact Information\n\nWhat would you like to know?",
     timestamp: new Date().toISOString(),
     isStreaming: false,
     streamingContent: "",
@@ -533,7 +533,7 @@ const Chatbot = ({ onToggleRef }) => {
       });
     }
 
-    // Research section - redirect to journey since research is now there
+    // Experience section (work, education, research, projects)
     if (
       lowerContent.includes("research") ||
       lowerContent.includes("paper") ||
@@ -541,11 +541,11 @@ const Chatbot = ({ onToggleRef }) => {
       lowerContent.includes("journal")
     ) {
       actions.push({
-        type: "view_journey",
-        label: "📚 View Journey",
+        type: "view_experience",
+        label: "📚 View Experience",
         action: () => {
-          scrollToPortfolioSection("#journey");
-          track("chatbot_quick_action", { action: "view_journey" });
+          scrollToPortfolioSection("#experience");
+          track("chatbot_quick_action", { action: "view_experience" });
         },
       });
     }
@@ -882,7 +882,7 @@ const Chatbot = ({ onToggleRef }) => {
       {
         role: "assistant",
         content:
-          "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Journey & Research\n• Contact Information\n\nWhat would you like to know?",
+          "Hi! I'm here to help you learn about Shubham's work. You can ask me about:\n\n• Resume & Experience\n• Technical Skills\n• Projects\n• Experience & Research\n• Contact Information\n\nWhat would you like to know?",
         timestamp: new Date().toISOString(),
       },
     ];
@@ -985,54 +985,7 @@ const Chatbot = ({ onToggleRef }) => {
 
   return (
     <>
-      {/* Floating Chat Button - Hidden on mobile, shown on desktop (icon + text) */}
-      <motion.button
-        onClick={handleToggle}
-        className="hidden md:inline-flex fixed bottom-6 right-6 z-50 flex-col items-center justify-center gap-1 px-4 py-3 rounded-2xl liquid-glass text-gray-700 dark:text-gray-300 shadow-lg hover:shadow-xl transition-all duration-300"
-        style={{
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-        }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.96 }}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-        aria-label={isOpen ? "Close chat" : "Open chat"}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-col items-center justify-center gap-1"
-            >
-              <XMarkIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Chat</span>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="chat"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 4 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-col items-center justify-center gap-1"
-            >
-              <ChatBubbleLeftRightIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Chat</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
-
+      {/* Chat open/close is triggered from Navbar only; no floating button */}
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
@@ -1064,7 +1017,7 @@ const Chatbot = ({ onToggleRef }) => {
                 className="relative liquid-glass text-gray-800 dark:text-white p-4 flex items-center justify-between"
                 style={{
                   background:
-                    "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.02)",
+                    "linear-gradient(to right, rgba(13, 148, 136, 0.08)), rgba(255, 255, 255, 0.02)",
                   backdropFilter: "blur(12px)",
                   WebkitBackdropFilter: "blur(12px)",
                   borderBottom: "1px solid rgba(255, 255, 255, 0.02)",
@@ -1134,7 +1087,7 @@ const Chatbot = ({ onToggleRef }) => {
                               onClick={() => handleSuggestedQuestion(question)}
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              className="text-xs px-3 py-1.5 bg-blue-500/20 dark:bg-blue-500/15 backdrop-blur-md border border-blue-500/30 dark:border-blue-400/20 text-blue-700 dark:text-blue-300 rounded-full hover:bg-blue-500/30 dark:hover:bg-blue-500/20 transition-colors shadow-sm"
+                              className="text-xs px-3 py-1.5 bg-brand/20 dark:bg-brand/15 backdrop-blur-md border border-brand/30 dark:border-brand/20 text-fg rounded-full hover:bg-brand/30 dark:hover:bg-brand/20 transition-colors shadow-sm"
                             >
                               {question}
                             </motion.button>
@@ -1174,7 +1127,7 @@ const Chatbot = ({ onToggleRef }) => {
                               msg.role === "user"
                                 ? {
                                     background:
-                                      "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.2)",
+                                      "linear-gradient(to right, rgba(13, 148, 136, 0.1)), rgba(255, 255, 255, 0.2)",
                                     backdropFilter: "blur(12px)",
                                     WebkitBackdropFilter: "blur(12px)",
                                     border:
@@ -1231,7 +1184,7 @@ const Chatbot = ({ onToggleRef }) => {
                                     className="text-xs px-3 py-1.5 liquid-glass text-gray-800 dark:text-gray-200 rounded-full transition-colors flex items-center gap-1 shadow-md"
                                     style={{
                                       background:
-                                        "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.2)",
+                                        "linear-gradient(to right, rgba(13, 148, 136, 0.1)), rgba(255, 255, 255, 0.2)",
                                       backdropFilter: "blur(12px)",
                                       WebkitBackdropFilter: "blur(12px)",
                                       border:
@@ -1264,13 +1217,13 @@ const Chatbot = ({ onToggleRef }) => {
                     >
                       <div className="bg-white/20 dark:bg-black/20 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-2xl px-4 py-2 shadow-md">
                         <div className="flex space-x-1">
-                          <div className="w-2 h-2 bg-blue-500/70 dark:bg-blue-400/70 rounded-full animate-bounce" />
+                          <div className="w-2 h-2 bg-brand/70 rounded-full animate-bounce" />
                           <div
-                            className="w-2 h-2 bg-purple-500/70 dark:bg-purple-400/70 rounded-full animate-bounce"
+                            className="w-2 h-2 bg-brand/70 rounded-full animate-bounce"
                             style={{ animationDelay: "0.1s" }}
                           />
                           <div
-                            className="w-2 h-2 bg-blue-500/70 dark:bg-blue-400/70 rounded-full animate-bounce"
+                            className="w-2 h-2 bg-brand/70 rounded-full animate-bounce"
                             style={{ animationDelay: "0.2s" }}
                           />
                         </div>
@@ -1355,7 +1308,7 @@ const Chatbot = ({ onToggleRef }) => {
                       }
                       disabled={isLoading || rateLimited}
                       maxLength={500}
-                      className="w-full px-4 py-2 pr-12 border border-white/20 dark:border-white/10 rounded-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:opacity-50 shadow-md"
+                      className="w-full px-4 py-2 pr-12 border border-white/20 dark:border-white/10 rounded-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand/50 disabled:opacity-50 shadow-md"
                     />
                     {inputMessage.length > 0 && (
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-gray-500">
@@ -1369,7 +1322,7 @@ const Chatbot = ({ onToggleRef }) => {
                     className="px-4 py-2 liquid-glass text-gray-800 dark:text-white rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center shadow-md"
                     style={{
                       background:
-                        "linear-gradient(to right, rgba(59, 131, 246, 0.1), rgba(138, 92, 246, 0.1)), rgba(255, 255, 255, 0.02)",
+                        "linear-gradient(to right, rgba(13, 148, 136, 0.08)), rgba(255, 255, 255, 0.02)",
                       backdropFilter: "blur(12px)",
                       WebkitBackdropFilter: "blur(12px)",
                       border: "1px solid rgba(255, 255, 255, 0.02)",
