@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import {
   ArrowTopRightOnSquareIcon,
   DocumentArrowDownIcon,
-  MapPinIcon,
 } from "@heroicons/react/24/outline";
 import { researchPapers, socialLinks } from "../utils/data";
 
@@ -23,18 +22,6 @@ const Hero = ({ title, subtitle, resumeLink }) => {
         <div className="grid items-center gap-10 lg:grid-cols-12">
           {/* Left */}
           <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-sm text-fg/80 backdrop-blur-md"
-            >
-              <MapPinIcon className="h-4 w-4 text-brand" />
-              <span>{socialLinks?.location || "Portland, Maine"}</span>
-              <span className="text-muted">•</span>
-              <span className="text-fg/80">AI • Medical imaging • Systems</span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
