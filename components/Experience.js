@@ -142,7 +142,7 @@ const Experience = () => {
 
         {/* Summary - one place only */}
         {item.summary && (
-          <p className="text-fg/90 dark:text-fg/80 leading-relaxed mb-5 max-w-2xl">
+          <p className="text-muted leading-relaxed mb-5 max-w-2xl">
             {item.summary}
           </p>
         )}
@@ -172,7 +172,7 @@ const Experience = () => {
               {item.responsibilities.map((resp, idx) => (
                 <li
                   key={idx}
-                  className="flex gap-2 text-sm text-fg/85 dark:text-fg/80 leading-relaxed"
+                  className="flex gap-2 text-sm text-muted leading-relaxed"
                 >
                   <span className="text-brand mt-0.5">•</span>
                   <span>{resp}</span>
@@ -211,7 +211,7 @@ const Experience = () => {
             {item.abstract && (
               <div>
                 <h4 className="text-sm font-semibold text-fg mb-1">Abstract</h4>
-                <p className="text-sm text-fg/85 dark:text-fg/80 leading-relaxed">{item.abstract}</p>
+                <p className="text-sm text-muted leading-relaxed">{item.abstract}</p>
               </div>
             )}
             {item.highlights?.length > 0 && (
@@ -219,7 +219,7 @@ const Experience = () => {
                 <h4 className="text-sm font-semibold text-fg mb-2">Key contributions</h4>
                 <ul className="space-y-1.5">
                   {item.highlights.map((point, idx) => (
-                    <li key={idx} className="flex gap-2 text-sm text-fg/85 leading-relaxed">
+                    <li key={idx} className="flex gap-2 text-sm text-muted leading-relaxed">
                       <span className="text-brand mt-0.5">•</span>
                       <span>{point}</span>
                     </li>
@@ -251,7 +251,7 @@ const Experience = () => {
                 {item.technologies.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 text-xs rounded-full bg-muted/15 dark:bg-muted/20 text-fg/80 border border-border/50"
+                    className="px-2.5 py-1 text-xs rounded-full bg-muted/15 dark:bg-muted/20 text-muted border border-border/50"
                   >
                     {tech}
                   </span>
@@ -268,7 +268,7 @@ const Experience = () => {
               {item.technologies.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="px-2.5 py-1 text-xs rounded-full bg-muted/15 dark:bg-muted/20 text-fg/80 border border-border/50"
+                  className="px-2.5 py-1 text-xs rounded-full bg-muted/15 dark:bg-muted/20 text-muted border border-border/50"
                 >
                   {tech}
                 </span>
@@ -349,10 +349,10 @@ const Experience = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-semibold text-fg font-display mb-2">
+          <h2 className="text-4xl md:text-5xl font-bold ai-gradient-text font-display mb-2">
             Experience
           </h2>
-          <p className="text-muted text-lg">
+          <p className="text-xl text-muted max-w-3xl mx-auto">
             Work, education, research, and projects.
           </p>
         </motion.header>

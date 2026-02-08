@@ -21,7 +21,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-20">
+    <section id="about" className="pt-20 pb-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
