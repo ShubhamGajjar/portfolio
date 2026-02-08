@@ -14,7 +14,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-28 pb-16 sm:pb-20"
+      className="relative overflow-hidden pt-28 pb-48 sm:pb-64 lg:pb-80 min-h-[85vh]"
     >
       {/* Background is site-wide (see index.js); hero has no local gradient so it never “ends” */}
 
