@@ -65,6 +65,13 @@ export const badges = [
     file: "/badges/GLI Certificate - Shubham.pdf",
     badge: "https://api.badgr.io/public/badges/cF9bMLzRTRirciup-ysJcA/image",
   },
+  {
+    id: "innovation-challenge",
+    title: "Innovation Challenge",
+    issuer: "College of Professional Studies, Continuing Education",
+    file: "/badges/Innovation Challenge.pdf",
+    badge: "https://api.badgr.io/public/badges/yH4qCY_6QumcoM6TF9DMjA/image",
+  },
 ];
 
 // Default export for backward compatibility
