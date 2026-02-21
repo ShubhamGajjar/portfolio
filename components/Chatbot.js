@@ -743,7 +743,17 @@ const Chatbot = ({ onToggleRef }) => {
         }),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      let data;
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch (parseErr) {
+        // API returned non-JSON (e.g. plain text error or HTML)
+        const msg =
+          responseText?.trim().slice(0, 200) ||
+          `Request failed (${response.status})`;
+        throw new Error(msg);
+      }
 
       if (!response.ok) {
         // Handle rate limit specifically - don't throw, just set state
