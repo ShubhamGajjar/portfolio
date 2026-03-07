@@ -97,6 +97,7 @@ TECHNICAL SKILLS:
     if (paper.keywords?.length > 0) {
       context += `   Keywords: ${paper.keywords.join(", ")}\n`;
     }
+    if (paper.github) context += `   GitHub (code): ${paper.github}\n`;
   });
 
   context += `\n\nWORK EXPERIENCE (${workExperience.length} total):\n`;

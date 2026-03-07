@@ -26,7 +26,7 @@ const Hero = ({ title, subtitle, resumeLink }) => {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.05, ease: "easeOut" }}
-              className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-fg font-display"
+              className="mt-0 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-fg font-display"
             >
               <span className="block">{title}</span>
               <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl font-semibold text-fg/80">
@@ -112,9 +112,19 @@ const Hero = ({ title, subtitle, resumeLink }) => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.12, ease: "easeOut" }}
-            className="lg:col-span-5"
+            className="lg:col-span-5 flex flex-col items-center lg:items-end gap-6"
           >
-            <div className="glass-card p-6 sm:p-7">
+            <div className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-56 lg:h-56 shrink-0">
+              <div className="absolute inset-0 rounded-full overflow-hidden ring-2 ring-border/60 ring-offset-2 ring-offset-bg dark:ring-offset-bg shadow-xl">
+                <img
+                  src="/images/profile-picture.jpg"
+                  alt="Shubham Gajjar"
+                  className="w-full h-full object-cover"
+                  fetchPriority="high"
+                />
+              </div>
+            </div>
+            <div className="glass-card p-6 sm:p-7 w-full max-w-md">
               <div className="flex items-center justify-between gap-3">
                 <h2 className="text-base font-semibold text-fg">Highlights</h2>
               </div>
@@ -130,17 +140,30 @@ const Hero = ({ title, subtitle, resumeLink }) => {
                     Hybrid deep learning for skin lesion classification
                     (HAM10000).
                   </p>
-                  {published?.ieeeUrl && (
-                    <a
-                      href={published.ieeeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 inline-flex items-center gap-2 text-sm text-brand hover:opacity-80 transition-colors"
-                    >
-                      View on IEEE Xplore
-                      <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                    </a>
-                  )}
+                  <div className="mt-2 flex flex-wrap items-center gap-3">
+                    {published?.ieeeUrl && (
+                      <a
+                        href={published.ieeeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-brand hover:opacity-80 transition-colors"
+                      >
+                        View on IEEE Xplore
+                        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                      </a>
+                    )}
+                    {published?.github && (
+                      <a
+                        href={published.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-brand hover:opacity-80 transition-colors"
+                      >
+                        View code on GitHub
+                        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
                 <div className="rounded-xl border border-border/60 bg-card/40 p-4">

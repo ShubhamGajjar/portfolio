@@ -64,6 +64,27 @@ export const projects = [
     impact: "Creative AI & Image Processing",
     status: "Completed",
   },
+  {
+    id: 4,
+    title: "Skin Cancer Hybrid ResNet-ViT (IEEE AIC 2025)",
+    description:
+      "Official code for 'A Hybrid ResNet-ViT Architecture for Skin Cancer Classification' — reproducible implementation of a hybrid convolutional–transformer model for skin lesion classification on HAM10000 (96.3% accuracy, AUC ≈ 1.00).",
+    technologies: [
+      "Python",
+      "PyTorch",
+      "ResNet50",
+      "Vision Transformer",
+      "Computer Vision",
+      "Medical AI",
+      "HAM10000",
+    ],
+    category: "Research",
+    github: "https://github.com/ShubhamGajjar/SkinCancer-Hybrid-ResNet-ViT",
+    live: null,
+    image: "/mosaic.jpg",
+    impact: "Medical AI • Skin Lesion Classification",
+    status: "Published",
+  },
 ];
 
 export const skills = {
@@ -156,6 +177,7 @@ export const researchPapers = [
     ],
     doi: "10.1109/AIC60235.2025.11212073",
     ieeeUrl: "https://ieeexplore.ieee.org/document/11212073",
+    github: "https://github.com/ShubhamGajjar/SkinCancer-Hybrid-ResNet-ViT",
     pdf: "/AIC 2025 Certificate.pdf",
     certificate: "/AIC_2025_Presentation_Certificate.pdf",
     abstract:
@@ -311,6 +333,7 @@ export const journey = [
       "Hybrid ResNet50–Vision Transformer model for seven-class skin lesion classification on HAM10000. Combines local feature learning with global context modeling, achieving 96.3% accuracy, macro F1 0.961, and AUC 1.00 across classes.",
     links: {
       paper: "https://ieeexplore.ieee.org/document/11212073",
+      github: "https://github.com/ShubhamGajjar/SkinCancer-Hybrid-ResNet-ViT",
     },
   },
   {
