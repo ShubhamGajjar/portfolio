@@ -1,17 +1,17 @@
 export const certificates = [
   {
+    id: "bspc-reviewer",
+    title: "Journal Reviewer – Biomedical Signal Processing and Control",
+    issuer: "Elsevier (Biomedical Signal Processing and Control)",
+    date: "2026",
+    file: "/certificates/Certificate_BSPC_Recognised.pdf",
+  },
+  {
     id: "aic-2025",
     title: "AIC 2025 Presentation Certificate",
     issuer: "IEEE AIC 2025",
     date: "2025",
     file: "/certificates/AIC_2025_Presentation_Certificate.pdf",
-  },
-  {
-    id: "machine-learning-2025",
-    title: "Machine Learning Certificate",
-    issuer: "Tops Technologies",
-    date: "2022",
-    file: "/certificates/Machine_Learning_Certificate.pdf",
   },
   {
     id: "python-data-structures",
@@ -26,6 +26,13 @@ export const certificates = [
     issuer: "Indian Institute of Technology Madras",
     date: "2023",
     file: "/certificates/Python For Data Science.pdf",
+  },
+  {
+    id: "machine-learning-2025",
+    title: "Machine Learning Certificate",
+    issuer: "Tops Technologies",
+    date: "2022",
+    file: "/certificates/Machine_Learning_Certificate.pdf",
   },
 ];
 
