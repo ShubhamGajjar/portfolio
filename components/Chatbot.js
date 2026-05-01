@@ -544,7 +544,7 @@ const Chatbot = ({ onToggleRef }) => {
         type: "view_experience",
         label: "📚 View Experience",
         action: () => {
-          scrollToPortfolioSection("#experience");
+          scrollToPortfolioSection("#work");
           track("chatbot_quick_action", { action: "view_experience" });
         },
       });

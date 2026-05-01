@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scrub Test — Research Journey</title>
+<style>
+  :root {
+    --paper: #F4F6F1;
+    --jade: #7B9669;
+    --jade-dk: #404E3B;
+    --ink: #1E2519;
+    --line: #D8DDD4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--paper); color: var(--ink); font-family: -apple-system, system-ui, sans-serif; }
+  .scroll-area { height: 5000px; position: relative; }
+  .canvas-wrap {
+    position: sticky; top: 0; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  canvas {
+    width: min(100%, 1280px); height: auto; aspect-ratio: 16 / 9;
+    background: var(--paper);
+    border-radius: 8px;
+  }
+  .hud {
+    position: fixed; top: 16px; left: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--jade-dk);
+    background: rgba(244,246,241,0.92); border: 1px solid var(--line);
+    padding: 10px 14px; border-radius: 8px; z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+  .hud-row { display: flex; gap: 16px; align-items: center; }
+  .hud strong { color: var(--ink); font-weight: 700; }
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: var(--jade); width: 0; z-index: 20;
+    transition: width .05s linear;
+  }
+  .hint {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--jade-dk);
+    opacity: .6; z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div class="hud">
+  <div class="hud-row">
+    <span>Frame <strong id="hudFrame">000</strong> / <span id="hudTotal">240</span></span>
+    <span>Loaded <strong id="hudLoaded">0</strong></span>
+    <span id="hudStatus">Loading…</span>
+  </div>
+</div>
+
+<div class="progress" id="progressBar"></div>
+
+<div class="scroll-area">
+  <div class="canvas-wrap">
+    <canvas id="canvas" width="1920" height="1080"></canvas>
+  </div>
+</div>
+
+<div class="hint">↓ Scroll to scrub ↓</div>
+
+<script>
+// === CONFIG ===
+// Adjust these to match your render output. Default Remotion v4 image-sequence
+// pattern is `element-NNNNNNN.png` in the output folder, 0-indexed, 7-digit padded.
+const TOTAL_FRAMES = 240;
+const FRAME_DIR = './anim/';
+const FRAME_PREFIX = 'element-';
+const FRAME_PAD = 7;
+const FRAME_EXT = '.png';
+
+// === ELEMENTS ===
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const hudFrame = document.getElementById('hudFrame');
+const hudLoaded = document.getElementById('hudLoaded');
+const hudStatus = document.getElementById('hudStatus');
+const hudTotal = document.getElementById('hudTotal');
+const progressBar = document.getElementById('progressBar');
+hudTotal.textContent = TOTAL_FRAMES;
+
+// === PRELOAD ===
+const images = new Array(TOTAL_FRAMES);
+let loadedCount = 0;
+let lastDrawn = -1;
+
+const frameUrl = (i) =>
+  `${FRAME_DIR}${FRAME_PREFIX}${String(i).padStart(FRAME_PAD, '0')}${FRAME_EXT}`;
+
+for (let i = 0; i < TOTAL_FRAMES; i++) {
+  const img = new Image();
+  img.onload = () => {
+    loadedCount++;
+    hudLoaded.textContent = loadedCount;
+    if (loadedCount === 1) drawFrame(0);
+    if (loadedCount === TOTAL_FRAMES) {
+      hudStatus.textContent = 'Ready · scroll to scrub';
+    }
+  };
+  img.onerror = () => {
+    loadedCount++;
+    hudLoaded.textContent = loadedCount;
+    if (loadedCount < 5) console.warn('Failed to load:', frameUrl(i));
+    if (loadedCount === TOTAL_FRAMES) {
+      hudStatus.textContent = 'Loaded with errors — check console';
+    }
+  };
+  img.src = frameUrl(i);
+  images[i] = img;
+}
+
+function drawFrame(i) {
+  const idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, i));
+  if (idx === lastDrawn) return;
+  const img = images[idx];
+  if (img && img.complete && img.naturalWidth > 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    lastDrawn = idx;
+    hudFrame.textContent = String(idx).padStart(3, '0');
+  }
+}
+
+let rafPending = false;
+function onScroll() {
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+    const idx = Math.floor(pct * (TOTAL_FRAMES - 1));
+    progressBar.style.width = (pct * 100) + '%';
+    drawFrame(idx);
+    rafPending = false;
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
+onScroll();
+</script>
+</body>
+</html>

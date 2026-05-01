@@ -68,7 +68,7 @@ export const projects = [
     id: 4,
     title: "Skin Cancer Hybrid ResNet-ViT (IEEE AIC 2025)",
     description:
-      "Official code for 'A Hybrid ResNet-ViT Architecture for Skin Cancer Classification' — reproducible implementation of a hybrid convolutional–transformer model for skin lesion classification on HAM10000 (96.3% accuracy, AUC ≈ 1.00).",
+      "Official code for 'A Hybrid ResNet-ViT Architecture for Skin Cancer Classification'. Reproducible implementation of a hybrid convolutional–transformer model for skin lesion classification on HAM10000 (96.3% accuracy, AUC ≈ 1.00).",
     technologies: [
       "Python",
       "PyTorch",
@@ -207,26 +207,24 @@ export const researchPapers = [
   },
   {
     id: 3,
-    title: "Extended ResNet50 with Inverse Soft Mask Attention for Skin Cancer",
-    authors:
-      "Shubham Gajjar, Harshal Joshi, Om Rathod, Vishal Barot, Deep Joshi",
-    conference: "Journal Submission",
-    status: "Submitted",
-    year: "2025",
+    title:
+      "MorphoCLIP: Text-Supervised Contrastive Learning for Perturbation Matching in Cell Painting Images",
+    authors: "Shubham Gajjar",
+    conference: "Working Paper · 2026",
+    status: "In Progress",
+    year: "2026",
     description:
-      "Developed two-stage pipeline combining U-Net++ hair segmentation with Extended ResNet50 classifier featuring Inverse Soft Mask Attention mechanism, achieving 97.89% accuracy on HAM10000 dataset with 10,015 dermoscopic images. Applied creativity by integrating dense residual blocks and Squeeze-and-Excitation modules with learnable weighted feature aggregation for hair-occluded and unoccluded regions. Utilized Nadam optimizer with Cosine Decay Restarts and Sparse Categorical Crossentropy loss, incorporating explainable AI principles ensuring model deployment readiness.",
+      "Contrastive framework that embeds Cell Painting microscopy images and natural-language perturbation descriptions in a shared 512-dim space, jointly trained across compounds, CRISPR knockouts, and ORF overexpressions.",
     keywords: [
-      "Computer Vision",
-      "Deep Learning",
-      "Medical AI",
-      "Skin Cancer",
-      "ResNet",
-      "Inverse Soft Mask Attention",
-      "U-Net++",
+      "Vision-Language",
+      "Contrastive Learning",
+      "Cell Painting",
+      "DINOv3",
+      "Drug Discovery",
+      "Microscopy",
     ],
-    doi: "Pending",
     abstract:
-      "We present a two-stage pipeline for skin lesion classification under hair occlusion: U‑Net++ hair segmentation followed by an Extended ResNet50 classifier with Inverse Soft Mask Attention. The method reaches 97.89% accuracy on HAM10000 and improves robustness across occluded and unoccluded regions.",
+      "MorphoCLIP is a contrastive learning framework that embeds Cell Painting microscopy images and natural-language perturbation descriptions in a shared 512-dimensional space. The image branch uses a frozen DINOv3 ViT-L/16 backbone with a CrossChannelFormer aggregator across five fluorescence channels; the text branch uses BioClinical ModernBERT with a trainable projection head. Trained with Continuously Weighted Contrastive Loss (CWCL) on the CPJUMP1 benchmark (51 plates, 817 perturbations), it reaches text-to-image Recall@10 of 24.3% (about two orders of magnitude above the 0.12% random baseline) and is the first such model trained jointly on compounds, CRISPR knockouts, and ORF overexpressions.",
   },
 ];
 
@@ -446,6 +444,31 @@ export const journey = [
     ],
     tags: ["Education", "Master's", "Artificial Intelligence"],
   },
+  {
+    id: "journey-ra-1",
+    type: "Work",
+    title: "Research Assistant",
+    organization: "Northeastern University",
+    location: "Portland, Maine",
+    period: "March 2026 – Present",
+    status: "Current",
+    summary:
+      "Part-time research assistantship on Vision-Language Models in Biomedicine.",
+    highlights: [
+      "Vision-Language Models for biomedical image understanding (MedGemma, LLaVA-Med).",
+      "MorphoCLIP: contrastive learning for Cell Painting perturbation matching (working paper, 2026).",
+    ],
+    technologies: [
+      "Vision-Language Models",
+      "Contrastive Learning",
+      "DINOv3",
+      "Cell Painting",
+      "MedGemma",
+      "LLaVA-Med",
+      "PyTorch",
+    ],
+    tags: ["Work Experience", "Research Assistant", "Vision-Language Models", "Biomedicine"],
+  },
 ];
 
 export const socialLinks = {
@@ -518,6 +541,30 @@ export const certifications = [
 
 // Work Experience Data
 export const workExperience = [
+  {
+    id: 2,
+    position: "Research Assistant",
+    company: "Northeastern University",
+    location: "Portland, Maine",
+    duration: "March 2026 - Present",
+    description:
+      "Part-time research assistantship on Vision-Language Models in Biomedicine. Working on biomedical image understanding with MedGemma and LLaVA-Med, and on MorphoCLIP, a contrastive learning framework for matching Cell Painting microscopy images to natural-language perturbation descriptions.",
+    responsibilities: [
+      "Vision-Language Models for biomedical image understanding (MedGemma, LLaVA-Med).",
+      "MorphoCLIP: contrastive learning for Cell Painting perturbation matching across compounds, CRISPR knockouts, and ORF overexpressions (text-to-image Recall@10 of 24.3% on CPJUMP1, ~200x over random baseline).",
+      "Frozen DINOv3 ViT-L/16 image backbone with CrossChannelFormer aggregator across five fluorescence channels; BioClinical ModernBERT text branch with trainable projection head.",
+    ],
+    technologies: [
+      "Vision-Language Models",
+      "Contrastive Learning",
+      "DINOv3",
+      "Cell Painting",
+      "MedGemma",
+      "LLaVA-Med",
+      "PyTorch",
+      "BioClinical ModernBERT",
+    ],
+  },
   {
     id: 1,
     position: "Artificial Intelligence Engineer",
