@@ -59,7 +59,15 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Download Resume ↓
+              Download Resume
+            </a>
+            <a
+              className="btn-pill"
+              href="/Shubham_Gajjar_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download CV
             </a>
             <a className="btn-pill" href={`mailto:${socialLinks.email}`}>
               Email me →
@@ -82,7 +90,7 @@ const HIGHLIGHTS = [
   {
     year: "2026",
     title: "MorphoCLIP",
-    sub: "Cell Painting contrastive learning · Working paper",
+    sub: "Cell Painting contrastive learning",
   },
   {
     year: "2025",

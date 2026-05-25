@@ -34,7 +34,7 @@ const CATEGORIES = [
 export default function Skills() {
   return (
     <section id="skills" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
-      <div className="eyebrow mb-[14px]">§ 05 · Stack</div>
+      <div className="eyebrow mb-[14px]">05 · Stack</div>
       <h2 className="section-title mb-14">
         Tools I <em>use most</em>.
       </h2>

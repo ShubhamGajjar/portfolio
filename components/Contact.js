@@ -7,6 +7,7 @@ const SOCIALS = [
   { label: "Google Scholar", href: socialLinks.googleScholar },
   { label: "ORCID", href: socialLinks.orcid },
   { label: "Resume · PDF", href: "/Shubham_Gajjar_Resume.pdf" },
+  { label: "CV · PDF", href: "/Shubham_Gajjar_CV.pdf" },
 ];
 
 export default function Contact() {
@@ -45,7 +46,7 @@ export default function Contact() {
       />
 
       <div className="relative z-[1] max-w-[1200px] mx-auto">
-        <div className="eyebrow on-dark mb-5">§ 08 · Get in touch</div>
+        <div className="eyebrow on-dark mb-5">08 · Get in touch</div>
         <h2
           className="font-display font-black mb-11"
           style={{ fontSize: "clamp(56px, 10vw, 170px)", lineHeight: ".88", letterSpacing: "-.05em" }}

@@ -1,18 +1,39 @@
 // pages/index.js
 import Head from "next/head";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
-import Experience from "../components/Experience";
-import Research from "../components/Research";
-import Projects from "../components/Projects";
-import Skills from "../components/Skills";
-import Certificates from "../components/Certificates";
-import Badges from "../components/Badges";
+import NowCard from "../components/NowCard";
+import Highlights from "../components/Highlights";
+import SkillsStrip from "../components/SkillsStrip";
 import Contact from "../components/Contact";
+import { workExperience, researchPapers, projects } from "../utils/data";
 
-export default function Home({ chatToggleRef }) {
-  const siteUrl = "https://shubhamgajjar.dev";
+const siteUrl = "https://shubhamgajjar.dev";
+
+// Subset of skills surfaced in the compact home strip — full list lives on /about
+const HOME_SKILLS = [
+  "PyTorch",
+  "Computer Vision",
+  "Vision Transformers",
+  "Medical AI",
+  "Python",
+  "Next.js",
+  "Reinforcement Learning",
+  "Contrastive Learning",
+];
+
+// Edit this whenever your current focus changes — it's the "currently working on" card
+const NOW = {
+  headline: "Two parallel projects in medical AI",
+  body:
+    "As Research Assistant at Northeastern, I'm building a vision-language model for veterinary mast cell tumor cytology — MedGemma 1.5 4B with QLoRA on a MedSigLIP encoder, deployed on Databricks. For my Research Capstone (a separate track), I led MorphoCLIP: a dual-encoder contrastive system aligning Cell Painting microscopy with natural-language perturbations.",
+  updated: "May 2026",
+};
+
+export default function Home() {
+  const latestWork = workExperience[0];
+  const latestPaper = researchPapers[0];
+  const latestProject = projects[0];
 
   return (
     <>
@@ -22,8 +43,6 @@ export default function Home({ chatToggleRef }) {
           name="description"
           content="AI researcher and M.S. AI student at Northeastern University. Deep learning for medical imaging, computer vision, and reliable AI systems."
         />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="alternate icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#7B9669" />
         <meta
@@ -46,17 +65,12 @@ export default function Home({ chatToggleRef }) {
         />
       </Head>
 
-      <Navbar onChatToggle={() => chatToggleRef?.current?.()} />
-
       <main>
         <Hero />
         <About />
-        <Experience />
-        <Research />
-        <Projects />
-        <Skills />
-        <Certificates />
-        <Badges />
+        <NowCard headline={NOW.headline} body={NOW.body} updated={NOW.updated} />
+        <Highlights work={latestWork} paper={latestPaper} project={latestProject} />
+        <SkillsStrip skills={HOME_SKILLS} />
         <Contact />
       </main>
     </>

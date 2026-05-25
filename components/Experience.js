@@ -1,76 +1,122 @@
-const ENTRIES = [
-  {
-    y: "2026 – Present",
-    titlePre: "Research ",
-    titleEm: "Assistant",
-    titlePost: "",
-    org: "Northeastern University · Part-time",
-    desc: "Vision-Language Models in Biomedicine. MedGemma / LLaVA-Med for cell-image classification.",
-  },
-  {
-    y: "2025 – 2027",
-    titlePre: "M.S. ",
-    titleEm: "Artificial Intelligence",
-    titlePost: "",
-    org: "Northeastern University · Roux Institute",
-    desc:
-      "Graduate research in Vision-Language Models, computer vision, medical imaging.\nGPA 4.0/4.0",
-  },
-  {
-    y: "2025",
-    titlePre: "AI ",
-    titleEm: "Engineer",
-    titlePost: "",
-    org: "BigCircle · UPSAAS Technologies LLP",
-    desc: "Multi-agent APIs · Deep Research Tool development.",
-  },
-  {
-    y: "2022 – 2025",
-    titlePre: "B.E. Computer ",
-    titleEm: "Engineering",
-    titlePost: "",
-    org: "LDRP-ITR · Gandhinagar, India",
-    desc: "ML, DL, CV foundations.\nGPA 8.41/10",
-  },
-];
+import { workExperience } from "../utils/data";
+
+function startYearOf(duration) {
+  const m = duration?.match(/(\d{4})/);
+  return m ? m[1] : "—";
+}
+
+function groupByYearDesc(items) {
+  const groups = {};
+  for (const it of items) {
+    const y = startYearOf(it.duration);
+    if (!groups[y]) groups[y] = [];
+    groups[y].push(it);
+  }
+  return Object.entries(groups)
+    .sort(([a], [b]) => Number(b) - Number(a))
+    .map(([year, list]) => ({ year, list }));
+}
 
 export default function Experience() {
+  const groups = groupByYearDesc(workExperience);
+
   return (
-    <section id="work" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
-      <div className="eyebrow mb-[14px]">§ 02 · Experience</div>
+    <section id="work" className="py-28 px-6 sm:px-12 max-w-[900px] mx-auto">
+      <div className="eyebrow mb-[14px]">02 · Experience</div>
       <h2 className="section-title mb-14">
         Recent <em>work</em>.
       </h2>
-      <div className="border-t-[1.5px] border-line">
-        {ENTRIES.map((e, i) => (
-          <Row key={i} {...e} />
+
+      <div className="space-y-16">
+        {groups.map((group) => (
+          <YearGroup
+            key={group.year}
+            year={group.year}
+            count={group.list.length}
+            label={group.list.length === 1 ? "role" : "roles"}
+          >
+            {group.list.map((w) => (
+              <Role key={w.id} role={w} />
+            ))}
+          </YearGroup>
         ))}
       </div>
     </section>
   );
 }
 
-function Row({ y, titlePre, titleEm, titlePost, org, desc }) {
+function YearGroup({ year, count, label, children }) {
   return (
-    <div className="grid grid-cols-[80px_1fr] md:grid-cols-[110px_1.3fr_1fr] gap-3 md:gap-7 items-start py-7 border-b border-line">
-      <div className="font-mono text-[12px] tracking-[.08em] text-jade pt-1.5 whitespace-nowrap">{y}</div>
-      <div>
-        <div
-          className="font-display font-extrabold text-[20px] md:text-[24px] leading-tight text-ink"
-          style={{ letterSpacing: "-.02em" }}
+    <div>
+      <div className="flex items-center gap-5 mb-10">
+        <h3
+          className="font-display font-black text-jade-dk leading-none"
+          style={{ fontSize: "clamp(34px, 4vw, 48px)", letterSpacing: "-.03em" }}
         >
-          {titlePre}
-          <em className="font-serif italic font-semibold text-jade">{titleEm}</em>
-          {titlePost}
-        </div>
-        <div className="font-mono text-[11px] tracking-[.06em] text-softer mt-1">{org}</div>
+          {year}
+        </h3>
+        <span className="flex-1 h-px bg-line" />
+        <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-softer">
+          {count} {label}
+        </span>
       </div>
-      <div
-        className="font-serif text-[14px] text-soft hidden md:block max-w-[44ch] pt-1.5 whitespace-pre-line"
-        style={{ lineHeight: 1.6 }}
-      >
-        {desc}
-      </div>
+      <div className="space-y-14">{children}</div>
     </div>
+  );
+}
+
+function Role({ role }) {
+  return (
+    <article>
+      <div className="font-mono text-[10.5px] tracking-[.18em] uppercase text-jade mb-3">
+        {role.duration} · {role.location}
+      </div>
+
+      <h4
+        className="font-display font-extrabold text-ink mb-1"
+        style={{
+          fontSize: "clamp(20px, 2.4vw, 28px)",
+          lineHeight: 1.2,
+          letterSpacing: "-.015em",
+        }}
+      >
+        {role.position}
+      </h4>
+
+      <p className="font-serif italic text-[14px] text-soft mb-5">{role.company}</p>
+
+      {role.description && (
+        <p
+          className="font-serif text-ink-2 mb-6 max-w-[70ch]"
+          style={{ fontSize: "16px", lineHeight: 1.75 }}
+        >
+          {role.description}
+        </p>
+      )}
+
+      {role.responsibilities?.length > 0 && (
+        <ul
+          className="font-serif text-ink-2 mb-6 max-w-[70ch] list-disc pl-5 space-y-2"
+          style={{ fontSize: "15px", lineHeight: 1.65 }}
+        >
+          {role.responsibilities.map((r, i) => (
+            <li key={i}>{r}</li>
+          ))}
+        </ul>
+      )}
+
+      {role.technologies?.length > 0 && (
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          {role.technologies.slice(0, 12).map((t) => (
+            <span
+              key={t}
+              className="font-mono text-[10px] tracking-[.10em] uppercase text-softer"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
+    </article>
   );
 }

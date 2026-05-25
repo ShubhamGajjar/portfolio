@@ -99,17 +99,16 @@ export default async function handler(req, res) {
     // Try different models in order of preference
     // Updated to use available models from API
     const modelNames = [
-      // --- TIER 1: The Frontier (Newest & Smartest) ---
+      // --- Primary: Gemini 3.1 Flash Lite (current) ---
+      "gemini-3.1-flash-lite",
+
+      // --- Fallback chain if the primary is unavailable on this API key ---
       "gemini-flash-latest",
-      "gemini-3-pro-preview", // Highest reasoning capability.
-
-      // --- TIER 2: Stable Workhorses (Best for Production) ---
-      "gemini-2.5-pro", // Stable version. High capability, reliable.
-      "gemini-2.5-flash", // Stable version. Fast, cheap, high-throughput.
-
-      // --- TIER 3: Efficient/Fallback ---
-      "gemini-2.5-flash-lite", // Extremely fast and cheap. Replaces Gemini 1.5 Flash.
-      "gemini-2.0-flash", // Reliable previous gen fallback.
+      "gemini-3-pro-preview",
+      "gemini-2.5-pro",
+      "gemini-2.5-flash",
+      "gemini-2.5-flash-lite",
+      "gemini-2.0-flash",
     ];
     let text = null;
     let lastError = null;

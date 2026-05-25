@@ -3,7 +3,7 @@ import { certificates } from "../utils/certificates";
 export default function Certificates() {
   return (
     <section id="certificates" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
-      <div className="eyebrow mb-[14px]">§ 06 · Certifications</div>
+      <div className="eyebrow mb-[14px]">06 · Certifications</div>
       <h2 className="section-title mb-14">
         Continued <em>learning</em>.
       </h2>

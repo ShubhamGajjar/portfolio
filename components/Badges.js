@@ -3,7 +3,7 @@ import { badges } from "../utils/certificates";
 export default function Badges() {
   return (
     <section id="badges" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
-      <div className="eyebrow mb-[14px]">§ 07 · Credentials</div>
+      <div className="eyebrow mb-[14px]">07 · Credentials</div>
       <h2 className="section-title mb-14">
         Northeastern <em>badges</em>.
       </h2>

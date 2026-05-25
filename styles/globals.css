@@ -26,10 +26,14 @@
     --border: var(--line);
     --brand:  var(--jade);
     --brand2: var(--jade-dk);
+
+    /* shadcn-style tokens — used by the GlassButton for color shading */
+    --foreground: #1E2519;   /* same as --ink  */
+    --background: #F4F6F1;   /* same as --paper */
   }
 
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
     scroll-padding-top: 88px;
   }
 
