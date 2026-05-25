@@ -1,5 +1,7 @@
 // components/Chatbot.js
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChatBubbleLeftRightIcon,
@@ -16,6 +18,61 @@ import {
 import { track } from "@vercel/analytics/react";
 import { projects } from "../utils/data";
 
+/**
+ * Linkify URLs in chatbot message text.
+ *  - Bare site routes: /about, /work, /research, /projects, /#contact  → Next.js <Link>
+ *  - External URLs: https?://...                                       → target="_blank" anchor
+ * Other text passes through unchanged so whitespace-pre-wrap preserves newlines.
+ */
+function renderMessageContent(text) {
+  if (!text) return null;
+  // Matches bare internal routes (without leading word char) and external URLs
+  const pattern =
+    /((?:^|(?<=[\s(]))\/(?:about|work|research|projects|#contact)\b|https?:\/\/[^\s<>"')\]]+)/g;
+
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ kind: "text", value: text.slice(lastIndex, match.index) });
+    }
+    const url = match[0].trim();
+    parts.push({
+      kind: url.startsWith("/") ? "internal" : "external",
+      value: url,
+    });
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push({ kind: "text", value: text.slice(lastIndex) });
+  }
+
+  return parts.map((part, i) => {
+    if (part.kind === "text") return <React.Fragment key={i}>{part.value}</React.Fragment>;
+    const cls =
+      "underline decoration-jade-lt/70 underline-offset-2 hover:decoration-jade font-medium transition-colors";
+    if (part.kind === "internal") {
+      return (
+        <Link key={i} href={part.value} className={cls}>
+          {part.value}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={i}
+        href={part.value}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cls}
+      >
+        {part.value}
+      </a>
+    );
+  });
+}
+
 const SUGGESTED_QUESTIONS = [
   "What are your technical skills?",
   "Tell me about your projects",
@@ -25,6 +82,7 @@ const SUGGESTED_QUESTIONS = [
 ];
 
 const Chatbot = ({ onToggleRef }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const initialMessage = {
     role: "assistant",
@@ -499,24 +557,30 @@ const Chatbot = ({ onToggleRef }) => {
       });
     }
 
-    // Projects section
+    // Helper: navigate to a real route. Closes the chat on mobile so the user
+    // can see the destination page; on desktop the chat stays open as a sidebar.
+    const goTo = (href, actionName) => () => {
+      if (typeof window !== "undefined" && window.innerWidth < 768) {
+        setIsOpen(false);
+      }
+      track("chatbot_quick_action", { action: actionName });
+      router.push(href);
+    };
+
+    // /projects
     if (
       lowerContent.includes("project") ||
       lowerContent.includes("portfolio") ||
-      lowerContent.includes("work") ||
       lowerContent.includes("github")
     ) {
       actions.push({
         type: "view_projects",
         label: "🚀 View Projects",
-        action: () => {
-          scrollToPortfolioSection("#projects");
-          track("chatbot_quick_action", { action: "view_projects" });
-        },
+        action: goTo("/projects", "view_projects"),
       });
     }
 
-    // Skills section
+    // /about (full technical stack lives here now)
     if (
       lowerContent.includes("skill") ||
       lowerContent.includes("technology") ||
@@ -524,16 +588,13 @@ const Chatbot = ({ onToggleRef }) => {
       lowerContent.includes("tech stack")
     ) {
       actions.push({
-        type: "view_skills",
-        label: "⚡ View Skills",
-        action: () => {
-          scrollToPortfolioSection("#skills");
-          track("chatbot_quick_action", { action: "view_skills" });
-        },
+        type: "view_stack",
+        label: "⚡ View Stack",
+        action: goTo("/about", "view_stack"),
       });
     }
 
-    // Experience section (work, education, research, projects)
+    // /research
     if (
       lowerContent.includes("research") ||
       lowerContent.includes("paper") ||
@@ -541,16 +602,28 @@ const Chatbot = ({ onToggleRef }) => {
       lowerContent.includes("journal")
     ) {
       actions.push({
-        type: "view_experience",
-        label: "📚 View Experience",
-        action: () => {
-          scrollToPortfolioSection("#experience");
-          track("chatbot_quick_action", { action: "view_experience" });
-        },
+        type: "view_research",
+        label: "📚 View Research",
+        action: goTo("/research", "view_research"),
       });
     }
 
-    // Contact section
+    // /work
+    if (
+      lowerContent.includes("work") ||
+      lowerContent.includes("experience") ||
+      lowerContent.includes("job") ||
+      lowerContent.includes("employment") ||
+      lowerContent.includes("career")
+    ) {
+      actions.push({
+        type: "view_work",
+        label: "💼 View Work",
+        action: goTo("/work", "view_work"),
+      });
+    }
+
+    // /#contact (anchor on home — Next.js handles the cross-page hash navigation)
     if (
       lowerContent.includes("contact") ||
       lowerContent.includes("email") ||
@@ -560,14 +633,12 @@ const Chatbot = ({ onToggleRef }) => {
       actions.push({
         type: "view_contact",
         label: "✉️ Get In Touch",
-        action: () => {
-          scrollToPortfolioSection("#contact");
-          track("chatbot_quick_action", { action: "view_contact" });
-        },
+        action: goTo("/#contact", "view_contact"),
       });
     }
 
-    // Detect specific projects
+    // Per-project: if the bot mentioned a specific project by title and it has
+    // a GitHub link, surface that as a direct external link.
     projects.forEach((project) => {
       if (lowerContent.includes(project.title.toLowerCase())) {
         if (project.github) {
@@ -575,7 +646,7 @@ const Chatbot = ({ onToggleRef }) => {
             type: "view_project_github",
             label: `🔗 ${project.title}`,
             action: () => {
-              window.open(project.github, "_blank");
+              window.open(project.github, "_blank", "noopener,noreferrer");
               track("chatbot_quick_action", {
                 action: "view_project_github",
                 project: project.title,
@@ -587,39 +658,6 @@ const Chatbot = ({ onToggleRef }) => {
     });
 
     return actions;
-  };
-
-  // Smooth scroll to portfolio section
-  const scrollToPortfolioSection = (sectionId) => {
-    // Close chat if on mobile
-    if (window.innerWidth < 768) {
-      setIsOpen(false);
-    }
-
-    setTimeout(() => {
-      const element = document.querySelector(sectionId);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-
-        // Add offset for sticky navbar
-        setTimeout(() => {
-          const navbarHeight = 80;
-          const currentScroll = window.pageYOffset;
-          const elementTop = element.offsetTop;
-          const offsetPosition = elementTop - navbarHeight;
-
-          if (Math.abs(currentScroll - offsetPosition) > 10) {
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth",
-            });
-          }
-        }, 100);
-      }
-    }, 100);
   };
 
   // Streaming animation function
@@ -1147,7 +1185,9 @@ const Chatbot = ({ onToggleRef }) => {
                             }
                           >
                             <p className="text-sm whitespace-pre-wrap break-words pr-6 pb-1">
-                              {displayContent}
+                              {msg.role === "assistant"
+                                ? renderMessageContent(displayContent)
+                                : displayContent}
                               {isStreaming && (
                                 <span className="inline-block w-2 h-4 bg-current ml-1 animate-pulse" />
                               )}

@@ -1,117 +1,63 @@
-// components/Skills.js
-import React from "react";
-import { motion } from "framer-motion";
-import {
-  skills,
-  projects,
-  researchPapers,
-  workExperience,
-} from "../utils/data";
+const CATEGORIES = [
+  {
+    label: "Frameworks",
+    items: ["PyTorch", "TensorFlow", "Hugging Face", "FastAPI"],
+  },
+  {
+    label: "Deep Learning",
+    items: [
+      "Vision Transformers",
+      "CNN / ResNet",
+      "UNet",
+      "Contrastive Learning",
+      "Reinforcement Learning",
+    ],
+  },
+  {
+    label: "Computer Vision",
+    items: ["OpenCV", "Albumentations", "Medical Imaging", "DINOv3"],
+  },
+  {
+    label: "Data",
+    items: ["Python", "NumPy", "Pandas", "Scikit-learn"],
+  },
+  {
+    label: "Web & Mobile",
+    items: ["Next.js", "React Native", "TypeScript"],
+  },
+  {
+    label: "DevOps",
+    items: ["Docker", "Git"],
+  },
+];
 
-const Skills = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  // Collect all skills/keywords mentioned across your work (to highlight them in the UI)
-  const normalize = (str) => str.toLowerCase().trim().replace(/\s+/g, " ");
-
-  const mentionedSkills = (() => {
-    const mentioned = new Set();
-
-    projects.forEach((project) => {
-      project.technologies?.forEach((tech) => mentioned.add(normalize(tech)));
-    });
-    researchPapers.forEach((paper) => {
-      paper.keywords?.forEach((keyword) => mentioned.add(normalize(keyword)));
-    });
-    workExperience.forEach((work) => {
-      work.technologies?.forEach((tech) => mentioned.add(normalize(tech)));
-    });
-
-    return mentioned;
-  })();
-
-  const isSkillUsed = (skill) => {
-    const s = normalize(skill);
-    if (mentionedSkills.has(s)) return true;
-
-    // If "React" appears as part of "React Native", still count it as used.
-    // This is intentionally permissive (better UX).
-    const escaped = s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(`\\b${escaped}\\b`, "i");
-    return Array.from(mentionedSkills).some((m) => regex.test(m));
-  };
-
-  const categories = Object.keys(skills);
-
+export default function Skills() {
   return (
-    <section id="skills" className="py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-12"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 ai-gradient-text font-display">
-            Skills
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            A focused snapshot of the tools and concepts I use most.
-          </p>
-          <p className="mt-3 text-sm text-muted max-w-2xl mx-auto">
-            Highlighted skills appear in my projects, research, or work experience.
-          </p>
-        </motion.div>
+    <section id="skills" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
+      <div className="eyebrow mb-[14px]">05 · Stack</div>
+      <h2 className="section-title mb-14">
+        Tools I <em>use most</em>.
+      </h2>
 
-        {/* Skills Grid */}
-        <motion.div
-          className="grid gap-6 md:grid-cols-2"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {categories.map((category) => (
-            <div key={category} className="glass-card p-6">
-              <h3 className="text-base sm:text-lg font-semibold text-fg font-display">
-                {category}
-              </h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {skills[category].map((skill) => {
-                  const used = isSkillUsed(skill);
-                  return (
-                    <span
-                      key={`${category}-${skill}`}
-                      className={
-                        "inline-flex items-center rounded-full border px-3 py-1 text-xs sm:text-sm " +
-                        (used
-                          ? "border-brand/30 bg-brand/10 text-fg"
-                          : "border-border/60 bg-card/40 text-muted")
-                      }
-                    >
-                      {skill}
-                    </span>
-                  );
-                })}
-              </div>
+      <div className="border-t-[1.5px] border-line">
+        {CATEGORIES.map((cat) => (
+          <div
+            key={cat.label}
+            className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-3 md:gap-10 items-start py-7 border-b border-line"
+          >
+            <div className="font-mono text-[11px] tracking-[.18em] uppercase text-jade pt-2">
+              {cat.label}
             </div>
-          ))}
-        </motion.div>
+            <div className="flex flex-wrap gap-2">
+              {cat.items.map((s) => (
+                <span key={s} className="pill on">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
-};
-
-export default Skills;
+}

@@ -1,101 +1,35 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import { badges } from "../utils/certificates";
 
-const Badges = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
+export default function Badges() {
   return (
-    <section id="badges" className="py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-12"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 ai-gradient-text font-display leading-normal overflow-visible pb-2">
-            Badges
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Digital badges and learning credentials.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {badges.map((badge) => (
-            <motion.div
-              key={badge.id}
-              className="flex flex-col items-center glass-card p-6 text-center"
-              variants={itemVariants}
+    <section id="badges" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
+      <div className="eyebrow mb-[14px]">07 · Credentials</div>
+      <h2 className="section-title mb-14">
+        Northeastern <em>badges</em>.
+      </h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[18px]">
+        {badges.map((b) => (
+          <a
+            key={b.id}
+            href={b.file}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group ai-card p-5 flex flex-col items-center gap-3 text-center cursor-pointer"
+          >
+            <div className="w-20 h-20 flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={b.badge} alt={b.title} className="w-full h-full object-contain" />
+            </div>
+            <h3
+              className="font-display font-extrabold text-[12px] leading-tight text-ink-2 mt-auto"
+              style={{ letterSpacing: "-.01em" }}
             >
-              <img
-                src={badge.badge}
-                alt={`${badge.title} badge`}
-                className="w-24 h-24 object-contain rounded mb-4"
-              />
-              <h3 className="font-semibold text-base text-fg mb-2">
-                {badge.title}
-              </h3>
-              <p className="text-sm text-muted mb-4">
-                {badge.issuer}
-              </p>
-              <motion.a
-                href={badge.file}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary px-4 py-2 text-sm"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <DocumentArrowDownIcon className="w-4 h-4" />
-                Open credential
-              </motion.a>
-            </motion.div>
-          ))}
-        </motion.div>
+              {b.title}
+            </h3>
+            <div className="font-mono text-[9px] tracking-[.12em] uppercase text-softer">{b.issuer}</div>
+          </a>
+        ))}
       </div>
     </section>
   );
-};
-
-export default Badges;
+}

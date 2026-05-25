@@ -1,101 +1,39 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import { certificates } from "../utils/certificates";
 
-const Certificates = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
+export default function Certificates() {
   return (
-    <section
-      id="certificates"
-      className="py-20"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-12"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 ai-gradient-text font-display">
-            Certificates
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Selected certificates and credentials. Click to view or download.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="space-y-4 max-w-3xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {certificates.map((cert) => (
-            <motion.div
-              key={cert.id}
-              className="flex items-center justify-between glass-card p-6"
-              variants={itemVariants}
+    <section id="certificates" className="py-28 px-6 sm:px-12 max-w-[1200px] mx-auto">
+      <div className="eyebrow mb-[14px]">06 · Certifications</div>
+      <h2 className="section-title mb-14">
+        Continued <em>learning</em>.
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
+        {certificates.map((c) => (
+          <a
+            key={c.id}
+            href={c.file}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group ai-card p-6 flex flex-col gap-3 cursor-pointer"
+          >
+            <div className="font-mono text-[10px] tracking-[.16em] uppercase text-jade flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-jade" />
+              {c.date}
+            </div>
+            <h3
+              className="font-display font-extrabold text-[17px] leading-[1.2] text-ink mt-auto"
+              style={{ letterSpacing: "-.01em" }}
             >
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg text-fg mb-1">
-                  {cert.title}
-                </h3>
-                <p className="text-sm text-muted">
-                  {cert.issuer} {cert.date ? `• ${cert.date}` : ""}
-                </p>
-              </div>
-              <motion.a
-                href={cert.file}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <DocumentArrowDownIcon className="w-5 h-5" />
-                Open
-              </motion.a>
-            </motion.div>
-          ))}
-        </motion.div>
+              {c.title}
+            </h3>
+            <div className="font-mono text-[10.5px] text-softer">{c.issuer}</div>
+            <div className="font-display font-bold text-[12px] text-jade-dk inline-flex items-center gap-2 mt-2">
+              <span className="w-[18px] h-[1.5px] bg-jade-lt transition-all group-hover:w-[28px] group-hover:bg-jade" />
+              View certificate
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   );
-};
-
-export default Certificates;
+}
